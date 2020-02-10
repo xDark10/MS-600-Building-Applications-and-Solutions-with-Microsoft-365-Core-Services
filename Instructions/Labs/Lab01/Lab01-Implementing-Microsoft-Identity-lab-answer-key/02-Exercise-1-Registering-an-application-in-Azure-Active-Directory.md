@@ -36,12 +36,6 @@ In this task, you will create a new Active Directory organization so you will un
 
 1. From the **Configuration** tab, perform the following actions:
 
-    1. In the **Select a directory type** section, select **Azure Active Directory**.
-
-    1. Select **Next: Configuration**.
-
-1. From the **Configuration** tab, perform the following actions:
-
     1. **Organization name**: *Contoso Marketing Company*
 
     1. **Initial domain name**: *contosomarketingXXXX* where you replace *XXXX* with numbers or letters to make your domain name unique.
