@@ -3,10 +3,12 @@
 This exercise will demonstrate the different account types that are used within the Microsoft identity platform.
 
 **Note**:
-This exercise demonstrates signing into a web application using two different accounts. These two accounts will come from two organizations, one of them being the organization where the Azure AD application is registered. Therefore, in order to complete the exercise, you'll need access to two user accounts in different Azure AD directories.
+This exercise demonstrates signing into a web application using two different accounts. These two accounts will come from two organizations, one of them being the organization where the Azure AD application is registered. Therefore, in order to complete the exercise, you'll need access to two user accounts in different Azure AD directories.
+
 ## Task 1: Create application that only allows single organization sign in
 
-In this task, you will register an application in the Azure portal that allows users from the current organization to sign in.### Register a single-tenant Azure AD application
+In this task, you will register an application in the Azure portal that allows users from the current organization to sign in.
+### Register a single-tenant Azure AD application
 
 1. From the Azure portal [https://azure.portal.com](https://azure.portal.com/), navigate to **Azure Active Directory**.
 
@@ -30,13 +32,18 @@ In this task, you will register an application in the Azure portal that allows u
 
 1. On the **Hello ASPNET Core Identity 01** page, select the **Add a Redirect URI** link under the **Redirect URIs**.
 
-1. Locate the section **Redirect URIs** and add the following two URLs:
+1. Locate the section **Platform configurations** and select **+Add a platform**.
 
+1. Select **Web** and add the following URLs:
     - **https://localhost:3007**
+    
+1. Select **Configure**
+
+1. Locate the section **Redirect URIs** under **Web**, select **Add URI** and add the following URL:    
 
     - **https://localhost:3007/signin-oidc**
 
-1. Locate the section **Advanced settings** and add the following **Logout URL**: **https://localhost:3007/signout-oidc**
+1. Locate the section **Logout URL** and add the following **Logout URL**: **https://localhost:3007/signout-oidc**
 
 1. Locate the section **Implicit grant** and select both **Access tokens** and **ID tokens**. This tells Azure AD to return these tokens the authenticated user if requested.
 
@@ -46,7 +53,8 @@ In this task, you will register an application in the Azure portal that allows u
 
 ## Task 2: Create a single organization ASP.NET core web application
 
-In this first application, you'll create an ASP.NET Core web application that allows users from the current organization to sign in and display their information.1. Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder. For example:
+In this first application, you'll create an ASP.NET Core web application that allows users from the current organization to sign in and display their information.
+1. Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder. For example:
 
     ```powershell
     Cd c:/LabFiles
@@ -134,7 +142,8 @@ In this first application, you'll create an ASP.NET Core web application that al
 
 ## Task 4: Create application that allows any organization's users to sign in
 
-In this task, you will register an application in the Azure portal that allows users from any organization or Microsoft Accounts to sign in.### Register a multi-tenant Azure AD application
+In this task, you will register an application in the Azure portal that allows users from any organization or Microsoft Accounts to sign in.
+### Register a multi-tenant Azure AD application
 
 1. From the Azure portal [https://azure.portal.com](https://azure.portal.com/), navigate to **Azure Active Directory**.
 
