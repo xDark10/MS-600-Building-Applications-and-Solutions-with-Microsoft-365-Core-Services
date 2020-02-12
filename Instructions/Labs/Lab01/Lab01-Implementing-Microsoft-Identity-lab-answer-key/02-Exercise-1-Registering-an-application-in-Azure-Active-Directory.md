@@ -91,7 +91,7 @@ In this task, you will create a user in the new Active Directory tenant you just
 
 1. Test new user in Azure portal and change password:
 
-    1. Navigate to the Azure portal, [https://azure.portal.com](https://azure.portal.com/) in the InPrivate browser session.
+    1. Navigate to the Azure portal, [https://portal.azure.com](https://portal.azure.com/) in the InPrivate browser session.
 
     1. Sign in with your new *testuser@contosomarketingxx@onmicrosoft.com* account.
 
