@@ -99,7 +99,7 @@ You can expose additional scopes later as necessary. Consider that your web API 
 
 1. Wait for **Preparing the consent** to finish then select **Grant admin consent for Contoso**.
 
-1. From the **Permissions requested** dialog, select **Accept**.
+1. From the **Permissions requested** dialog, select **Yes**.
 
 1. Your **ContosoApp** is now configured and authorized to use the API permissions from the **Hello ASPNET Core Identity 01** app.
 
