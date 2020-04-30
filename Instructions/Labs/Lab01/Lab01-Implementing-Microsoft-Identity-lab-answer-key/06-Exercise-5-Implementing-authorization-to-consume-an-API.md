@@ -16,7 +16,9 @@ The sample application used in this exercise enables a JavaScript SPA to query t
 
 1. Download the sample project for Node.js:
 
-    1. To run the project by using a local web server, such as Node.js, download the project files to your **C:/Labfiles** directory.[https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip)
+    1. To run the project by using a local web server, such as Node.js, download the project files to your **C:/Labfiles** directory. Visit [https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/releases](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/releases) and select the latest release: **Source code
+(zip)**.
+
 
 1. Navigate to where the download zip file is and unblock file.
 
@@ -86,7 +88,7 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 
     1. Wait for **Preparing for consent** to finish then select **Grant admin consent for Contoso**.
 
-    1. From the Permissions requested dialog, select **Accept**.
+    1. From the Permissions requested dialog, select **Yes**.
 
     1. Your **JavaScript-SPA-App** app is now configured and authorized to use the Calendars.Read and People.Read permissions for Microsoft Graph.
 
