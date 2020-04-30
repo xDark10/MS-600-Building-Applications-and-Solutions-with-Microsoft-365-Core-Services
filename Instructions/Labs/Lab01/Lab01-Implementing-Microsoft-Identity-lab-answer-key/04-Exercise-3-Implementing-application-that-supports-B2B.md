@@ -1,14 +1,16 @@
 ﻿# Exercise 3: Implementing application that supports B2B
 
-This exercise will demonstrate to the user how to configure and implement an application that supports B2B.**Note**:
-This exercise demonstrates signing into a web application using three different accounts. These three accounts will come from two organizations, one of them being the organization where the Azure AD application is registered. Therefore, in order to complete the exercise, you'll need access to two user accounts in different Azure AD directories.
+This exercise will demonstrate to the user how to configure and implement an application that supports B2B.
+**Note**:
+This exercise demonstrates signing into a web application using three different accounts. These three accounts will come from two organizations, one of them being the organization where the Azure AD application is registered. Therefore, in order to complete the exercise, you'll need access to two user accounts in different Azure AD directories.
+
 ## Task 1: Create a single-tenant Azure AD application
 
 In this task, you'll create an Azure AD application that allows users from the current organization to sign in.
 
 ### Register a single-tenant Azure AD application
 
-1. From the Azure portal [https://azure.portal.com](https://azure.portal.com/), navigate to **Azure Active Directory**.
+1. From the Azure portal [https://portal.azure.com](https://portal.azure.com/), navigate to **Azure Active Directory**.
 
 1. Select **Manage > App registrations** in the left-hand navigation.
 
@@ -180,4 +182,4 @@ In this task, you will configure your Active Directory tenant to allow external 
 
 ## Review
 
-In this exercise, you created an ASP.NET Core web application and Azure AD application that allows guest users from partner Azure AD directories to sign in and access the application. You then invited a guest user to the directory and signed into the application with this user.
+In this exercise, you created an ASP.NET Core web application and Azure AD application that allows guest users from partner Azure AD directories to sign in and access the application. You then invited a guest user to the directory and signed into the application with this user.
