@@ -258,7 +258,7 @@ The remainder of this exercise instructs you to add code to this **index.html** 
 
 ## Task 2: Register a new application
 
-1. From the Azure portal [https://azure.portal.com](https://azure.portal.com/), navigate to **Azure Active Directory**.
+1. From the Azure portal [https://portal.azure.com](https://portal.azure.com/), navigate to **Azure Active Directory**.
 
 1. Select **Manage > App registrations** in the left-hand navigation.
 
