@@ -96,7 +96,7 @@ When presenting data to end users it’s often necessary to use a sort order oth
 
 1. Select **Run Query**. The results are shown in the **Response Preview** pane. Note that there is no **@odata.nextLink** this time, which indicates that all the matching records have been returned in this request. If there is an **@odata.nextLink** it should be used to fetch additional pages of results. It’s possible to compose queries that traverse object properties as well; for instance, to find mail sent from a specific email address.
 
-1. Change the **request URL** box to read: **https://graph.microsoft.com/v1.0/me/messages?$filter from/emailAddress/address eq 'no-reply@microsoft.com'**
+1. Change the **request URL** box to read: **https://graph.microsoft.com/v1.0/me/messages?$filter=from/emailAddress/address eq 'no-reply@microsoft.com'**
 
 1. Select **Run Query**. The results are shown in the **Response Preview** pane. Note that there are multiple pages of results as indicated by the presence of the **@odata.nextLink**. Some properties support the use of a start with operator.
 
