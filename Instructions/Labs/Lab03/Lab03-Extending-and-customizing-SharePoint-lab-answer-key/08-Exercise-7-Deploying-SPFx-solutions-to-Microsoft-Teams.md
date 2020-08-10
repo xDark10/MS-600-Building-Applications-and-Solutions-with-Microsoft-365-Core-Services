@@ -67,7 +67,8 @@ The automatic generation and deployment of the Microsoft Teams manifest is not c
 | {{SPFX_COMPONENT_ID}}| id|
 
 **Note**:
-Don't miss replacing **{{SPFX_COMPONENT_ID}}** in **configurableTabs[0].configurationUrl**. You will likely have to scroll your editor to the right to see it. The tokens surrounded by single curly braces (for example, **{teamSiteDomain}**) do not need to be replaced.
+Don't miss replacing **{{SPFX_COMPONENT_ID}}** in **configurableTabs[0].configurationUrl**. You will likely have to scroll your editor to the right to see it. The tokens surrounded by single curly braces (for example, **{teamSiteDomain}**) do not need to be replaced.
+
 ## Task 3: Create and deploy the SharePoint package
 
 In order to test the web part in SharePoint and Microsoft Teams, it must first be deployed to an app catalog.
@@ -133,12 +134,13 @@ Test the SPFx web part in SharePoint:
     1. Select the Microsoft Teams application ZIP file previously created. This is the file that contains the **manifest.json** and two image files.
 
         **Note**:
-        After a moment, the application will appear next to your tenant name. You may need to refresh the page for the app to appear if you are using the browser Microsoft Teams client.
+        After a moment, the application will appear next to your tenant name. You may need to refresh the page for the app to appear if you are using the browser Microsoft Teams client.
+
 1. Select the **SPFx Teams Together** app.
 
-1. In the **SPFx Teams Together** dialog box, select the **My First Team** in the **Add to a team** drop-down control and select **Install**.
+1. In the **SPFx Teams Together** dialog box, select **Add to a team**.
 
-1. In the **SPFx Teams Together is now available for My First Team** dialog box, select the **General** channel and select **Set up**.
+1. In the **Select a channel to start using SPFx Teams Together** dialog box, make sure that the **General** channel is selected and select **Set up a tab**.
 
 1. The next dialog box will confirm the installation of the app. Select **Save**.
 
