@@ -52,7 +52,9 @@ To be able to scaffold projects using the Teams generator you need to install th
 
     - **Default Tab name? (max 16 characters)**: Learn Teams App
 
-    - **Do you want to create a configurable or static tab?**: Static
+    - **What kind of Tab would you like to create?**: Personal (Static)
+    
+    - **Do you require Azure AD Single-Sign-On support for the tab**: No
 
 1. Once Yeoman is finished generating the solution, navigate to the newly created project directory by executing the command: `cd myteamsapp`
 
