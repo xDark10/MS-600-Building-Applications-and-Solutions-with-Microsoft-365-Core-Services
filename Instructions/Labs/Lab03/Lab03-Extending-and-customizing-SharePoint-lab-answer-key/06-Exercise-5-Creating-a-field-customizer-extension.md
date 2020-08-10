@@ -116,12 +116,26 @@ Field customizers, when deployed to production, are implemented by creating a ne
     1. The JSON code for the default serve configuration should look something like the following:
 
         ```json
-        "default": {  "pageUrl": "https://contoso.sharepoint.com/sites/mySite/Lists/Work%20Status/AllItems.aspx",  "fieldCustomizers": {    "PercentComplete": {      "id": "6a1b8997-00d5-4bc7-a472-41d6ac27cd83",      "properties": {        "greenMinLimit": "85",        "yellowMinLimit": "70"      }    }  }}
+        "default": {  
+          "pageUrl": "https://contoso.sharepoint.com/sites/mySite/Lists/Work%20Status/AllItems.aspx",  
+          "fieldCustomizers": {    
+            "PercentComplete": {      
+              "id": "6a1b8997-00d5-4bc7-a472-41d6ac27cd83",      
+              "properties": {        
+                "greenMinLimit": "85",        
+                "yellowMinLimit": "70"     
+              }    
+            } 
+          }
+        }
         ```
+
+1. Run the project by executing the following command: `gulp serve`
 
 1. When prompted, select the **Load debug scripts** button.
 
 1. Stop the local web server by pressing CTRL+C in the console/terminal window.
+
 
 ## Review
 
