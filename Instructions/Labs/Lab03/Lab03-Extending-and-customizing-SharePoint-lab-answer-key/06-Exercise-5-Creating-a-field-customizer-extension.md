@@ -62,8 +62,8 @@
     ```typescript
         event.domElement.classList.add(styles.cell);
         event.domElement.innerHTML = `
-            <div class='${styles.HelloWorld}'>
-                <div class='${styles.full}'>
+            <div class='${styles.HelloFieldCustomizer}'>
+                <div class='${styles.cell}'>
                 <div style='width: ${event.fieldValue}px; background:#0094ff; color:#c0c0c0'>
                     &nbsp; ${event.fieldValue}
                 </div>
