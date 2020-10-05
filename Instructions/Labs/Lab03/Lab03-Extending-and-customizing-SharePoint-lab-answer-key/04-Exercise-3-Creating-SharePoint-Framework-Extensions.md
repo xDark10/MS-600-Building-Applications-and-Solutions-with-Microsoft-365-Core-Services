@@ -80,7 +80,7 @@
     ```powershell
     gulp build
     gulp bundle --ship
-    gulp package-solution –-ship
+    gulp package-solution --ship
     ```
 
 1. In the browser, navigate to your SharePoint Online tenant App Catalog site.
