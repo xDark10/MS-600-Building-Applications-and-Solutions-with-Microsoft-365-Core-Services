@@ -2,17 +2,24 @@
 
 ## Lab scenario
 
-You are a developer working for an organization that is using Microsoft Teams as the primary collaboration platform. You want to gain an understanding of the Microsoft Teams developer framework to determine if building a custom app on the Microsoft Teams platform is right for you, and if so you want to choose the right extensibility points and distribution model to make your app successful. ## Objectives
+You are a developer working for an organization that is using Microsoft Teams as the primary collaboration platform. You want to gain an understanding of the Microsoft Teams developer framework to determine if building a custom app on the Microsoft Teams platform is right for you, and if so you want to choose the right extensibility points and distribution model to make your app successful. 
+## Objectives
 
 After you complete this lab, you will be able to:
 
-- Recognize the components of a Teams App.
+- Create a Microsoft Teams app manifest.
 
-- Describe webhooks in Microsoft Teams.
+- Deploy a Teams app.
 
-- Explain tabs in Microsoft Teams.
+- Create and use task modules.
 
-- Describe messaging extensions.
+- Create a webhook.
+
+- Implement custom Teams tabs.
+
+- Create a messaging extension.
+
+- Create a conversational Bot.
 
 ## Lab setup
 
@@ -25,7 +32,8 @@ After you complete this lab, you will be able to:
 Sign in to the Windows 10 virtual machine using credentials.
 
 **Note**:
-Lab virtual machine sign-in instructions will be provided to students by the instructor.
+Lab virtual machine sign-in instructions will be provided to students by the instructor.
+
 ### Review installed applications
 
 Observe the taskbar located at the bottom of your Windows 10 desktop. The taskbar contains the icons for the applications you will use in this lab:
@@ -44,5 +52,5 @@ Also, ensure that the following necessary utilities are installed:
 
 - Ngrok
 
-- NodeJS v8.x or v10.x
+- NodeJS v10.x
 
