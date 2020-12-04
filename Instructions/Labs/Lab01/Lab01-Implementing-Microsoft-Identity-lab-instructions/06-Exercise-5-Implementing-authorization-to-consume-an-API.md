@@ -86,7 +86,7 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 
     1. Wait for **Preparing for consent** to finish then select **Grant admin consent for Contoso**.
 
-    1. From the Permissions requested dialog, select **Accept**.
+    1. From the Permissions requested dialog, select **Yes**.
 
     1. Your **JavaScript-SPA-App** app is now configured and authorized to use the Calendars.Read and People.Read permissions for Microsoft Graph.
 
@@ -125,8 +125,8 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 
     ```javascript
     var graphConfig = {
-            graphMeEndpoint: https://graph.microsoft.com/v1.0/me,
-    graphPeopleEndpoint: "https://graph.microsoft.com/v1.0/people"
+            graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
+            graphPeopleEndpoint: "https://graph.microsoft.com/v1.0/people"
         };
     ```
 
@@ -199,4 +199,3 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 ## Review
 
 In this exercise, you implemented authorization and incremental consent using the Microsoft Identity.
-

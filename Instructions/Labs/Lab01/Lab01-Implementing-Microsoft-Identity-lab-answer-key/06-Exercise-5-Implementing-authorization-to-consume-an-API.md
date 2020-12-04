@@ -127,8 +127,8 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 
     ```javascript
     var graphConfig = {
-            graphMeEndpoint: https://graph.microsoft.com/v1.0/me,
-    graphPeopleEndpoint: "https://graph.microsoft.com/v1.0/people"
+            graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
+            graphPeopleEndpoint: "https://graph.microsoft.com/v1.0/people"
         };
     ```
 
@@ -201,4 +201,3 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 ## Review
 
 In this exercise, you implemented authorization and incremental consent using the Microsoft Identity.
-

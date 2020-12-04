@@ -36,7 +36,7 @@ In this task, you'll create an Azure AD application that allows users from the c
 
     - **https://localhost:3007/signin-oidc**
 
-1. Locate the section **Advanced settings** and add the following **Logout URL**: **https://localhost:3007/signout-oidc**
+1. Add the following **Logout URL**: **https://localhost:3007/signout-oidc**
 
 1. Locate the section **Implicit grant** and select both **Access tokens** and **ID tokens**. This tells Azure AD to return these tokens the authenticated user if requested.
 
@@ -108,6 +108,8 @@ In this application, you'll create an ASP.NET Core web application that allows u
     </div>
     }
     ```
+
+1. Save the above all changes.
 
 ## Task 3: Build and test the app
 

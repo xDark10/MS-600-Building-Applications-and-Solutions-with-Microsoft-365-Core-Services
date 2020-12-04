@@ -1,7 +1,9 @@
 ﻿# Exercise 3: Implementing application that supports B2B
 
-This exercise will demonstrate to the user how to configure and implement an application that supports B2B.**Note**:
-This exercise demonstrates signing into a web application using three different accounts. These three accounts will come from two organizations, one of them being the organization where the Azure AD application is registered. Therefore, in order to complete the exercise, you'll need access to two user accounts in different Azure AD directories.
+This exercise will demonstrate to the user how to configure and implement an application that supports B2B.
+**Note**:
+This exercise demonstrates signing into a web application using three different accounts. These three accounts will come from two organizations, one of them being the organization where the Azure AD application is registered. Therefore, in order to complete the exercise, you'll need access to two user accounts in different Azure AD directories.
+
 ## Task 1: Create a single-tenant Azure AD application
 
 In this task, you'll create an Azure AD application that allows users from the current organization to sign in.
@@ -34,7 +36,7 @@ In this task, you'll create an Azure AD application that allows users from the c
 
     - **https://localhost:3007/signin-oidc**
 
-1. Locate the section **Advanced settings** and add the following **Logout URL**: **https://localhost:3007/signout-oidc**
+1. Add the following **Logout URL**: **https://localhost:3007/signout-oidc**
 
 1. Locate the section **Implicit grant** and select both **Access tokens** and **ID tokens**. This tells Azure AD to return these tokens the authenticated user if requested.
 
@@ -106,6 +108,8 @@ In this application, you'll create an ASP.NET Core web application that allows u
     </div>
     }
     ```
+
+1. Save the above all changes.
 
 ## Task 3: Build and test the app
 
@@ -180,4 +184,4 @@ In this task, you will configure your Active Directory tenant to allow external 
 
 ## Review
 
-In this exercise, you created an ASP.NET Core web application and Azure AD application that allows guest users from partner Azure AD directories to sign in and access the application. You then invited a guest user to the directory and signed into the application with this user.
+In this exercise, you created an ASP.NET Core web application and Azure AD application that allows guest users from partner Azure AD directories to sign in and access the application. You then invited a guest user to the directory and signed into the application with this user.

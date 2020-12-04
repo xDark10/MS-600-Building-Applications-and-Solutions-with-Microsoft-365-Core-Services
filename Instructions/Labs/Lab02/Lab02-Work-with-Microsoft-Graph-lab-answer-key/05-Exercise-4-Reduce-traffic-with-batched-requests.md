@@ -12,9 +12,9 @@ In this example, you'll sign in to Microsoft Graph with a real user.
 
     ![Screenshot of the Graph Explorer](../../Linked_Image_Files/reduce_traffic_with_batched_requests_image_1.png)
 
-1. Select the **Sign in with Microsoft** button in the leftmost panel and enter the credentials of a Work and School account.
+1. Select the **Sign in to Graph Explorer** button in the leftmost panel and enter the credentials of a Work and School account.
 
-1. After signing in, select **modify permissions** and verify that the user has the permissions to submit the requests in this exercise. You must have at least these minimum permissions:
+1. After signing in, click **select permissions** and verify that the user has the permissions to submit the requests in this exercise. You must have at least these minimum permissions:
 
     - **Mail.Read**
 
@@ -22,11 +22,13 @@ In this example, you'll sign in to Microsoft Graph with a real user.
 
     - **Files.ReadWrite**
 
+    ![Screenshot of the Graph Explorer](../../Linked_Image_Files/reduce_traffic_with_batched_requests_image_5.png)
+
 ## Task 2: Submit three (3) GET requests in a single batch
 
-All batch requests are submitted as HTTP POSTs to a specific endpoint: [https://graph.microsoft.com/v1.0/$batch](https://graph.microsoft.com/v1.0/$batch). The **$batch** query parameter is what tells Microsoft Graph to unpack the requests submitted in the body.
+All batch requests are submitted as HTTP POSTs to a specific endpoint: [https://graph.microsoft.com/v1.0/$batch](https://graph.microsoft.com/v1.0/\$batch). The **\$batch** query parameter is what tells Microsoft Graph to unpack the requests submitted in the body.
 
-1. Set the request to an HTTP **POST** and the endpoint of the request to [https://graph.microsoft.com/v1.0/$batch](https://graph.microsoft.com/v1.0/$batch).
+1. Set the request to an HTTP **POST** and the endpoint of the request to [https://graph.microsoft.com/v1.0/$batch](https://graph.microsoft.com/v1.0/\$batch).
 
 1. Add the following JSON code to the **Request Body** input box. This JSON code will issue three requests:
 
@@ -65,7 +67,7 @@ All batch requests are submitted as HTTP POSTs to a specific endpoint: [https://
 
 1. Observe the results in the **Response Preview** box at the bottom of the page.
 
-![Screenshot of Microsoft Graph batch response](../../Linked_Image_Files/reduce_traffic_with_batched_requests_image_3.png)
+    ![Screenshot of Microsoft Graph batch response](../../Linked_Image_Files/reduce_traffic_with_batched_requests_image_3.png)
 
 Notice the response includes three individual responses within the responses collection. Also notice for response id:3, the data that was returned, as indicated by the @odata.nextLink property, is from the **/me/events** collection. This query matches the third request in the initial request submitted.
 
@@ -94,7 +96,7 @@ In this example, you'll submit a request that creates a new folder in the curren
                 }
             },
             {
-                "url": "/me/drive/root/children/TestBatchingFolder ",
+                "url": "/me/drive/root/children/TestBatchingFolder",
                 "method": "GET",
                 "id": "2",
                 "DependsOn": [
@@ -109,7 +111,7 @@ In this example, you'll submit a request that creates a new folder in the curren
 
 1. Observe the results in the **Response Preview** box at the bottom of the page. Notice that this response contains two objects. The first request resulted in an HTTP 201 message that says the item, or folder, was created. The second request was also successful, and the name of the folder returned matched the folder the first request created.
 
-![Screenshot of Microsoft Graph batch response](../../Linked_Image_Files/reduce_traffic_with_batched_requests_image_4.png)
+    ![Screenshot of Microsoft Graph batch response](../../Linked_Image_Files/reduce_traffic_with_batched_requests_image_4.png)
 
 ## Review
 

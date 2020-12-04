@@ -2,13 +2,13 @@
 
 ## Task 1: Create your project
 
-1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: cd c:/LabFiles/SharePoint
+1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: `cd c:/LabFiles/SharePoint`
 
-1. Make a new directory for your SharePoint project files by executing the following command: md SPFxFieldCustomizer
+1. Make a new directory for your SharePoint project files by executing the following command: `md SPFxFieldCustomizer`
 
 1. Navigate to the newly created SharePoint directory by executing the following command: `cd SPFxFieldCustomizer`
 
-1. Run the SharePoint Yeoman generator by executing the following command: yo @microsoft/sharepoint
+1. Run the SharePoint Yeoman generator by executing the following command: `yo @microsoft/sharepoint`
 
 1. Use the following to complete the prompt that is displayed:
 
@@ -41,7 +41,7 @@
 1. Replace the contents of the file with the following styles:
 
     ```html
-            .HelloFieldCustomizer {
+        .HelloFieldCustomizer {
             .cell {
                 display: 'inline-block';
             }
@@ -49,6 +49,7 @@
                 background-color: #cccccc;
                 width: 100px;
             }
+        }
     ```
 
 ## Task 3: Update the code for the field customizer
@@ -62,13 +63,13 @@
     ```typescript
         event.domElement.classList.add(styles.cell);
         event.domElement.innerHTML = `
-            <div class='${styles.HelloWorld}'>
-                <div class='${styles.full}'>
-                <div style='width: ${event.fieldValue}px; background:#0094ff; color:#c0c0c0'>
-                    &nbsp; ${event.fieldValue}
+            <div class='${styles.HelloFieldCustomizer}'>
+                <div class='${styles.filledBackground}'>
+                    <div style='width: ${event.fieldValue}px; background:#0094ff; color:#c0c0c0'>
+                        &nbsp; ${event.fieldValue}
+                    </div>
                 </div>
-            </div>
-        </div>`;
+            </div>`;
     ```
 
 ## Task 4: Update the deployment code for the field customizer
@@ -116,8 +117,20 @@ Field customizers, when deployed to production, are implemented by creating a ne
     1. The JSON code for the default serve configuration should look something like the following:
 
         ```json
-        "default": {  "pageUrl": "https://contoso.sharepoint.com/sites/mySite/Lists/Work%20Status/AllItems.aspx",  "fieldCustomizers": {    "PercentComplete": {      "id": "6a1b8997-00d5-4bc7-a472-41d6ac27cd83",      "properties": {        "greenMinLimit": "85",        "yellowMinLimit": "70"      }    }  }}
+        "default": {  
+            "pageUrl": "https://contoso.sharepoint.com/sites/mySite/Lists/Work%20Status/AllItems.aspx",  
+                "fieldCustomizers": {    
+                    "PercentComplete": {      
+                        "id": "6a1b8997-00d5-4bc7-a472-41d6ac27cd83",      
+                        "properties": {        
+                            "greenMinLimit": "85",        
+                            "yellowMinLimit": "70"
+                        }    
+                    }  
+                }
+        }
         ```
+1. Run the project by executing the following command: `gulp serve`
 
 1. When prompted, select the **Load debug scripts** button.
 

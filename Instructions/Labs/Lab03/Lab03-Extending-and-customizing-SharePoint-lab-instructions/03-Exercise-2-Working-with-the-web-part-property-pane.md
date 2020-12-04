@@ -2,13 +2,13 @@
 
 ## Task 1: Create a new SPFx solution and web part
 
-1. From the PowerShell command prompt, change to the **C:/LabFiles/SharePoint** directory by executing the following command: cd c:/LabFiles/SharePoint
+1. From the PowerShell command prompt, change to the **C:/LabFiles/SharePoint** directory by executing the following command: `cd c:/LabFiles/SharePoint`
 
-1. Make a new directory for your SharePoint project files by executing the following command: md HelloPropertyPane
+1. Make a new directory for your SharePoint project files by executing the following command: `md HelloPropertyPane`
 
 1. Navigate to the newly created SharePoint directory by executing the following command: `cd HelloPropertyPane`
 
-1. Run the SharePoint Yeoman generator by executing the following command: yo @microsoft/sharepoint
+1. Run the SharePoint Yeoman generator by executing the following command: `yo @microsoft/sharepoint`
 
 1. Use the following to complete the prompt that is displayed:
 
@@ -30,7 +30,7 @@
 
     - **Which framework would you like to use?**: No JavaScript framework
 
-1. Open the project in Visual Studio Code by executing the following command: code .
+1. Open the project in Visual Studio Code by executing the following command: `code .`
 
 1. From the Visual Studio Code ribbon, select **Terminal > New Terminal**.
 
@@ -90,7 +90,7 @@
 
     1. In the command prompt, press CTRL+C to stop the local web server.
 
-    1. Rebuild and restart the local web server by executing the command gulp serve.
+    1. Rebuild and restart the local web server by executing the command `gulp serve`.
 
     1. When the SharePoint Workbench loads, add the web part back to the page to see the properties.
 
@@ -125,7 +125,7 @@ Now that the web part has two new custom properties, the next step is to extend 
     1. In the **HelloPropertyPaneWebPart.ts**, at the top of the file, add a **PropertyPaneSlider** reference to the existing import statement for the **@microsoft/sp-webpart-base** package.
 
         ```typescript
-        Import { PropertyPaneSlider } from ‘@microsoft/sp-webpart-base’
+        Import { PropertyPaneSlider } from '@microsoft/sp-webpart-base'
         ```
 
     1. Scroll down to the method **getPropertyPaneConfiguration** and within it, locate the **groupFields** array.

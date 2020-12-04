@@ -55,7 +55,8 @@ By the end of this exercise you will be able to use the following queries:
 1. Copy the client secret value before you leave this page. You will need it in the next step.
 
     **Important**:
-    This client secret is never shown again, so make sure you copy it now.
+    This client secret is never shown again, so make sure you copy it now.
+
     ![Screenshot of the newly added client secret](../../Linked_Image_Files/retrieve_and_control_information_returned_from_microsoft_graph_image_7.png)
 
 1. Grant Azure AD application permissions to Microsoft Graph. After creating the application, you need to grant it the necessary permissions to Microsoft Graph. Select **API Permissions** in the leftmost navigation panel.
@@ -293,19 +294,19 @@ By the end of this exercise you will be able to use the following queries:
 
 1. When the application runs, you'll see a list of users displayed. The query retrieved all information about the users.
 
-![Screenshot of the console application with no query parameters](../../Linked_Image_Files/retrieve_and_control_information_returned_from_microsoft_graph_image_12.png)
+    ![Screenshot of the console application with no query parameters](../../Linked_Image_Files/retrieve_and_control_information_returned_from_microsoft_graph_image_12.png)
 
-**Note**:
-Notice the URL written to the console. This is the entire request, including query parameters, that the Microsoft Graph SDK is generating. Take note for each query you run in this exercise.
+    **Note**:
+    Notice the URL written to the console. This is the entire request, including query parameters, that the Microsoft Graph SDK is generating. Take note for each query you run in this exercise.
+
 ## Task 7: Edit the application to optimize the query
 
 The current console application isn't efficient because it retrieves all information about all users in your organization but only displays three properties. The **$select** query parameter can limit the amount of data that is returned by Microsoft Graph, optimizing the query.
 
-1. Update the line that starts with `var results = client.Users` in the **Main** method with the following to limit the query to just two properties:
+1. Update the line that starts with `var results = graphRequest` in the **Main** method with the following to limit the query to just two properties:
 
     ```csharp
-    var results = client.Users
-                        .Request()
+    var results = graphRequest
                         .Select(u => new { u.DisplayName, u.Mail })
                         .GetAsync()
                         .Result;
@@ -322,11 +323,10 @@ The current console application isn't efficient because it retrieves all informa
 
     ![Screenshot of the console application with the $select query parameters](../../Linked_Image_Files/retrieve_and_control_information_returned_from_microsoft_graph_image_13.png)
 
-1. Let us further limit the results to just the first 15 results. Update the line that starts with `var results = client.Users` in the **Main** method with the following:
+1. Let us further limit the results to just the first 15 results. Update the line that starts with `var results = graphRequest` in the **Main** method with the following:
 
     ```csharp
-    var results = client.Users
-                        .Request()
+    var results = graphRequest
                         .Select(u => new { u.DisplayName, u.Mail })
                         .Top(15)
                         .GetAsync()
@@ -344,11 +344,10 @@ The current console application isn't efficient because it retrieves all informa
 
     ![Screenshot of the console application with the $top query parameters](../../Linked_Image_Files/retrieve_and_control_information_returned_from_microsoft_graph_image_14.png)
 
-1. Sort the results in reverse alphabetic order. Update the line that starts with `var results = client.Users` in the **Main** method with the following:
+1. Sort the results in reverse alphabetic order. Update the line that starts with `var results = graphRequest` in the **Main** method with the following:
 
     ```csharp
-    var results = client.Users
-                        .Request()
+    var results = graphRequest
                         .Select(u => new { u.DisplayName, u.Mail })
                         .Top(15)
                         .OrderBy("DisplayName desc")
@@ -365,11 +364,10 @@ The current console application isn't efficient because it retrieves all informa
 
     ![Screenshot of the console application with the $orderby query parameters](../../Linked_Image_Files/retrieve_and_control_information_returned_from_microsoft_graph_image_15.png)
 
-1. Further refine the results by selecting users whose surname starts with A, B, or C. You'll need to remove the **$orderby** query parameter added previously as the Users endpoint doesn't support combining the **$filter** and **$orderby** parameters. Update the line that starts with `var results = client.Users` in the **Main** method with the following:
+1. Further refine the results by selecting users whose surname starts with A, B, or C. You'll need to remove the **\$orderby** query parameter added previously as the Users endpoint doesn't support combining the **\$filter** and **\$orderby** parameters. Update the line that starts with `var results = graphRequest` in the **Main** method with the following:
 
     ```csharp
-    var results = client.Users
-                        .Request()
+    var results = graphRequest
                         .Select(u => new { u.DisplayName, u.Mail })
                         .Top(15)
                         // .OrderBy("DisplayName desc)
@@ -385,7 +383,7 @@ The current console application isn't efficient because it retrieves all informa
     dotnet run
     ```
 
-![Screenshot of the console application with the $filter query parameters](../../Linked_Image_Files/retrieve_and_control_information_returned_from_microsoft_graph_image_16.png)
+    ![Screenshot of the console application with the $filter query parameters](../../Linked_Image_Files/retrieve_and_control_information_returned_from_microsoft_graph_image_16.png)
 
 ## Review
 

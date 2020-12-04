@@ -28,7 +28,7 @@ In this task, you will create a new Active Directory organization so you will un
 
 1. From the **Basics** tab, perform the following actions:
 
-    1. In the **Select a directory type** section, select **Azure Active Directory**.
+    1. In the **Select a tenant type** section, select **Azure Active Directory**.
 
     1. Select **Next: Configuration**.
 

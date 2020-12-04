@@ -2,13 +2,13 @@
 
 ## Task 1: Create your project
 
-1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: cd c:/LabFiles/SharePoint
+1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: `cd c:/LabFiles/SharePoint`
 
-1. Make a new directory for your SharePoint project files by executing the following command: md SPFxTeamsTab
+1. Make a new directory for your SharePoint project files by executing the following command: `md SPFxTeamsTab`
 
 1. Navigate to the newly created SharePoint directory by executing the following command: `cd SPFxTeamsTab`
 
-1. Run the SharePoint Yeoman generator by executing the following command: yo @microsoft/sharepoint
+1. Run the SharePoint Yeoman generator by executing the following command: `yo @microsoft/sharepoint`
 
 1. Use the following to complete the prompt that is displayed:
 
@@ -52,22 +52,78 @@ Alternatively, you can manually create the manifest file if you want to have mor
 
 The automatic generation and deployment of the Microsoft Teams manifest is not currently operational; you will manually create the Microsoft Teams manifest and app package:
 
-1. Copy the **manifest.json** file from **Resources/manifest.json** to the **./teams** folder in your project.
+1. Create a **manifest.json** file in **./teams** folder, use the following manifest file as a template:
+    ```json
+    {
+        "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+        "manifestVersion": "1.5",
+        "packageName": "{{SPFX_COMPONENT_ALIAS}}",
+        "id": "{{SPFX_COMPONENT_ID}}",
+        "version": "0.1",
+        "developer": {
+            "name": "Parker Porcupine",
+            "websiteUrl": "https://contoso.com",
+            "privacyUrl": "https://contoso.com/privacystatement",
+            "termsOfUseUrl": "https://contoso.com/servicesagreement"
+        },
+        "name": {
+            "short": "{{SPFX_COMPONENT_NAME}}"
+        },
+        "description": {
+            "short": "{{SPFX_COMPONENT_SHORT_DESCRIPTION}}",
+            "full": "{{SPFX_COMPONENT_LONG_DESCRIPTION}}"
+        },
+        "icons": {
+            "outline": "{{SPFX_COMPONENT_ID}}_outline.png",
+            "color": "{{SPFX_COMPONENT_ID}}_color.png"
+        },
+        "accentColor": "#004578",
+        "staticTabs": [
+            {
+            "entityId": "com.contoso.personaltab.spfx",
+            "name": "My SPFx Personal Tab",
+            "contentUrl": "https://{teamSiteDomain}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest=/_layouts/15/teamshostedapp.aspx%3Fteams%26personal%26componentId={{SPFX_COMPONENT_ID}}%26forceLocale={locale}",
+            "scopes": [
+                "personal"
+            ]
+            }
+        ],
+        "configurableTabs": [
+            {
+            "configurationUrl": "https://{teamSiteDomain}{teamSitePath}/_layouts/15/TeamsLogon.aspx?SPFX=true&dest={teamSitePath}/_layouts/15/teamshostedapp.aspx%3FopenPropertyPane=true%26teams%26componentId={{SPFX_COMPONENT_ID}}%26forceLocale={locale}",
+            "canUpdateConfiguration": true,
+            "scopes": [
+                "team"
+            ]
+            }
+        ],
+        "validDomains": [
+            "*.login.microsoftonline.com",
+            "*.sharepoint.com",
+            "spoprod-a.akamaihd.net",
+            "resourceseng.blob.core.windows.net"
+        ],
+        "webApplicationInfo": {
+            "resource": "https://{teamSiteDomain}",
+            "id": "00000003-0000-0ff1-ce00-000000000000"
+        }
+    }
+    ```
 
 1. Open the **manifest.json** file. This file contains multiple strings that need to be updated to match the SPFx component. Use the following table to determine the values that should be replaced. The SPFx component properties are found in the web part manifest file: **./src/webparts/spFxTeamsTogether/SpFxTeamsTogetherWebPart.manifest.json**
+    | **manifest.json string**| **Property in SPFx component manifest**|
+    | :--- | :--- |
+    | {{SPFX_COMPONENT_ALIAS}}| alias|
+    | {{SPFX_COMPONENT_NAME}}| preconfiguredEntries[0].title|
+    | {{SPFX_COMPONENT_SHORT_DESCRIPTION}}| preconfiguredEntries[0].description|
+    | {{SPFX_COMPONENT_LONG_DESCRIPTION}}| preconfiguredEntries[0].description|
+    | {{SPFX_COMPONENT_ID}}| id|
+
+    **Note**:
+    Don't miss replacing **{{SPFX_COMPONENT_ID}}** in **configurableTabs[0].configurationUrl**. You will likely have to scroll your editor to the right to see it. The tokens surrounded by single curly braces (for example, **{teamSiteDomain}**) do not need to be replaced.
+
 
 1. Create a Microsoft Teams app package by zipping the contents of the **./teams** folder. Make sure to zip just the contents and not the folder itself. This ZIP archive should contain three files at the root: two images and the **manifest.json**.
-
-| **manifest.json string**| **Property in SPFx component manifest**|
-| :--- | :--- |
-| {{SPFX_COMPONENT_ALIAS}}| alias|
-| {{SPFX_COMPONENT_NAME}}| preconfiguredEntries[0].title|
-| {{SPFX_COMPONENT_SHORT_DESCRIPTION}}| preconfiguredEntries[0].description|
-| {{SPFX_COMPONENT_LONG_DESCRIPTION}}| preconfiguredEntries[0].description|
-| {{SPFX_COMPONENT_ID}}| id|
-
-**Note**:
-Don't miss replacing **{{SPFX_COMPONENT_ID}}** in **configurableTabs[0].configurationUrl**. You will likely have to scroll your editor to the right to see it. The tokens surrounded by single curly braces (for example, **{teamSiteDomain}**) do not need to be replaced.
 
 ## Task 3: Create and deploy the SharePoint package
 
@@ -79,9 +135,9 @@ In order to test the web part in SharePoint and Microsoft Teams, it must first b
 
 1. Build the project by opening a command prompt and changing to the root folder of the project. Then execute the following command: `gulp build`
 
-1. Next, create a production bundle of the project by running the following command on the command line from the root of the project: `gulp bundle –ship`
+1. Next, create a production bundle of the project by running the following command on the command line from the root of the project: `gulp bundle --ship`
 
-1. Create a deployment package of the project by running the following command on the command line from the root of the project: `gulp package-solution –ship`
+1. Create a deployment package of the project by running the following command on the command line from the root of the project: `gulp package-solution --ship`
 
 1. Locate the file created by the gulp task, found in the **./sharepoint/solution** folder with the name *.sppkg.
 

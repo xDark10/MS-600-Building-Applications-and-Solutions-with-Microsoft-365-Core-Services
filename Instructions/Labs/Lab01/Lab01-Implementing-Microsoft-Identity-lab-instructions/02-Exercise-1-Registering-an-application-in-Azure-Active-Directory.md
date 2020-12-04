@@ -24,21 +24,16 @@ In this task, you will create a new Active Directory organization so you will un
 
 1. Expand the left navigation pane, select **Azure Active Directory**.
 
-1. Select **Create a directory** located in the right side of the portal.
+1. Select **Create a tenant** located in the right side of the portal.
 
 1. From the **Basics** tab, perform the following actions:
 
-    1. In the **Select a directory type** section, select **Azure Active Directory**.
+    1. In the **Select a tenant type** section, select **Azure Active Directory**.
 
     1. Select **Next: Configuration**.
 
     ![Create a directory pane with basics tab selected showing the Azure Active Directory selected for the Directory type.](../../Linked_Image_Files/l01_exercise_1_task_2_image_1.png)
 
-1. From the **Configuration** tab, perform the following actions:
-
-    1. In the **Select a directory type** section, select **Azure Active Directory**.
-
-    1. Select **Next: Configuration**.
 
 1. From the **Configuration** tab, perform the following actions:
 
@@ -91,7 +86,7 @@ In this task, you will create a user in the new Active Directory tenant you just
 
 1. Test new user in Azure portal and change password:
 
-    1. Navigate to the Azure portal, [https://azure.portal.com](https://azure.portal.com/) in the InPrivate browser session.
+    1. Navigate to the Azure portal, [https://portal.azure.com](https://portal.azure.com/) in the InPrivate browser session.
 
     1. Sign in with your new *testuser@contosomarketingxx@onmicrosoft.com* account.
 

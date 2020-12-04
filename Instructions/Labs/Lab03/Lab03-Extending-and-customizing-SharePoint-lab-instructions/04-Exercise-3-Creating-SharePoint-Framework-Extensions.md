@@ -2,13 +2,13 @@
 
 ## Task 1: Create your project
 
-1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: cd c:/LabFiles/SharePoint
+1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: `cd c:/LabFiles/SharePoint`
 
-1. Make a new directory for your SharePoint project files by executing the following command: md SPFxAppCustomizer
+1. Make a new directory for your SharePoint project files by executing the following command: `md SPFxAppCustomizer`
 
 1. Navigate to the newly created SharePoint directory by executing the following command: `cd SPFxAppCustomizer`
 
-1. Run the SharePoint Yeoman generator by executing the following command: yo @microsoft/sharepoint
+1. Run the SharePoint Yeoman generator by executing the following command: `yo @microsoft/sharepoint`
 
 1. Use the following to complete the prompt that is displayed:
 
@@ -32,7 +32,7 @@
 
 1. After provisioning the folders required for the project, the generator will install all the dependency packages using NPM.
 
-1. Open the project in Visual Studio Code by executing the following command: code .
+1. Open the project in Visual Studio Code by executing the following command: `code .`
 
 1. From the Visual Studio Code **Terminal** prompt, execute the following command: `gulp trust-dev-cert`
 
@@ -53,7 +53,7 @@
 
 1. Select the button **Load debug scripts**.
 
-1. Once the scripts load, a SharePoint dialog alert box will be shown: This alert box is shown by the application customizer. Open the application customizer file located at **./src/extensions/helloAppCustomizer/HelloAppCustomizerApplicationCustomizer.ts** and find the **OnInit()** method. Notice the following line in the method that is triggering the dialog to appear: `Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`);`
+1. Once the scripts load, a SharePoint dialog alert box will be shown: This alert box is shown by the application customizer. Open the application customizer file located at **./src/extensions/helloAppCustomizer/HelloAppCustomizerApplicationCustomizer.ts** and find the **OnInit()** method. Notice the following line in the method that is triggering the dialog to appear: ``Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`);``
 
 1. Stop the local web server by pressing CTRL+C in the console/terminal window.
 
@@ -80,8 +80,10 @@
     ```powershell
     gulp build
     gulp bundle --ship
-    gulp package-solution –-ship
+    gulp package-solution --ship
     ```
+    **Note**:
+    If this error `The build failed because a task wrote output to stderr.` is displayed on the command console, please ignore it. The reason is that the build output contain a warning.
 
 1. In the browser, navigate to your SharePoint Online tenant App Catalog site.
 

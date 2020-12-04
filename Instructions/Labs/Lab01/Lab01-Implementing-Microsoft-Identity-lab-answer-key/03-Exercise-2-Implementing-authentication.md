@@ -10,7 +10,7 @@ This exercise demonstrates signing into a web application using two different ac
 In this task, you will register an application in the Azure portal that allows users from the current organization to sign in.
 ### Register a single-tenant Azure AD application
 
-1. From the Azure portal [https://azure.portal.com](https://azure.portal.com/), navigate to **Azure Active Directory**.
+1. From the Azure portal [https://portal.azure.com](https://portal.azure.com/), navigate to **Azure Active Directory**.
 
 1. Select **Manage > App registrations** in the left-hand navigation.
 
@@ -145,7 +145,7 @@ In this first application, you'll create an ASP.NET Core web application that al
 In this task, you will register an application in the Azure portal that allows users from any organization or Microsoft Accounts to sign in.
 ### Register a multi-tenant Azure AD application
 
-1. From the Azure portal [https://azure.portal.com](https://azure.portal.com/), navigate to **Azure Active Directory**.
+1. From the Azure portal [https://portal.azure.com](https://portal.azure.com/), navigate to **Azure Active Directory**.
 
 1. Select **Manage > App registrations** in the left-hand navigation.
 
@@ -163,7 +163,7 @@ In this task, you will register an application in the Azure portal that allows u
 
 1. On the **Hello ASPNET Core Identity 02** page, copy the values **Application (client) ID** and **Directory (tenant) ID**; you'll need these values later in this exercise.
 
-1. On the **Hello ASPNET Core Identity 01** page, select the **Add a Redirect URI** link under the **Redirect URIs**.
+1. On the **Hello ASPNET Core Identity 02** page, select the **Add a Redirect URI** link under the **Redirect URIs**.
 
 1. Locate the section **Redirect URIs** and add the following two URLs:
 
@@ -171,11 +171,13 @@ In this task, you will register an application in the Azure portal that allows u
 
     - **https://localhost:3007/signin-oidc**
 
-1. Locate the section **Advanced settings** and add the following **Logout URL**: **https://localhost:3007/signout-oidc**
+1. Add the following **Logout URL**: **https://localhost:3007/signout-oidc**
 
 1. Locate the section **Implicit grant** and select both **Access tokens** and **ID tokens**. This tells Azure AD to return these tokens the authenticated user if requested.
 
 1. Select **Save** when finished setting these values.
+
+![Register an application page with Accounts in any organizational directory selected.](../../Linked_Image_Files/l01_exercise_2_task_4_image_2.png)
 
 ## Task 5: Create a multiple organization ASP.NET core web application
 
@@ -238,7 +240,9 @@ In this second application, you'll create an ASP.NET Core web application that a
         </table>
     </div>
     }
-    ```
+     ```
+
+1. Save the above all changes.
 
 ## Task 6: Build and test the multiple organization web app
 

@@ -2,13 +2,13 @@
 
 ## Task 1: Create your project
 
-1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: cd c:/LabFiles/SharePoint
+1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: `cd c:/LabFiles/SharePoint`
 
-1. Make a new directory for your SharePoint project files by executing the following command: md SPFxFieldCustomizer
+1. Make a new directory for your SharePoint project files by executing the following command: `md SPFxFieldCustomizer`
 
 1. Navigate to the newly created SharePoint directory by executing the following command: `cd SPFxFieldCustomizer`
 
-1. Run the SharePoint Yeoman generator by executing the following command: yo @microsoft/sharepoint
+1. Run the SharePoint Yeoman generator by executing the following command: `yo @microsoft/sharepoint`
 
 1. Use the following to complete the prompt that is displayed:
 
@@ -41,7 +41,7 @@
 1. Replace the contents of the file with the following styles:
 
     ```html
-            .HelloFieldCustomizer {
+        .HelloFieldCustomizer {
             .cell {
                 display: 'inline-block';
             }
@@ -49,6 +49,7 @@
                 background-color: #cccccc;
                 width: 100px;
             }
+        }
     ```
 
 ## Task 3: Update the code for the field customizer
@@ -63,12 +64,12 @@
         event.domElement.classList.add(styles.cell);
         event.domElement.innerHTML = `
             <div class='${styles.HelloFieldCustomizer}'>
-                <div class='${styles.cell}'>
-                <div style='width: ${event.fieldValue}px; background:#0094ff; color:#c0c0c0'>
-                    &nbsp; ${event.fieldValue}
+                <div class='${styles.filledBackground}'>
+                    <div style='width: ${event.fieldValue}px; background:#0094ff; color:#c0c0c0'>
+                        &nbsp; ${event.fieldValue}
+                    </div>
                 </div>
-            </div>
-        </div>`;
+            </div>`;
     ```
 
 ## Task 4: Update the deployment code for the field customizer
@@ -140,4 +141,3 @@ Field customizers, when deployed to production, are implemented by creating a ne
 ## Review
 
 In this exercise, you learned how to create and deploy a command set extension.  Command set extensions are used for adding additional commands into the command bar at the top of a page.
-

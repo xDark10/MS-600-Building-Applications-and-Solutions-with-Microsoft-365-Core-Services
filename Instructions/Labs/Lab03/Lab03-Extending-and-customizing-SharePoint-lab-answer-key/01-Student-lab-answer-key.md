@@ -13,7 +13,8 @@ The Microsoft Worldwide Learning team updates this training course as soon as th
 Sign in to the Windows 10 virtual machine using credentials.
 
 **Note**:
-Lab virtual machine sign-in instructions will be provided to students by the instructor.
+Lab virtual machine sign-in instructions will be provided to students by the instructor.
+
 ## Review installed applications
 
 Observe the taskbar located at the bottom of your Windows 10 desktop. The taskbar contains the icons for the applications you will use in this lab:
@@ -32,5 +33,5 @@ Also, ensure that the following necessary utilities are installed:
 
 - Ngrok
 
-- NodeJS v8.x or v10.x
+- NodeJS v10.x
 

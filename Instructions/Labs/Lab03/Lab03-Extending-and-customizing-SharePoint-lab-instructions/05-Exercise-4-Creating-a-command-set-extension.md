@@ -2,13 +2,13 @@
 
 ## Task 1: Create your project
 
-1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: cd c:/LabFiles/SharePoint
+1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: `cd c:/LabFiles/SharePoint`
 
-1. Make a new directory for your SharePoint project files by executing the following command: md SPFxCommandSet
+1. Make a new directory for your SharePoint project files by executing the following command: `md SPFxCommandSet`
 
 1. Navigate to the newly created SharePoint directory by executing the following command: `cd SPFxCommandSet`
 
-1. Run the SharePoint Yeoman generator by executing the following command: yo @microsoft/sharepoint
+1. Run the SharePoint Yeoman generator by executing the following command: `yo @microsoft/sharepoint`
 
 1. Use the following to complete the prompt that is displayed:
 
@@ -56,7 +56,9 @@
 
 The behavior for your custom buttons is contained in the **onListViewUpdated()** and **OnExecute()** methods.
 
-The **onListViewUpdated()** event occurs separately for each command (for example, a menu item) whenever a change happens in the ListView, and the UI needs to be re-rendered. The event function parameter represents information about the command being rendered. The handler can use this information to customize the title or adjust the visibility, for example, if a command should only be shown when a certain number of items are selected in the list view. This is the default implementation.When using the method **tryGetCommand**, you get a Command object, which is a representation of the command that shows in the UI. You can modify its values, such as **title**, or **visible**, to modify the UI element. SPFx uses this information when re-rendering the commands. These objects keep the state from the last render, so if a command is set to **visible** = **false**, it remains invisible until it is set back to **visible** = **true**.```typescript
+The **onListViewUpdated()** event occurs separately for each command (for example, a menu item) whenever a change happens in the ListView, and the UI needs to be re-rendered. The event function parameter represents information about the command being rendered. The handler can use this information to customize the title or adjust the visibility, for example, if a command should only be shown when a certain number of items are selected in the list view. This is the default implementation.
+When using the method **tryGetCommand**, you get a Command object, which is a representation of the command that shows in the UI. You can modify its values, such as **title**, or **visible**, to modify the UI element. SPFx uses this information when re-rendering the commands. These objects keep the state from the last render, so if a command is set to **visible** = **false**, it remains invisible until it is set back to **visible** = **true**.
+```typescript
 @override
     public onListViewUpdated(event: IListViewCommandSetListViewUpdatedParameters): void {
         const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
@@ -87,7 +89,11 @@ public onExecute(event: IListViewCommandSetExecuteEventParameters): void {
 
 ## Task 3: Test your extension
 
-You cannot currently use the local Workbench to test SharePoint Framework Extensions. You'll need to test and develop them directly against a live SharePoint Online site. You don't have to deploy your customization to the app catalog to do this, which makes the debugging experience simple and efficient.Go to any SharePoint list in your SharePoint Online site by using the modern experience or create a new list. Copy the URL off the list to clipboard.Because our ListView Command Set is hosted from localhost and is running, you can use specific debug query parameters to execute the code in the list view.Open **serve.json** file from **config** folder. Update the **pageUrl** attributes to match a URL of the list where you want to test the solution. After edits your serve.json should look somewhat like:```powershell
+You cannot currently use the local Workbench to test SharePoint Framework Extensions. You'll need to test and develop them directly against a live SharePoint Online site. You don't have to deploy your customization to the app catalog to do this, which makes the debugging experience simple and efficient.
+Go to any SharePoint list in your SharePoint Online site by using the modern experience or create a new list. Copy the URL off the list to clipboard.
+Because our ListView Command Set is hosted from localhost and is running, you can use specific debug query parameters to execute the code in the list view.
+Open **serve.json** file from **config** folder. Update the **pageUrl** attributes to match a URL of the list where you want to test the solution. After edits your serve.json should look somewhat like:
+```powershell
 {
     "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
     "port": 4321,

@@ -2,13 +2,13 @@
 
 ## Task 1: Create your project
 
-1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: cd c:/LabFiles/SharePoint
+1. From the PowerShell command prompt, change to the C:/LabFiles/SharePoint directory by executing the following command: `cd c:/LabFiles/SharePoint`
 
-1. Make a new directory for your SharePoint project files by executing the following command: md DeploymentDemo
+1. Make a new directory for your SharePoint project files by executing the following command: `md DeploymentDemo`
 
 1. Navigate to the newly created SharePoint directory by executing the following command: `cd DeploymentDemo`
 
-1. Run the SharePoint Yeoman generator by executing the following command: yo @microsoft/sharepoint
+1. Run the SharePoint Yeoman generator by executing the following command: `yo @microsoft/sharepoint`
 
 1. Use the following to complete the prompt that is displayed:
 
@@ -36,9 +36,9 @@
 
 1. When NPM completes downloading all dependencies, build the project by running the following command on the command line from the root of the project: `gulp build`
 
-1. Create a production bundle of the project by running the following command on the command line from the root of the project: `gulp bundle –ship`
+1. Create a production bundle of the project by running the following command on the command line from the root of the project: `gulp bundle --ship`
 
-1. Create a deployment package of the project by running the following command on the command line from the root of the project: `gulp package-solution –ship`
+1. Create a deployment package of the project by running the following command on the command line from the root of the project: `gulp package-solution --ship`
 
 ## Task 3: Deploying the package to a SharePoint site
 
@@ -83,7 +83,8 @@ SharePoint will start to install the application. At first it will appear dimmed
 1. Refresh the page and examine where the JavaScript bundle is being hosted.
 
     **Note**:
-    If you have not enabled the Office 365 CDN then the bundle will be hosted from a document library named ClientSideAssets in the app catalog site. If you have enabled the Office 365 CDN then the bundle will be automatically hosted from the CDN.
+    If you have not enabled the Office 365 CDN then the bundle will be hosted from a document library named ClientSideAssets in the app catalog site. If you have enabled the Office 365 CDN then the bundle will be automatically hosted from the CDN.
+
 ## Review
 
 In this exercise, you learned how to package and deploy your SharePoint Framework solutions.

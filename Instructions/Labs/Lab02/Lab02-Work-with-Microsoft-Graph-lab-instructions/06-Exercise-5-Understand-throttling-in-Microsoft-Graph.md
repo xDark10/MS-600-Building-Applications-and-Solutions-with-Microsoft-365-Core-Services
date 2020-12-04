@@ -32,11 +32,17 @@ In this exercise, you will create a new Azure AD web application registration us
 
 1. Select **Manage > Authentication**.
 
-1. In the section **Redirect URIs**, locate the **Suggested Redirect URIs for public clients (mobile, desktop)** section and select the entry that begins with **msal**.
+1. Under **Platform configurations**, select **Add a platform**.
 
-    ![Screenshot of the Redirect URIs section](../../Linked_Image_Files/understand_throttling_in_microsoft_graph_image_5.png)
+1. In Configure platforms, select **Mobile and desktop applications**.
 
-1. Scroll down to the **Default client type** section and set the toggle to **Yes**.
+    ![Screenshot of the Redirect URIs section](../../Linked_Image_Files/portal-04-app-reg-03-platform-config.png)
+
+1. In the section **Redirect URIs**, select the entry that begins with **msal** and enter **https://contoso** in **Custom redirect URIs** section, and then click **Configure** button.
+
+    ![Screenshot of the Redirect URIs section](../../Linked_Image_Files/understand_throttling_in_microsoft_graph_image_4_1.png)
+
+1. Scroll down to the **Advanced settings** section and set the toggle to **Yes**.
 
     ![Screenshot of the Default client type section](../../Linked_Image_Files/understand_throttling_in_microsoft_graph_image_6.png)
 
@@ -301,7 +307,7 @@ The option to **Grant admin consent** here in the Azure AD admin center is pre-c
         }
     ```
 
-1. Locate the **Main** method in the **Program** class. Add the following code below **Console.WriteLine("Hello World!"); ** to load the configuration settings from the **appsettings.json** file:
+1. Locate the **Main** method in the **Program** class. Add the following code below **Console.WriteLine("Hello World!");** to load the configuration settings from the **appsettings.json** file:
 
     ```csharp
           var config = LoadAppSettings();
@@ -320,7 +326,7 @@ The option to **Grant admin consent** here in the Azure AD admin center is pre-c
           var client = GetAuthenticatedHTTPClient(config, userName, userPassword);
     ```
 
-1. Add the following code to issue many requests to Microsoft Graph. This code will create a collection of tasks to request a specific Microsoft Graph endpoint. When a task succeeds, it will write a dot to the console, while a failed request will write an X to the console. The most recent failed request's status code and headers are saved. All tasks are then executed in parallel. At the conclusion of all requests, the results are written to the console:
+1. Add the following code below **var client = GetAuthenticatedHTTPClient(config, userName, userPassword);**  to issue many requests to Microsoft Graph. This code will create a collection of tasks to request a specific Microsoft Graph endpoint. When a task succeeds, it will write a dot to the console, while a failed request will write an X to the console. The most recent failed request's status code and headers are saved. All tasks are then executed in parallel. At the conclusion of all requests, the results are written to the console:
 
     ```csharp
     var totalRequests = 100;
@@ -368,7 +374,8 @@ The option to **Grant admin consent** here in the Azure AD admin center is pre-c
 1. Run the following command to run the console application: `dotnet run`
 
     **Note**:
-    The console app may take one or two minutes to complete the process of authenticating and obtaining an access token from Azure AD and issuing the requests to Microsoft Graph.
+    The console app may take one or two minutes to complete the process of authenticating and obtaining an access token from Azure AD and issuing the requests to Microsoft Graph.
+
 1. After entering the username and password of a user, you will see the results written to the console.
 
 ![Screenshot of the console application with no query parameters](../../Linked_Image_Files/understand_throttling_in_microsoft_graph_image_11.png)
@@ -388,7 +395,7 @@ It is easier to work with strongly typed objects instead of untyped JSON respons
     ```csharp
     using Newtonsoft.Json;
     using System;
-    namespace graphconsoleapp
+    namespace graphconsolethrottlepp
     {
         public class Messages
         {
@@ -411,10 +418,9 @@ It is easier to work with strongly typed objects instead of untyped JSON respons
     }
     ```
 
-1. Ensure the namespace in the **Messages.cs** file matches the namespace in the rest of the application.
-
     **Note**:
-    This class is used by the JSON deserializer to translate a JSON response into a Messages object.
+    This class is used by the JSON deserializer to translate a JSON response into a Messages object.
+
 ### Add method to implement delayed retry strategy when requests are throttled
 
 The application is going to be modified to first get a list of messages in the current user's mailbox, then issue a separate request for the details of each message. In most scenarios, a separate request will trigger Microsoft Graph to throttle the requests.
@@ -491,7 +497,8 @@ This code will do the following:
 - Recursively call the same method to retry the request.
 
     **Tip**:
-    In cases where the response does not include a **Retry-After** header, it is recommended to consider implementing an exponential back-off default delay. In this code, the application will initially pause for two seconds before retrying the request. Future requests will double the delay if Microsoft Graph continues to throttle the request.
+    In cases where the response does not include a **Retry-After** header, it is recommended to consider implementing an exponential back-off default delay. In this code, the application will initially pause for two seconds before retrying the request. Future requests will double the delay if Microsoft Graph continues to throttle the request.
+
 Real-world applications should have an upper limit on how long they will delay so to avoid an unreasonable delay so users are not left with an unresponsive experience.
 
 The resulting method should look like the following:
@@ -695,7 +702,7 @@ The last step is to modify the **GetMessageDetail** method that retrieved the me
 1. Update the signature of the method so the first parameter expects an instance of the **GraphServiceClient**, not the **HttpClient**, and remove the last parameter of a default delay. The method signature should now look like the following:
 
     ```csharp
-    private static Message GetMessageDetail(GraphServiceClient client, string messageId)
+    private static Microsoft.Graph.Message GetMessageDetail(GraphServiceClient client, string messageId)
     ```
 
 1. Next, remove all code within this method and replace it with this single line:

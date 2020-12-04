@@ -268,7 +268,11 @@ In this step of the tutorial, you'll create a chart using data from the table th
 
     ```javascript
     document.getElementById("create-chart").onclick = createChart;
+    ```
+    
     Add the following function to the end of the file:
+
+    ```javascript
     function createChart() {
         Excel.run(function (context) {
             // TODO1: Queue commands to get the range of data to be charted.

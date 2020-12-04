@@ -8,7 +8,20 @@ You’re a developer in an organization that relies on paper-based documentation
 
 After you complete this lab, you will be able to:
 
-Recognize the fundamental components and types of Office Add-ins.Describe Office JavaScript APIs.Explain customization of Add-ins.Describe testing, debugging, and deployment options.Describe actionable messages.## Lab setup
+- Describe fundamental components and types of Office Add-ins.
+
+- Describe Add-in commands.
+
+- Describe Office JavaScript APIs.
+
+- Describe customization of Add-ins.
+
+- Describe testing, debugging, and deployment options.
+
+- Describe actionable messages.
+
+
+## Lab setup
 
 **Estimated Time**: 180 minutes.
 
@@ -24,4 +37,5 @@ Lab virtual machine sign in instructions will be provided to you by your instruc
 
 Once you signed in to the VM, observe the start menu, and verify following applications have been installed:
 
-Office 2019Visual Studio 2019 
+Office 2019
+Visual Studio 2019 
