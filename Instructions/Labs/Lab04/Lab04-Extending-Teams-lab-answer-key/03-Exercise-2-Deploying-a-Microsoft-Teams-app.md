@@ -6,7 +6,7 @@
 
 You can build Teams apps with your preferred tools, but these lessons show how you can get started quickly with the Microsoft Teams Toolkit for Visual Studio Code.
 
-> NOTE:
+> **NOTE:**
 > Due to a bug in the latest Microsoft Teams Toolkit for bot development, you will need to install version 1.1.2.
 
 1. Open Visual Studio Code and select **Extensions** on the left Activity Bar.
@@ -105,6 +105,6 @@ Now that you’ve tested your tab, it’s time to run your app inside Microsoft 
 
 In this exercise, you:
 
-- Utilize Microsoft Teams Toolkit to creates scaffolding and reviewed the result.
+- Utilized Microsoft Teams Toolkit to creates scaffolding and reviewed the result.
 
-- Build and run Teams Tab app in Teams.
+- Built and run Teams Tab app in Teams.
