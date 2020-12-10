@@ -51,7 +51,7 @@ Conversational bots allow users to interact with your web service through text, 
 
    This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 3978. Copy the https forwarding address. In the example below that would be https://787b8292.ngrok.io. You will need this later.
 
-1. Reture to **Visual Studio Code**, for the **Messaging endpoint**, use the current https URL you were given by running ngrok and append it with the path /api/messages. It should like something work `https://{subdomain}.ngrok.io/api/messages`.
+1. Return to **Visual Studio Code**, for the **Messaging endpoint**, use the current https URL you were given by running ngrok and append it with the path /api/messages. It should like something work `https://{subdomain}.ngrok.io/api/messages`.
 
 ## Task 3: Run your bot
 
@@ -186,7 +186,9 @@ A proactive message is any message sent by a bot that is not in direct response 
 
 1. In Visual Studio Code, press the **F5** key to launch a Teams web client.
 
-1. In your browser, open the page [https://localhost:3978/api/notify](https://localhost:3978/api/notify) to send a proactive message.
+1. Select **Add** to install the bot to a Team/Chat.
+
+1. In your browser, open the page [http://localhost:3978/api/notify](http://localhost:3978/api/notify) to send a proactive message.
 
 1. A message **"proactive hello"** will be received in your conversation thread.
 
@@ -260,7 +262,7 @@ The bot channels registration registers your web service as a bot with the Bot F
 
    This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 3978. Copy the https forwarding address. In the example below that would be https://787b8292.ngrok.io. You will need this later.
 
-1. 1. Reture to **Visual Studio Code**, for the **Messaging endpoint**, use the current https URL you were given by running ngrok and append it with the path /api/messages. It should like something work `https://{subdomain}.ngrok.io/api/messages`.
+1. Return to **Azure portal site**, for the **Messaging endpoint**, use the current https URL you were given by running ngrok and append it with the path /api/messages. It should like something work `https://{subdomain}.ngrok.io/api/messages`.
 
     ![bot app channels registration](../../Linked_Image_Files/auth-bot-channels-registration.png)
 
@@ -294,9 +296,9 @@ The bot channels registration registers your web service as a bot with the Bot F
 
     d. Click **Add**.
 
-    e. Copy the client secret and save it to a file.
+    e. Copy the **Client secret value** and save it to a file.
 
-1. Go back to the **Bot Channel Registration** window and copy the **App ID** and the **Client secret** in the **Microsoft App ID** and **Password** boxes, respectively.
+1. Go back to the **Bot Channel Registration** window and copy the **App ID** and the **Client secret value** in the **Microsoft App ID** and **Password** boxes, respectively.
 
 1. Click **OK**.
 
@@ -355,7 +357,7 @@ You need an identity provider that can be used for authentication. In this proce
 
     d. Select **Add**.
 
-    e. Before leaving this page, record the secret. You'll use this value later as the Client secret when you register your Azure AD application with your bot.
+    e. Before leaving this page, record the **Client secret value**. You'll use this value later as the Client secret when you register your Azure AD application with your bot.
 
 ### Configure the identity provider connection and register it with the bot
 
@@ -411,9 +413,7 @@ The connection name is used by the bot code to retrieve user authentication toke
 
 ### Prepare the bot sample code
 
-1. In **Visual Studio Code**, select **App Studio** in **Microsoft Teams Toolkit**.
-
-1. When prompted, sign in with your Microsoft 365 development account.
+1. In **Visual Studio Code**, select **Microsoft Teams --> Create a new Teams app**.
 
 1. On the **Add capabilities** screen, select **Bots** then Next.
 
@@ -441,7 +441,7 @@ The connection name is used by the bot code to retrieve user authentication toke
 
     // index.js is used to setup and configure your bot
 
-    // Import required pckages
+    // Import required packages
     const path = require('path');
     const express = require('express');
 
@@ -667,7 +667,7 @@ The connection name is used by the bot code to retrieve user authentication toke
 
     ```
 
-1. Open the **botActivityHandler.js** file and replace the content with the following code.
+1. open **botActivityHandler.js** file, relace the content with the following code.
 
     ```javascript
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -701,7 +701,7 @@ The connection name is used by the bot code to retrieve user authentication toke
 
     ```
 
-1. Create a file named **DialogBot.js** in root folder, and add the following code to the file.
+1. create **DialogBot.js** file in root folder, and add the following code to the file.
 
     ```javascript
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -755,13 +755,13 @@ The connection name is used by the bot code to retrieve user authentication toke
 
 1. From the Visual Studio Code ribbon, select **Terminal > New Terminal**.
 
-1. Execute the following command: `npm install`.
+1. Executing the following command: `npm install`.
 
-1. Execute the following command: `npm install botbuilder-dialogs -save`.
+1. Executing the following command: `npm install botbuilder-dialogs -save`.
 
 1. Run `npm start` to start the app.
 
-1. In Visual Studio Code, select the **F5** key to launch a Teams web client.
+1. In Visual Studio Code, press the **F5** key to launch a Teams web client.
 
 1. Go back to Teams. In the dialog, you could select **Add for me** to install the bot as a personal bot, or you select **Add to a team** or **Add to a chat** to install the bot as a a group/channel bot.
 
