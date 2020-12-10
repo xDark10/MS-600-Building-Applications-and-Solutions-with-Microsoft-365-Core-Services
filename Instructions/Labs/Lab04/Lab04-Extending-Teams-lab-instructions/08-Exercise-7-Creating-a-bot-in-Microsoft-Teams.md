@@ -10,9 +10,9 @@ Conversational bots allow users to interact with your web service through text, 
 
 1. When prompted, sign in with your Microsoft 365 development account.
 
-1. On the **Add capabilities** screen, select **Bots** then Next.
+1. On the **Add capabilities** screen, select **Bots** then **Next**.
 
-1. Select the properties for your project.
+1. Set the following properties for your project:
 
    - Enter a name for your Teams app. (This is the default name for your app and also the name of the app project directory on your local machine.)
 
@@ -26,32 +26,37 @@ Conversational bots allow users to interact with your web service through text, 
 
 1. When prompted, sign in with your Microsoft 365 development account.
 
-1. Select **Bots** under **Capabilities** section in left menu, and then click **Edit** button.
+1. Select **Bots** under **Capabilities** section in left menu and click **Edit**.
 
     ![Configure a bot](../../Linked_Image_Files/teams-bot-edit-config.png)
 
-1. For the **Scope**, make sure **teams**, **personal** and **groupChat** options are checked, and then click **Save** button to close the popup box.
+1. For the **Scope**: ensure **teams**, **personal** and **groupChat** options are checked.
 
-    **Note**:
-    A conversation is a series of messages sent between your bot and one or more users. There are three kinds of conversations (also called scopes) in Teams:
+1. Click **Save** button to close the popup box.
 
-    - **teams**: Also called channel conversations, visible to all members of the channel.
+   ![Configure a bot](../../Linked_Image_Files/teams-bot-scope.png)
 
-    - **personal**: Conversations between bots and a single user.
+    >    **Note**:
+    >    A conversation is a series of messages sent between your bot and one or more users. There are three kinds of conversations (also called scopes) in Teams:
+    >
+    >    - **teams**: Also called channel conversations, visible to all members of the channel.
+    >
+    >    - **personal**: Conversations between bots and a single user.
+    >
+    >    - **groupChat**: Chat between a bot and two or more users. Also enables your bot in meeting chats.
+    >
 
-    - **groupChat**: Chat between a bot and two or more users. Also enables your bot in meeting chats.
-
-    ![Configure a bot](../../Linked_Image_Files/teams-bot-scope.png)
-
-1. Open a command prompt to execute the following commands.
+1. Open a command prompt and execute the following command:
 
     ```powershell
     ngrok http -host-header=rewrite 3978
     ```
 
-   This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 3978. Copy the https forwarding address. In the example below that would be https://787b8292.ngrok.io. You will need this later.
+   > This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 3978. Copy the https forwarding address (for example: https://787b8292.ngrok.io) You will need this for the next step.
 
-1. Return to **Visual Studio Code**, for the **Messaging endpoint**, use the current https URL you were given by running ngrok and append it with the path /api/messages. It should like something work `https://{subdomain}.ngrok.io/api/messages`.
+1. Return to **Visual Studio Code**.
+
+1. Set the **Messaging endpoint** to the current https URL that was part of the output when you ran ngrok (in previous step) and append it with the path /api/messages. It should look similar to `https://{subdomain}.ngrok.io/api/messages`.
 
 ## Task 3: Run your bot
 
@@ -63,15 +68,18 @@ Conversational bots allow users to interact with your web service through text, 
 
 1. In Visual Studio Code, press the **F5** key to launch a Teams web client.
 
-1. Go back to Teams. In the dialog, you could select **Add for me** to install the bot as a personal bot, or you select **Add to a team** or **Add to a chat** to install the bot as a a group/channel bot.
+1. Go back to Teams. In the dialog, select one of the following:
 
-1. Try to send "Hello" to start a conversation with the bot.
+    - **Add for me** to install the bot as a personal bot.
+    - **Add to a team** or **Add to a chat** to install the bot as a a group/channel bot.
+
+1. Try to send "**Hello**" to start a conversation with the bot.
 
 1. Go back to the Visual Studio Code project. Stop the running project by selecting **Ctrl + C**.
 
 ## Task 4: Send proactive messages
 
-A proactive message is any message sent by a bot that is not in direct response to a request from a user. 
+A proactive message is any message sent by a bot that is not in direct response to a request from a user.
 
 1. From Visual Studio Code, open the **index.js** file in the root folder.
 
@@ -104,7 +112,7 @@ A proactive message is any message sent by a bot that is not in direct response 
 
 1. Open the **botActivityHandler.js** file in the root folder.
 
-1. Add a parameter `conversationReferences` for the **constructor** method, and update the contents to match the following code.
+1. Add a parameter `conversationReferences` for the **constructor** method and update the contents to match the following code.
 
     ```javascript
     constructor(conversationReferences) {
@@ -196,7 +204,7 @@ A proactive message is any message sent by a bot that is not in direct response 
 
 ### Create the resource group
 
-The resource group and the service plan aren't strictly necessary, but they allow you to conveniently release the resources you create. This is good practice for keeping your resources organized and manageable.
+The resource group and the service plan aren't strictly necessary but they allow you to conveniently release the resources you create. This is good practice for keeping your resources organized and manageable.
 
 1. In your browser, sign into the [Azure portal](https://ms.portal.azure.com/).
 
@@ -206,15 +214,15 @@ The resource group and the service plan aren't strictly necessary, but they allo
 
 1. You'll be prompted to provide the following:
 
-    1. **Subscription**. Use your existing subscription.
+    - **Subscription**: Use your existing subscription.
 
-    1. **Resource group**. Enter the name for the resource group. An example could be `TeamsResourceGroup`. Remember that the name must be unique.
+    - **Resource group**: Enter the name for the resource group. An example could be `TeamsResourceGroup`. Remember that the name must be unique.
 
-    1. From the **Region** drop-down menu, select `West US`, or a region close to your applications.
+    - From the **Region** drop-down menu: select `West US` or your closest region.
 
-    1. Select the **Review and create** button. You should see a banner that reads `Validation passed`.
+    - Select the **Review and create** button. You should see a banner that reads `Validation passed`.
 
-    1. Select the **Create** button. It may take a few minutes to create the resource group.
+1. Select the **Create** button. It may take a few minutes to create the resource group.
 
 ### Create the service plan
 
@@ -224,23 +232,26 @@ The resource group and the service plan aren't strictly necessary, but they allo
 
 1. Select **Create**.
 
-1. You'll be asked to provide the following information:
+1. You'll be prompted to provide the following:
 
-    1. **Subscription**. You can use an existing subscription.
+    - **Subscription**: You can use an existing subscription.
 
-    1. **Resource Group**. Select the group you created earlier.
+    - **Resource Group**: Select the group you created earlier.
 
-    1. **Name**. Enter the name for the service plan. An example could be `TeamsServicePlan`. Remember that the name must be unique, within the group.
+    - **Name**: Enter the name for the service plan. 
+    > An example could be `TeamsServicePlan`. The name must be unique within the group and will prompted if the name you are trying to use already exists.
 
-    1. **Operating System**. Select `Windows` or your applicable OS.
+    - **Operating System**: Select `Windows` or your applicable OS.
 
-    1. **Region**. Select `West US` or a region close to your applications.
+    - **Region**: Select `West US` or your closest region.
 
-    1. **Pricing Tier**. Make sure that `Standard S1` is selected. This should be the default value.
+    - **Pricing Tier**: Make sure `Standard S1` is selected. This should be the default value.
 
-    1. Select the **Review and create** button. You should see a banner that reads `Validation passed`.
+1. Select the **Review and create** button.
+    > You should see a banner that reads `Validation passed`.
 
-    1. Select **Create**. It may take a few minutes to create the app service plan. The plan will be listed in the resource group.
+1. Select **Create**.
+    > It may take a few minutes to create the app service plan. The plan will be listed in the resource group.
 
 ### Create the bot channels registration
 
@@ -254,15 +265,17 @@ The bot channels registration registers your web service as a bot with the Bot F
 
 1. In the **Bot Channel Registration** blade, provide the requested information about your bot.
 
-1. Open a command prompt to execute the following commands.
+1. Open a command prompt to execute the following command:
 
     ```powershell
     ngrok http -host-header=rewrite 3978
     ```
 
-   This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 3978. Copy the https forwarding address. In the example below that would be https://787b8292.ngrok.io. You will need this later.
+   > This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 3978. Copy the https forwarding address (for example: https://787b8292.ngrok.io). You will need this in the next step.
 
-1. Return to **Azure portal site**, for the **Messaging endpoint**, use the current https URL you were given by running ngrok and append it with the path /api/messages. It should like something work `https://{subdomain}.ngrok.io/api/messages`.
+1. Return to **Azure portal site**.
+
+1. Set the **Messaging endpoint** to the current https URL that was the URL output given by running ngrok (in previous step) and append it with the path /api/messages. It should look similar to `https://{subdomain}.ngrok.io/api/messages`.
 
     ![bot app channels registration](../../Linked_Image_Files/auth-bot-channels-registration.png)
 
@@ -278,52 +291,54 @@ The bot channels registration registers your web service as a bot with the Bot F
 
 1. In the displayed **App registration** window, click the **New registration** tab in the upper left.
 
-1. Enter the name of the bot application you are registering, we used `BotTeamsAuth` (you need to select your own unique name).
+1. Enter the name of the bot application you are registering. For example, `BotTeamsAuth` (name must be unique).
 
 1. For the **Supported account types** select `Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)`.
 
-1. Click the **Register** button. Once completed, Azure displays the Overview page for the application.
+1. Click the **Register** button. 
+    > Once completed, Azure displays the Overview page for the application.
 
 1. Copy and save to a file the **Application (client) ID** value.
 
 1. In the left panel, click **Certificate and secrets**.
 
-    a. Under **Client secrets**, click **New client secret**.
+    - Under **Client secrets**: click **New client secret**.
 
-    b. Add a description to identify this secret from others you might need to create for this app.
+        - Add a description to identify this secret from others you might need to create for this app.
 
-    c. Set **Expires** to your selection.
+    - Set **Expires** to your selection.
 
-    d. Click **Add**.
+    - Click **Add**.
 
-    e. Copy the **Client secret value** and save it to a file.
+    - Copy the **Client secret value** and save it to a file or notepad.
 
-1. Go back to the **Bot Channel Registration** window and copy the **App ID** and the **Client secret value** in the **Microsoft App ID** and **Password** boxes, respectively.
+1. Go back to the **Bot Channel Registration** window and copy the **App ID** and the **Client secret value** in the **Microsoft App ID** and **Password** boxes.
 
 1. Click **OK**.
 
 1. Finally, click **Create**.
 
-After Azure has created the registration resource it will be included in the resource group list.
+> After Azure has created the registration resource it will be included in the resource group list.
 
 ![bot app channels registration group](../../Linked_Image_Files/auth-bot-channels-registration-group.png)
 
 Once your bot channels registration is created, you'll need to enable the Teams channel.
 
-1. In the [Azure portal](https://ms.portal.azure.com/), under Azure services, select the **Bot Channel Registration** you just created.
+1. In the browser, open the [Azure portal](https://ms.portal.azure.com/).
+
+1. Under Azure services, select the **Bot Channel Registration** you just created.
 
 1. In the left panel, click **Channels**.
 
-1. Click the Microsoft Teams icon, then choose **Save**.
+1. Click the Microsoft Teams icon and then choose **Save**.
 
-    **Note**:
-    The Bot Channels Registration resource will show the Global region even if you selected West US. This is expected.
+    >  **Note**: The Bot Channels Registration resource will show the Global region even if you selected West US. This is expected.
 
 ### Create the identity provider
 
 You need an identity provider that can be used for authentication. In this procedure you'll use an Azure AD provider; other Azure AD supported identity providers can also be used.
 
-1. In the [Azure portal](https://ms.portal.azure.com/), on the left navigation panel, select **Azure Active Directory**.
+1. In the [Azure portal](https://ms.portal.azure.com/) on the left navigation panel, select **Azure Active Directory**.
 
 1. In the left panel, select **App registrations**.
 
@@ -331,33 +346,35 @@ You need an identity provider that can be used for authentication. In this proce
 
 1. You'll be asked to provide the following information:
 
-    a. **Name**. Enter the name for the application. An example could be `BotTeamsIdentity`. Remember that the name must be unique.
+    - **Name**: Enter the name for the application. 
+        > An example could be `BotTeamsIdentity` (the name must be unique).
 
-    b. Select the **Supported account types** for your application. Select `Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)`.
+    - Select the **Supported account types** for your application and select `Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)`.
 
-    c. For the Redirect URI:
-    1. Select Web.
-    1. Set the URL to https://token.botframework.com/.auth/web/redirect.
+    - For the Redirect URI:
+        - Select Web.
+        - Set the URL to: https://token.botframework.com/.auth/web/redirect
 
-    d. Select **Register**.
+    - Select **Register**.
+        > Once it's created, Azure displays the Overview page for the app.
 
-1. Once it is created, Azure displays the Overview page for the app. Copy and save the following information to a file:
+1. Copy and save the following information to a file:
 
-    a. The **Application (client) ID** value. You'll use this value later as the Client ID when you register this Azure identity application with your bot.
+    - The **Application (client) ID** value. You'll use this value later as the Client ID when you register this Azure identity application with your bot.
 
-    b. The **Directory (tenant) ID** value. You'll also use this value later as the Tenant ID to register this Azure identity application with your bot.
+    - The **Directory (tenant) ID** value. You'll also use this value later as the Tenant ID to register this Azure identity application with your bot.
 
 1. In the left panel, select **Certificates & secrets** to create a client secret for your application.
 
-    a. Under Client secrets, select **➕ New client secret**.
+    - Under Client secrets, select **➕ New client secret**.
 
-    b. Add a description to identify this secret from others you might need to create for this app, such as `Bot identity app` in Teams.
+        - Add a description to identify this secret from others you might need to create for this app, such as `Bot identity app` in Teams.
 
-    c. Set **Expires** to your selection.
+    - Set **Expires** to your selection.
 
-    d. Select **Add**.
+    - Select **Add**.
 
-    e. Before leaving this page, record the **Client secret value**. You'll use this value later as the Client secret when you register your Azure AD application with your bot.
+    - Before leaving this page, copy and save the **Client secret value** to a file or notepad. You'll use this value later as the Client secret when you register your Azure AD application with your bot.
 
 ### Configure the identity provider connection and register it with the bot
 
@@ -371,21 +388,26 @@ You need an identity provider that can be used for authentication. In this proce
 
 1. Complete the form as follows:
 
-    a. **Name**. Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv2.
+    - **Name**: Enter a name for the connection. You'll use this name in your bot in the appsettings.json file. For example BotTeamsAuthADv2.
 
-    b. **Service Provider**. Select `Azure Active Directory v2`. Once you select this, the Azure AD-specific fields will be displayed.
+    - **Service Provider**: Select `Azure Active Directory v2`. 
+        > Once you select this, the Azure AD-specific fields will be displayed.
 
-    c. **Client id**. Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
+    - **Client id**: Enter the Application (client) ID that you recorded for your Azure identity provider app in the steps above.
 
-    d. **Client secret**. Enter the secret that you recorded for your Azure identity provider app in the steps above.
+    -  **Client secret**: Enter the secret that you recorded for your Azure identity provider app in the steps above.
 
-    e. **Token Exchange URL**. Leave this blank.
+    - **Token Exchange URL**: Leave this blank.
 
-    f. **Tenant ID**, enter the Directory (tenant) ID that you recorded earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app. To decide which value to assign follow these criteria:
+    - **Tenant ID**: enter the Directory (tenant) ID that you copied earlier for your Azure identity app or common depending on the supported account type selected when you created the identity provider app. 
+    
+        To decide which value to assign follow this criteria:
 
-    1. If you selected either Accounts in this organizational directory only (Microsoft only - Single tenant) or Accounts in any organizational directory(Microsoft AAD directory - Multi tenant) enter the tenant ID you recorded earlier for the AAD app. This will be the tenant associated with the users who can be authenticated.
+        - If you selected **Accounts in this organizational directory only (Microsoft only - Single tenant)** or **Accounts in any organizational directory (Microsoft AAD directory - Multi tenant)** enter the tenant ID you copied earlier for the AAD app. 
+            > This will be the tenant associated with the users who can be authenticated.
 
-    1. If you selected Accounts in any organizational directory (Any AAD directory - Multi tenant and personal Microsoft accounts e.g. Skype, Xbox, Outlook) enter the word common instead of a tenant ID. Otherwise, the AAD app will verify through the tenant whose ID was selected and exclude personal Microsoft accounts.
+        - If you selected **Accounts in any organizational directory (Any AAD directory - Multi tenant and personal Microsoft accounts e.g. Skype, Xbox, Outlook)** enter the word `common` instead of a tenant ID. 
+            > If you use tenant ID instead of common, the AAD app will verify through the tenant whose ID was selected and exclude personal Microsoft accounts.
 
     g. For **Scopes**, enter a space-delimited list of graph permissions this application requires e.g.: `User.Read` `User.ReadBasic.All`
 
@@ -395,45 +417,53 @@ You need an identity provider that can be used for authentication. In this proce
 
 1. Select the connection entry to open the connection you just created.
 
-1. Select Test Connection at the top of the Service Provider Connection Setting panel.
+1. Select **Test Connection** at the top of the **Service Provider Connection Setting** panel.
 
-1. The first time you do this will open a new browser window asking you to select an account. Select the one you want to use.
+    > The first time you do this will open a new browser window asking you to select an account. Select the one you want to use.
 
-1. Next, you'll be asked to allow to the identity provider to use your data (credentials). The following image is an example:
+1. Next, you'll be prompted with a permissions consent to allow to the identity provider to use your data (credentials).
+
+    The following image is an example:
 
     ![teams bot auth connection string adv1](../../Linked_Image_Files/auth-bot-connection-test-accept.png)
 
 1. Select **Accept**.
 
-1. This should then redirect you to **a Test Connection to <your-connection-name> Succeeded** page. Refresh the page if you get an error. The following image is an example:
+1. This should then redirect you to **a Test Connection to <your-connection-name> Succeeded** page. Refresh the page if you get an error.
+
+    The following image is an example:
 
     ![test token](../../Linked_Image_Files/auth-bot-connection-test-token.png)
 
-The connection name is used by the bot code to retrieve user authentication tokens.
+> The connection name is used by the bot code to retrieve user authentication tokens.
 
 ### Prepare the bot sample code
 
 1. In **Visual Studio Code**, select **Microsoft Teams --> Create a new Teams app**.
 
-1. On the **Add capabilities** screen, select **Bots** then Next.
+2. On the **Add capabilities** screen, select **Bots** and then click **Next**.
 
-1. Enter a name for the application, e.g. TeamsBotAuthFlowSample.
+3. Enter a name for the application. 
+    > For example: `TeamsBotAuthFlowSample` (name bust be unique)
 
-1. Select **Use an existing bot registered with Bot Framework**,
+4. Select **Use an existing bot registered with Bot Framework**,
 
-    a. Set **bot App ID** to the bot App ID you saved at the time of the bot channel registration.
+    1. Set **bot App ID** to the bot App ID you saved at the time of the bot channel registration.
 
-    b. Set **bot App Password** to the customer secret you saved at the time of the bot channel registration.
+    1. Set **bot App Password** to the customer secret you saved at the time of the bot channel registration.
 
-1. Select **Finish** at the bottom of the screen to configure your project.
+5. Select **Finish** at the bottom of the screen to configure your project.
 
-1. In **Visual Studio Code**, open **.env** file, append the following content to the end of the file, please set \<your-connection-name\> to  the name of the identity provider connection you added to the bot channel registration.
+6. In **Visual Studio Code**, open the **.env** file.
 
+7. Append the following content to the end of the file. 
+    > Set \<your-connection-name\> to  the name of the identity provider connection you added to the bot channel registration.
+
+    ```javascript
+        connectionName=<your-connection-name>
     ```
-    connectionName=<your-connection-name>
-    ```
 
-1. Open **index.js** in the root folder, and then relace content with the following code.
+1. Open **index.js** in the root folder, and replace content with the following code:
 
     ```javascript
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -517,7 +547,7 @@ The connection name is used by the bot code to retrieve user authentication toke
 
 1. Create a new folder named **dialogs** in the project.
 
-1. Use the following content to create a new file named **logoutDialog.js** in the **dialogs** folder.
+1. Create **logoutDialog.js** file in **dialogs** folder and add the following code to the file:
 
     ```javascript
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -568,7 +598,7 @@ The connection name is used by the bot code to retrieve user authentication toke
 
     ```
 
-1. Use the following content to create a new file named **mainDialog.js** in the **dialogs** folder.
+1. Create **mainDialog.js** file in **dialogs** folder and add the following code to the file:
 
     ```javascript
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -667,7 +697,7 @@ The connection name is used by the bot code to retrieve user authentication toke
 
     ```
 
-1. open **botActivityHandler.js** file, relace the content with the following code.
+1. Open **botActivityHandler.js** file and replace the content with the following code:
 
     ```javascript
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -701,7 +731,7 @@ The connection name is used by the bot code to retrieve user authentication toke
 
     ```
 
-1. create **DialogBot.js** file in root folder, and add the following code to the file.
+1. Create **DialogBot.js** file in root folder and add the following code to the file:
 
     ```javascript
     // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -753,19 +783,23 @@ The connection name is used by the bot code to retrieve user authentication toke
 
     ```
 
-1. From the Visual Studio Code ribbon, select **Terminal > New Terminal**.
+1. In the Visual Studio Code ribbon, select **Terminal > New Terminal**.
 
-1. Executing the following command: `npm install`.
+1. From **Terminal**, execute the following commands:
 
-1. Executing the following command: `npm install botbuilder-dialogs -save`.
+    1. Execute the command: `npm install`.
 
-1. Run `npm start` to start the app.
+    1. Next, execute the command: `npm install botbuilder-dialogs -save`.
 
-1. In Visual Studio Code, press the **F5** key to launch a Teams web client.
+    1. Run `npm start` to start the app.
 
-1. Go back to Teams. In the dialog, you could select **Add for me** to install the bot as a personal bot, or you select **Add to a team** or **Add to a chat** to install the bot as a a group/channel bot.
+1. Now press the **F5** key to launch a Teams web client.
 
-1. Try to sign in with the bot.
+1. Go back to Teams. In the dialog, select one of the following:
+    - **Add for me** to install the bot as a personal bot.
+    - **Add to a team** or **Add to a chat** to install the bot as a a group/channel bot.
+
+1. Now sign in with the bot.
 
 ## Review
 

@@ -105,6 +105,6 @@ Now that you’ve tested your tab, it’s time to run your app inside Microsoft 
 
 In this exercise, you:
 
-- Utilize Microsoft Teams Toolkit to creates scaffolding and reviewed the result.
+- Utilized Microsoft Teams Toolkit to creates scaffolding and reviewed the result.
 
-- Build and run Teams Tab app in Teams.
+- Built and run Teams Tab app in Teams.
