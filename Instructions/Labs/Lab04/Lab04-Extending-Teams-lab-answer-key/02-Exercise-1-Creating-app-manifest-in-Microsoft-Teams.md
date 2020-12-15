@@ -243,11 +243,10 @@ Once you have the app manifest ready, you will need to download it and then manu
     | {{SPFX_COMPONENT_LONG_DESCRIPTION}}| preconfiguredEntries[0].description|
     | {{SPFX_COMPONENT_ID}}| id|
 
-     >   **Note**:
-    Make sure **{{SPFX_COMPONENT_ID}}** in **configurableTabs[0].configurationUrl**. You will likely have to scroll your editor to the right to see it. The tokens surrounded by single curly braces (for example, **{teamSiteDomain}**) do not need to be replaced.
+    >   **Note**:
+    >   Make sure you update **{{SPFX_COMPONENT_ID}}** in **configurableTabs[0].configurationUrl**. You will likely have to scroll your editor to the right to see it. The tokens surrounded by single curly braces (for example, **{teamSiteDomain}**) do not need to be replaced.
 
-
-1. Create a Microsoft Teams app package by zipping the contents of the **./teams** folder. Make sure to zip just the contents and not the folder itself. 
+1. Create a Microsoft Teams app package by zipping the contents of the **./teams** folder. Make sure to zip just the contents and not the folder itself.
 
     - This ZIP archive should contain 3 files at the root:
         - 2 images and the **manifest.json**
