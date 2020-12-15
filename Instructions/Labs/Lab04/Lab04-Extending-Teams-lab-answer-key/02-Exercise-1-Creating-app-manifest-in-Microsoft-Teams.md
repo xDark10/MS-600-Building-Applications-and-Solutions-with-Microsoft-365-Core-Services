@@ -71,6 +71,7 @@ Now you can modify your app manifest here in App Studio.
 1. On the **App details** page update the following under the **App names** section:
 
     - **Short name**: Change to **First App**
+
     - **Full name**: Change to **Learn Microsoft Teams App**
 
 1. On the **App details** page, scroll down to the **Descriptions** section and enter the following values:
