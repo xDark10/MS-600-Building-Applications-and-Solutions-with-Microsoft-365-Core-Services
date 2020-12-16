@@ -1,8 +1,8 @@
-﻿# Exercise 4: Creating webhooks in Microsoft Teams
+# Exercise 4: Creating webhooks in Microsoft Teams
 
-You use webhooks to connect web services to channels and teams in Teams.
+Webhooks can be used to connect web services to channels and teams in Teams.
 
-You can create two types of webhooks—incoming and outgoing. Incoming webhooks allow you to connect a channel to a service, and outgoing webhooks allow you to send messages to a service.
+You can create two types of webhooks—**incoming** and **outgoing**. Incoming webhooks allow you to connect a channel to a service and outgoing webhooks allow you to send messages to a service.
 
 ## Task 1: Setting up a custom incoming webhook
 
@@ -20,19 +20,21 @@ These steps explain how to send a card to a connector.
 
     ![Select a channel to start using incoming webhook.](../../Linked_Image_Files/m04_e02_t01_image_3.png)
 
-1. Select the **Set up a connector** button, provide a name, and, optionally, upload an image avatar for your webhook then select **Create**.
+1. Click on the **Set up a connector** button.
+
+1. Provide a name. Optionally, upload an image avatar for your webhook and then click **Create**.
 
     ![Incoming webhook configuration dialog.](../../Linked_Image_Files/m04_e02_t01_image_4.png)
 
-1. The dialog window will present a unique URL that will map to the channel. Make sure that you **copy and save the URL**—you will need to provide it to the outside service.
+1. The dialog window will present a unique URL that will map to the channel. **Copy and save the URL**—you will need to provide it to the outside service.
 
     ![Incoming webhook configuration dialog.](../../Linked_Image_Files/m04_e02_t01_image_5.png)
 
-1. Select the **Done** button. The webhook will be available in the team channel.
+1. Select the **Done** button. The webhook will now be available in the team channel.
 
 1. The Incoming Webhook should now be available in the **Configured** section.
 
-![Incoming webhook screen](../../Linked_Image_Files/m04_e02_t01_image_6.png)
+    ![Incoming webhook screen](../../Linked_Image_Files/m04_e02_t01_image_6.png)
 
 ## Task 2: Post a message to the webhook using PowerShell
 
@@ -42,7 +44,7 @@ These steps explain how to send a card to a connector.
     Invoke-RestMethod -Method post -ContentType 'Application/Json' -Body '{"text":"Hello World!"}' -Uri <YOUR WEBHOOK URL>
     ```
 
-1. If the POST succeeds, you should see a simple 1 output by `Invoke-RestMethod`.
+1. If the POST succeeds, you should see a simple  displayed output by `Invoke-RestMethod`.
 
     ![Invoke rest method PowerShell command executing.](../../Linked_Image_Files/m04_e02_t02_image_1.png)
 
@@ -55,4 +57,3 @@ These steps explain how to send a card to a connector.
 In this exercise, you:
 
 - Used a combination of coding tools and user interfaces to create an incoming webhook.
-
