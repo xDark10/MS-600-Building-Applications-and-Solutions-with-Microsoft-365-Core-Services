@@ -4,9 +4,9 @@
 
 ### Install your development tools
 
-You can build Teams apps with your preferred tools, but these lessons show how you can get started quickly with the Microsoft Teams Toolkit for Visual Studio Code.
+These lessons show how you can get started quickly with the Microsoft Teams Toolkit for Visual Studio Code.
 
-> NOTE:
+> **NOTE:**
 > Due to a bug in the latest Microsoft Teams Toolkit for bot development, you will need to install version 1.1.2.
 
 1. Open Visual Studio Code and select **Extensions** on the left Activity Bar.
@@ -45,21 +45,24 @@ You can build Teams apps with your preferred tools, but these lessons show how y
 
 ### Review the generated solution
 
-Once the toolkit configures your project, you have the components to build a basic personal tab for Teams. The project directories and files display in the Explorer area of Visual Studio Code.
+Once the toolkit configures your project, you will have the components to build a basic personal tab for Teams. The project directories and files display in the Explorer area of Visual Studio Code.
 
 ![Microsoft Visual Studio Code showing expanded left navigation pane.](../../Linked_Image_Files/m04_e01_t02_image_3.png)
 
-The toolkit automatically creates scaffolding for you in the src directory based on the capabilities you added during setup.
-
-If you create a tab during setup, for example, the **App.js** file in the **src/components** directory is important because it handles the initialization and routing of your app. It calls the [Microsoft Teams SDK](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/using-teams-client-sdk) to establish communication between your app and Teams.
+> **NOTE**: The toolkit automatically creates scaffolding for you in the src directory based on the capabilities you added during setup.
+> 
+> For example, if you create a tab during setup the **App.js** file in the **src/components** directory is important because it handles the initialization and routing of your app. It calls the [Microsoft Teams SDK](https://docs.microsoft.com/en-us/microsoftteams/platform/tabs/how-to/using-teams-client-sdk) to establish communication between your app and Teams.
 
 #### App ID
 
-Your Teams app ID is needed to configure your app with App Studio. You can find the ID in the **teamsAppId** object, which is located in your project's **package.json** file.
+Your Teams app ID is needed to configure your app with App Studio. 
+
+- You can find the ID in the **teamsAppId** object, which is located in your project's **package.json** file.
 
 ### Build and run your app
 
-Your Tab will be located in the **./src/components/Tab.js** file. This is the TypeScript React based class for your Tab. Locate the **render()** method and observe the code inside the `<div>` tag.
+Your Tab will be located in the **./src/components/Tab.js** file. This is the TypeScript React based class for your Tab.
+- Locate the **render()** method and observe the code inside the `<div>` tag.
 
 ```typescript
         <div>
@@ -71,19 +74,20 @@ Your Tab will be located in the **./src/components/Tab.js** file. This is the Ty
 
 1. Open Terminal in Visual Studio Code. From the Visual Studio Code ribbon select **Terminal > New Terminal**.
 
-1. Go to the root directory of your app project and run `npm install`.
+1. Go to the root directory of your app project and run: `npm install`.
 
-1. To build your solution you use the `npm run build` command.
-
-    1. This will transpile your solution into the **./build** folder.
+1. To build your solution run the `npm run build` command.
+    - This will transpile your solution into the **./build** folder.
 
         ![dist directory expanded in VS Code.](../../Linked_Image_Files/m04_e01_t02_image_4.png)
 
 ### Run your app
 
-To run your app you use the `npm start` command. This will build and start a local web server for you to test your app. The command will also rebuild the application whenever you save a file in your project.
+To run your app you use the `npm start` command. 
 
-Once complete, there's a Compiled successfully! message in the terminal. Your app is running on **https://localhost:3000**.
+> This will build and start a local web server for you to test your app. The command will also rebuild the application whenever you save a file in your project.
+
+Once complete, there's a Compiled successfully! message in the terminal. Your app should now be running on **https://localhost:3000**.
 
 ## Task 3: Sideload an app in Microsoft Teams
 
