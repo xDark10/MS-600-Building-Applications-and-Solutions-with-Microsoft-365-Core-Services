@@ -2,15 +2,15 @@
 
 Task modules allow you to create modal popup experiences in your Teams application. Inside the popup you can run your own custom HTML/JavaScript code, show an \<iframe\>-based widget such as a YouTube or Microsoft Stream video or display an [Adaptive card](https://docs.microsoft.com/en-us/adaptive-cards/).
 
-Firstly, we need to create a Teams application for displaying Task modules.
+To create a task module, you will need to create a Teams application for displaying Task modules.
 
 1. Open Visual Studio Code and select **Extensions** on the left Activity Bar.
 
-1. Select **Microsoft Teams** on the left Activity Bar and choose **Create a new Teams app**.
+1. Select **Microsoft Teams** and choose **Create a new Teams app**.
 
     ![Create a new Teams app](../../Linked_Image_Files/m04_e01_t02_image_1.png)
 
-1. When prompted, sign in with your Microsoft 365 development account.
+1. When prompted, sign in with your Microsoft 365 developer account.
 
 1. On the **Add capabilities** screen, select **Tab** and **Bot** then Next.
 
@@ -87,11 +87,11 @@ Now, a card-based task module has been added to the Teams Tab app.
 
 ## Task 2: Create an iframe-based task module
 
-1. From Visual Studio Code, Create a folder named **models** in the **service** folder.
+1. From Visual Studio Code, create a folder named **models** in the **service** folder.
 
-1. Follow the below steps to create 4 script files in the **models** folder.
+1. Follow the steps below to create 4 script files in the **models** folder.
 
-    1. Create a file named **taskmoduleids.js**, and then copy the following code to the file.
+    1. Create a file named **taskmoduleids.js** and copy the following code to the file.
 
         ```typescript
         const TaskModuleIds = {
@@ -102,7 +102,7 @@ Now, a card-based task module has been added to the Teams Tab app.
         module.exports.TaskModuleIds = TaskModuleIds;
         ```
 
-    1. Create a file named **taskmoduleresponsefactory.js**, and then copy the following code to the file.
+    1. Create a file named **taskmoduleresponsefactory.js** and  copy the following code to the file.
 
         ```typescript
         class TaskModuleResponseFactory {
@@ -132,7 +132,7 @@ Now, a card-based task module has been added to the Teams Tab app.
         module.exports.TaskModuleResponseFactory = TaskModuleResponseFactory;
         ```
 
-    1. Create a file named **taskmoduleuiconstants.js**, and then copy the following code to the file.
+    1. Create a file named **taskmoduleuiconstants.js** and copy the following code to the file.
 
         ```typescript
         const { UISettings } = require('./uisettings');
@@ -146,7 +146,7 @@ Now, a card-based task module has been added to the Teams Tab app.
         module.exports.TaskModuleUIConstants = TaskModuleUIConstants;
         ```
 
-    1. Create a file named **uisettings.js**, and then copy the following code to the file.
+    1. Create a file named **uisettings.js** and copy the following code to the file.
 
         ```typescript
         class UISettings {
@@ -164,9 +164,9 @@ Now, a card-based task module has been added to the Teams Tab app.
 
 1. Create a folder named **pages** in the **service** folder.
 
-1. To follow the below steps to create 1 html file in the **pages** folder.
+1. Now you need to create the following HTML file in the **pages** folder.
 
-    1. Create a file named **youtube.html**, and then copy the following code to the file.
+    1. Create a file named **youtube.html** and copy the following code to the file.
 
     ```html
     <!DOCTYPE html>
@@ -358,7 +358,7 @@ Now, a card-based task module has been added to the Teams Tab app.
 
 1. Open Terminal in Visual Studio Code. From the Visual Studio Code ribbon select **Terminal > New Terminal**.
 
-1. To execute `cd tabs` command to navigate to tab directory in Terminal.
+1. Navigate to the tabs directory by running the command `cd tabs` command.
 
 1. Run `npm install` to install all dependent packages for the Teams tab.
 
@@ -366,7 +366,7 @@ Now, a card-based task module has been added to the Teams Tab app.
 
 1. In Visual Studio Code, press the **F5** key to launch a Teams web client.
 
-1. To display your app content in Teams, specify that where your app is running (localhost) is trustworthy:
+1. To display your app content in Teams, specify where your app is running (localhost) is trustworthy:
 
    1. Open a new tab in the same browser window (Google Chrome by default) which opened after pressing **F5**.
 
@@ -380,17 +380,17 @@ Now, a card-based task module has been added to the Teams Tab app.
 
 ## Task 4: Invoke a task module from a bot
 
-1. Firstly need to open a command prompt to execute the following commands.
+1. To invoke, open a command prompt and execute the following command:
 
     ```powershell
     ngrok http -host-header=rewrite 3978
     ```
 
-   This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 3978. Copy the https forwarding address. In the example below that would be https://787b8292.ngrok.io. You will need this later.
+   > This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 3978. Copy the https forwarding address. In the example below that would be https://787b8292.ngrok.io. You will need this later.
 
 1. Return to Visual Studio Code, and then Open a new Terminal.
 
-1. To execute `cd service` command to navigate to bot service directory in Terminal.
+1. Navigate to the service directory by executing the `cd service` command.
 
 1. Run `npm install` to install all dependent packages for the Teams tab.
 
@@ -404,9 +404,9 @@ Now, a card-based task module has been added to the Teams Tab app.
 
 1. In App Studio, select the **Manifest editor** tab, then select the app you just installed.
 
-1. To edit manifest file, select **Bots** under **Capabilities** section in left menus.
+1. To edit manifest file, select **Bots** under **Capabilities** section in left menu.
 
-1. For the **Messaging endpoint URL**, use the current https URL you were given by running ngrok and append it with the path /api/messages. It should like something work https://{subdomain}.ngrok.io/api/messages.
+1. For the **Messaging endpoint URL**, use the current https URL you were given by running ngrok and append it with the path /api/messages. It should look similar to `https://{subdomain}.ngrok.io/api/messages`
 
 1. In the app bar, select ... **More added apps** and then select your just installed app.
 
