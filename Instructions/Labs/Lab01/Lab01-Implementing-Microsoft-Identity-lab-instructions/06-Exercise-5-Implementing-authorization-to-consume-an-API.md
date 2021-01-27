@@ -16,7 +16,10 @@ The sample application used in this exercise enables a JavaScript SPA to query t
 
 1. Download the sample project for Node.js:
 
-    1. To run the project by using a local web server, such as Node.js, download the project files to your **C:/Labfiles** directory.[https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/archive/quickstart.zip)
+    1. To run the project by using a local web server, such as Node.js, download the project files to your **C:/Labfiles** directory.
+
+        Visit [https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/releases](https://github.com/Azure-Samples/active-directory-javascript-graphapi-v2/releases) and download the latest release: **Source code (zip)**.
+
 
 1. Navigate to where the download zip file is and unblock file.
 
@@ -48,9 +51,9 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
 
 1. To set up a redirect URL in the application registration information, switch back to the **Application Registration** pane, and do either of the following:
 
-    1. Set **http://localhost:30662/** as the **Redirect URL**.
+    1. Set **`http://localhost:30662/`** as the **Redirect URL**.
 
-    1. If you're using a custom TCP port, use **http://localhost:[port]/** (where **[port]** is the custom TCP port number).
+    1. If you're using a custom TCP port, use **`http://localhost:[port]/`** (where **[port]** is the custom TCP port number).
 
 1. Select **Register**.
 
@@ -178,7 +181,7 @@ Follow these steps if you choose to use the Node.js project. For Node.js, you ca
     node server.js
     ```
 
-1. From the browser, launch **http://localhost:30662**.
+1. From the browser, launch: **`http://localhost:30662`**
 
     ![Call localhost 30662 showing sign in screen.](../../Linked_Image_Files/l01_exercise_5_task_3_image_4.png)
 
