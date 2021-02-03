@@ -82,7 +82,7 @@
     gulp bundle --ship
     gulp package-solution --ship
     ```
-    **Note**:
+    **NOTE:**
     If this error `The build failed because a task wrote output to stderr.` is displayed on the command console, please ignore it. The reason is that the build output contain a warning.
 
 1. In the browser, navigate to your SharePoint Online tenant App Catalog site.
@@ -103,9 +103,9 @@
 
 1. Select **Tenant Wide Extensions**. Depending on when your tenant was created the Tenant Wide Extensions list may be hidden. If you do not see the list in the Site Contents then you will have to navigate to it manually. Do this by appending **/Lists/TenantWideExtensions/AllItems.aspx** to the URL of the app catalog site.
 
-1. In a separate browser window, navigate to any modern page in any modern site within your SharePoint Online tenant. You should see the extension appear in the tenant.
+1. In a separate browser window, navigate to any modern page in any modern site within your SharePoint Online tenant. If this extenstion has been deployed successfully you should see a custom header and footer showing up on the site.
 
-    **Note**:
+    **NOTE:**
     It may take up to 20 minutes for a Tenant Wide Extension to get deployed across the SharePoint Online tenant so you may need to wait to fully test whether your deployment was successful.
 
 1. Stop the local web server by pressing CTRL+C in the console/terminal window.
