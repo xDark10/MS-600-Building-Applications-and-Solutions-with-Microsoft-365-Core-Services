@@ -1,4 +1,5 @@
 ﻿# Exercise 3: Creating SharePoint Framework Extensions
+In this exercise, you will create a SPFx Application Customizer that will launch a Hello dialog on the load of the SharePoint modern page.
 
 ## Task 1: Create your project
 
@@ -103,7 +104,7 @@
 
 1. Select **Tenant Wide Extensions**. Depending on when your tenant was created the Tenant Wide Extensions list may be hidden. If you do not see the list in the Site Contents then you will have to navigate to it manually. Do this by appending **/Lists/TenantWideExtensions/AllItems.aspx** to the URL of the app catalog site.
 
-1. In a separate browser window, navigate to any modern page in any modern site within your SharePoint Online tenant. If this extenstion has been deployed successfully you should see a custom header and footer showing up on the site.
+1. In a separate browser window, navigate to any modern page in any modern site within your SharePoint Online tenant. If this extension has been deployed successfully you should see a Hello (your name) dialog prompt on the load of the page.
 
     **NOTE:**
     It may take up to 20 minutes for a Tenant Wide Extension to get deployed across the SharePoint Online tenant so you may need to wait to fully test whether your deployment was successful.
