@@ -37,7 +37,7 @@ In this exercise, you will create a SPFx Application Customizer that will launch
 
 1. From the Visual Studio Code **Terminal** prompt, execute the following command: `gulp trust-dev-cert`
 
-    **Note**:
+    **NOTE:**
     Extensions must be tested in a modern SharePoint page unlike web parts, which can be tested in the local workbench. In addition, extensions also require special URL parameters when requesting the page to load the extension from the local development web server.
 
 1. Obtain the URL of a modern SharePoint page.
@@ -65,7 +65,7 @@ In this exercise, you will create a SPFx Application Customizer that will launch
 
 1. When prompted, select the **Load debug scripts** button.
 
-1. Notice that when the page loads, the text defined in the public properties is displayed in the header and footer of the page.
+1. Notice when the page loads, a Hello (your name) dialog should appear.
 
 1. Stop the local web server by pressing CTRL+C in the console/terminal window.
 
