@@ -1,4 +1,5 @@
 ﻿# Exercise 3: Creating SharePoint Framework Extensions
+In this exercise, you will create a SPFx Application Customizer that will launch a Hello dialog on the load of the SharePoint modern page.
 
 ## Task 1: Create your project
 
@@ -36,7 +37,7 @@
 
 1. From the Visual Studio Code **Terminal** prompt, execute the following command: `gulp trust-dev-cert`
 
-    **Note**:
+    **NOTE:**
     Extensions must be tested in a modern SharePoint page unlike web parts, which can be tested in the local workbench. In addition, extensions also require special URL parameters when requesting the page to load the extension from the local development web server.
 
 1. Obtain the URL of a modern SharePoint page.
@@ -63,7 +64,7 @@
 
 1. When prompted, select the **Load debug scripts** button.
 
-1. Notice that when the page loads, the text defined in the public properties is displayed in the header and footer of the page.
+1. Notice when the page loads, a Hello (your name) dialog should appear.
 
 1. Stop the local web server by pressing CTRL+C in the console/terminal window.
 
@@ -82,7 +83,7 @@
     gulp bundle --ship
     gulp package-solution --ship
     ```
-    **Note**:
+    **NOTE:**
     If this error `The build failed because a task wrote output to stderr.` is displayed on the command console, please ignore it. The reason is that the build output contain a warning.
 
 1. In the browser, navigate to your SharePoint Online tenant App Catalog site.
@@ -103,9 +104,9 @@
 
 1. Select **Tenant Wide Extensions**. Depending on when your tenant was created the Tenant Wide Extensions list may be hidden. If you do not see the list in the Site Contents then you will have to navigate to it manually. Do this by appending **/Lists/TenantWideExtensions/AllItems.aspx** to the URL of the app catalog site.
 
-1. In a separate browser window, navigate to any modern page in any modern site within your SharePoint Online tenant. You should see the extension appear in the tenant.
+1. In a separate browser window, navigate to any modern page in any modern site within your SharePoint Online tenant. If this extension has been deployed successfully you should see a Hello (your name) dialog prompt on the load of the page.
 
-    **Note**:
+    **NOTE:**
     It may take up to 20 minutes for a Tenant Wide Extension to get deployed across the SharePoint Online tenant so you may need to wait to fully test whether your deployment was successful.
 
 1. Stop the local web server by pressing CTRL+C in the console/terminal window.

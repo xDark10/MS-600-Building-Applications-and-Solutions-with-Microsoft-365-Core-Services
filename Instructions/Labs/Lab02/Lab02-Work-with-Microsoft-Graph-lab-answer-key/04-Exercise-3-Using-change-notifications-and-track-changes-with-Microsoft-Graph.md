@@ -81,13 +81,19 @@ In this exercise, you will create a new Azure AD web application registration us
 
 In order for the Microsoft Graph to send notifications to your application running on your development machine you need to use a tool such as ngrok to tunnel calls from the internet to your development machine. Ngrok allows calls from the internet to be directed to your application running locally without needing to create firewall rules.
 
+> **NOTE:** Graph requires using https and this lab uses ngrok free. 
+> 
+> If you run into any issues please visit [Using ngrok to get a public HTTPS address for a local server already serving HTTPS (for free)](https://camerondwyer.com/2019/09/23/using-ngrok-to-get-a-public-https-address-for-a-local-server-already-serving-https-for-free/)
+
+
+
 1. Run ngrok by executing the following from the command line:
 
     ```powershell
     ngrok http 5000
     ```
 
-1. This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 5000. Copy the https forwarding address. In the example below that would be https://787b8292.ngrok.io. You will need this later.
+2. This will start ngrok and will tunnel requests from an external ngrok url to your development machine on port 5000. Copy the https forwarding address. In the example below that would be https://787b8292.ngrok.io. You will need this later.
 
 ### Create .NET Core WebApi App
 
