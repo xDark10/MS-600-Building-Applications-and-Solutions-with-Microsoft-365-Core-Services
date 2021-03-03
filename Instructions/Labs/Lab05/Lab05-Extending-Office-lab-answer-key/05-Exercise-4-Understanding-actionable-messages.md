@@ -124,7 +124,7 @@ Because the card JSON must be wrapped in a `<script>` tag, the body of the actio
     }
     ```
 
-1. Wrap the resulting JSON in a ``<script>`` tag of type `application/adaptivecard+json`. If you are using the [legacy message card format](https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference) rather than the Adaptive card format, the <script> tag type MUST be `application/ld+json`.
+1. Wrap the resulting JSON in a `<script>` tag of type `application/adaptivecard+json`. If you are using the [legacy message card format](https://docs.microsoft.com/en-us/outlook/actionable-messages/message-card-reference) rather than the Adaptive card format, the `<script>` tag type MUST be `application/ld+json`.
 
     ```json
     <script type="application/adaptivecard+json">{
