@@ -29,9 +29,23 @@ Observe the taskbar located at the bottom of your Windows 10 desktop. The taskba
 
 Also, ensure that the following necessary utilities are installed:
 
+> [!IMPORTANT]
+> In most cases, installing the latest version of the following tools is the best option. The versions listed here were used when this module was published and last tested.
+
 - [.NET Core 3.1 SDK](https://dotnet.microsoft.com/download)
 
 - Ngrok
 
 - NodeJS v10.x
+
+- NPM (installed with Node.js) - v6.\* (or higher)
+
+- [Gulp](https://gulpjs.com/) - v4.\* (or higher)
+
+- [Yeoman](https://yeoman.io/) - v3.\* (or higher)
+
+- [Yeoman Generator for Microsoft Teams](https://github.com/OfficeDev/generator-teams) - v3.0.\* (or higher)
+
+
+You must have the minimum versions of these prerequisites installed on your workstation.
 
