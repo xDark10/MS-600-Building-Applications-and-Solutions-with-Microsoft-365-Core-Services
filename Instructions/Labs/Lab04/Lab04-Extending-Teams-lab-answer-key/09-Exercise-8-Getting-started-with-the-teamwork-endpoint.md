@@ -90,10 +90,10 @@ In this exercise, you’ll learn how to create a project using the Yeoman Genera
 
 1. Add the following client applications by selecting the **Add a client application** link. For each, select the **api://REPLACE.ngrok.io/<app-id>/access_as_user** scope you previously created:
 
-- `1fec8e78-bce4-4aaf-ab1b-5451cc387264`
-  - *Microsoft Teams mobile & desktop clients*
-- `5e3ce6c0-2b1f-4285-8d4b-75ee78787346`
-  - *Microsoft Teams web client*
+    - `1fec8e78-bce4-4aaf-ab1b-5451cc387264`
+      - *Microsoft Teams mobile & desktop clients*
+    - `5e3ce6c0-2b1f-4285-8d4b-75ee78787346`
+      - *Microsoft Teams web client*
 
 ## Task 2: Create your Microsoft Teams app project
 
