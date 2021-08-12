@@ -1,27 +1,4 @@
-# Student lab manual
-
-## Lab scenario
-
-You are a developer working for an organization that is using Microsoft Teams as the primary collaboration platform. You want to gain an understanding of the Microsoft Teams developer framework to determine if building a custom app on the Microsoft Teams platform is right for you, and if so you want to choose the right extensibility points and distribution model to make your app successful. 
-
-## Objectives
-
-After you complete this lab, you will be able to:
-
-- Create and use task modules.
-
-- Create incoming and outgoing webhooks.
-
-- Implement custom Teams tabs.
-
-- Create messaging extensions.
-
-- Create conversational bots.
-
-- Use Microsoft Graph to work with Teams
-
-- Implement single sign-on (SSO) authentication for tabs and bots
-
+﻿# Student lab answer key
 
 ## Microsoft Azure user interface
 
@@ -29,7 +6,7 @@ Given the dynamic nature of Microsoft cloud tools, you might experience Azure us
 
 The Microsoft Worldwide Learning team updates this training course as soon as the community brings needed changes to our attention. However, because cloud updates occur frequently, you might encounter UI changes before this training content is updated. **If this occurs, adapt to the changes and work through them in the labs as needed.**
 
-## Lab Setup
+## Lab setup
 
 ### Sign in to the lab virtual machine
 
@@ -49,6 +26,7 @@ Observe the taskbar located at the bottom of your Windows 10 desktop. The taskba
 - Visual Studio Code
 
 - Microsoft Teams
+
 
 ### Development tools
 
