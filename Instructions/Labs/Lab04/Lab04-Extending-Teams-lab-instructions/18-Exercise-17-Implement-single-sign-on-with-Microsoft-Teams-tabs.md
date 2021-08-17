@@ -1,4 +1,4 @@
-# Exercise 12: Implement single sign-on with Microsoft Teams tabs
+# Exercise 17: Implement single sign-on with Microsoft Teams tabs
 
 In this exercise, you'll add a custom tab to a Microsoft Teams app and use single sign-on (SSO) to obtain an access token to submit requests to Microsoft Graph.
 

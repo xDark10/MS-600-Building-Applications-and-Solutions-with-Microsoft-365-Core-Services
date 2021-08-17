@@ -1,4 +1,4 @@
-# Exercise 9: Configure a built-in tab with Microsoft Graph
+# Exercise 14: Configure a built-in tab with Microsoft Graph
 
 In this exercise, you'll add a few built-in tabs to a channel in a Microsoft Teams team with the Microsoft Graph's teamwork endpoint.
 

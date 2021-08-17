@@ -1,4 +1,4 @@
-# Exercise 13: Implement single sign-on with Microsoft Teams bots
+# Exercise 18: Implement single sign-on with Microsoft Teams bots
 
 In this exercise, you'll add a custom bot in a new existing Microsoft Teams app and use single sign-on (SSO) to obtain an access token to submit requests to Microsoft Graph.
 

@@ -1,4 +1,4 @@
-# Exercise 8: Getting started with the teamwork endpoint
+# Exercise 13: Getting started with the teamwork endpoint
 
 In this exercise, you’ll learn how to create a project using the Yeoman Generator for Microsoft Teams and configure the custom Microsoft Teams app with single sign-on to submit requests to Microsoft Graph.
 

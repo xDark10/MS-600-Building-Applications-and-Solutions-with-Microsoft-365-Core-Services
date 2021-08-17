@@ -1,4 +1,4 @@
-# Exercise 10: Use Microsoft Graph to post to the activity feed
+# Exercise 15: Use Microsoft Graph to post to the activity feed
 
 In this exercise, you'll learn how to use Microsoft Graph to submit notifications to the Microsoft Teams activity feed.
 
