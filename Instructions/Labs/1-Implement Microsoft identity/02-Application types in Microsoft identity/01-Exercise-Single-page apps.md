@@ -260,7 +260,7 @@ The web page you created will submit a request to Microsoft Graph to retrieve th
 
   ![Screenshot of the App registrations](../../Linked_Image_Files/01-02-azure-ad-portal-home.png)
 
-4. On the **App registrations** page, select **New registration**.
+4. On the **App registrations** page, select **+ New registration**.
 
   ![Screenshot of App Registrations page](../../Linked_Image_Files/01-02-azure-ad-portal-new-app-00.png)
 
@@ -279,7 +279,7 @@ The web page you created will submit a request to Microsoft Graph to retrieve th
 
 8. Select **Manage > Authentication** in the left-hand navigation.
 
-9. On the **Authentication** page, select **Add a platform**. When the **Configure platforms** panel appears, select **Single-page application**.
+9. On the **Authentication** page, select **+ Add a platform**. When the **Configure platforms** panel appears, select **Single-page application**.
 
 ![Screenshot of the Configure platforms panel](../../Linked_Image_Files/01-02-03-azure-ad-portal-new-app-details-02.png)
 
