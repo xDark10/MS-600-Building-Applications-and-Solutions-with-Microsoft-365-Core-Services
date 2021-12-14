@@ -7,27 +7,28 @@ In this exercise, you'll create an Azure AD application and single page applicat
 > [!NOTE]
 > The instructions below assume you are using v2.14.2 of the Microsoft Authentication Library for JavaScript 2.0.
 
-Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder.
+1. Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder.
 
-Execute the following command to create a new Node.js application:
+2. Execute the following command to create a new Node.js application:
 
 ```shell
 npm init -y
 ```
 
-Install the Node.js webserver **express** and HTTP request middleware **morgan** into the application:
+3. Install the Node.js webserver **express** and HTTP request middleware **morgan** into the application:
 
 ```shell
 npm install express morgan
 ```
 
-Open the application in Visual Studio Code using the following command:
+4. Open the application in Visual Studio Code using the following command:
 
 ```console
 code .
 ```
+If a message pop-ups **Do you trust the authors of the files in the folder?** check the **Trust the authors of all files in the parent folder <created on the step#1>**  and click the **Yes, I trust the authors**
 
-Create a new file **server.js** in the root of the folder and add the following JavaScript to it. This code will start the web server:
+5. Create a new file **server.js** in the root of the folder and add the following JavaScript to it. This code will start the web server:
 
 ```js
 var express = require('express');
@@ -54,7 +55,7 @@ console.log('Press CTRL+C to stop the web server...');
 
 ## Task 2: Create a web page for the user to sign in and display details
 
-Create a new folder **web** in the current folder and add a new file **index.html** to the folder. Add the following code to the **index.html** file:
+1. Create a new folder **web** in the current folder and add a new file **index.html** to the folder. Add the following code to the **index.html** file:
 
 ```html
 <!DOCTYPE html>
@@ -118,9 +119,9 @@ Create a new folder **web** in the current folder and add a new file **index.htm
 ```
 
 > [!NOTE]
-> The remainder of this exercise instructs you to add code to this **index.html** file. Pay close attention where you add the code using the using the two `TODO:` comments for placement.
+> The remainder of this exercise instructs you to add code to this **index.html** file. Pay close attention where you add the code using the two `TODO:` comments for placement.
 
-Add the following function to the **index.html** file immediately before the `// TODO: add FUNCTIONS before this line` comment that will configure the welcome message for the page:
+2. Add the following function to the **index.html** file immediately before the `// TODO: add FUNCTIONS before this line` comment that will configure the welcome message for the page:
 
 ```js
 function updateUserInterface() {
@@ -133,7 +134,7 @@ function updateUserInterface() {
 }
 ```
 
-Next, add the following function to **index.html** immediately before the `// TODO: add FUNCTIONS before this line` comment. This function requests an access token from Microsoft identity and submits a request to Microsoft Graph for the current user's information. The function uses the popup approach for modern browsers and it uses the redirect approach for Internet Explorer:
+3. Next, add the following function to **index.html** immediately before the `// TODO: add FUNCTIONS before this line` comment. This function requests an access token from Microsoft identity and submits a request to Microsoft Graph for the current user's information. The function uses the popup approach for modern browsers and it uses the redirect approach for Internet Explorer:
 
 ```js
 function acquireTokenAndGetUser() {
@@ -168,7 +169,7 @@ The function first attempts to retrieve the access token silently from the curre
 
 The redirect approach to authenticating requires an extra step. The MSAL application on the page needs to see if the current page was requested based on a redirect from Azure AD. If so, it needs to process information in the URL request provided by Azure AD.
 
-Add the following code immediately before the `// TODO: add CODE before this line` comment:
+4. Add the following code immediately before the `// TODO: add CODE before this line` comment:
 
 ```js
 msalApplication.handleRedirectPromise()
@@ -179,7 +180,7 @@ msalApplication.handleRedirectPromise()
 
 Once the user is authenticated, the code can submit a request to Microsoft Graph for the current user's information. The `acquireTokenAndGetUser()` function passes the access token acquired from Azure AD to the `getUserFromMSGraph()` function you are about to add.
 
-Add the following functions immediately before the `// TODO: add FUNCTIONS before this line` comment:
+5. Add the following functions immediately before the `// TODO: add FUNCTIONS before this line` comment:
 
 ```js
 function getUserFromMSGraph(accessToken, callback) {
@@ -202,7 +203,7 @@ function graphAPICallback(data) {
 
 Finally, add the following functions to implement a sign in and sign out capability for the button on the page.
 
-Add the functions immediately before the `// TODO: add FUNCTIONS before this line` comment:
+6. Add the functions immediately before the `// TODO: add FUNCTIONS before this line` comment:
 
 ```js
 function handleResponse(loginResponse) {
@@ -245,38 +246,38 @@ function signOut() {
 
 The web page you created will submit a request to Microsoft Graph to retrieve the user's details. All requests to Microsoft Graph must include an access token as proof of the user's identity and that they have the necessary permissions to call Microsoft Graph. To obtain an access token, you must create an Azure AD application.
 
-Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+1. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
   ![Screenshot of the App registrations](../../Linked_Image_Files/01-01-azure-ad-portal-home.png)
 
-Select **Manage > App registrations** in the left-hand navigation.
+3. Select **Manage > App registrations** in the left-hand navigation.
 
-On the **App registrations** page, select **New registration**.
+4. On the **App registrations** page, select **+ New registration**.
 
   ![Screenshot of App Registrations page](../../Linked_Image_Files/01-01-azure-ad-portal-new-app-00.png)
 
-On the **Register an application** page, set the values as follows:
+5. On the **Register an application** page, set the values as follows:
 
 - **Name**: Hello World Identity
 - **Supported account types**: Accounts in this organizational directory only (Single tenant)
 
     ![Screenshot of the Register an application page](../../Linked_Image_Files/01-01-03-azure-ad-portal-new-app-01.png)
 
-Select **Register** to create the application.
+6. Select **Register** to create the application.
 
-On the **Hello World Identity** page, copy the values **Application (client) ID** and **Directory (tenant) ID**; you'll need these values later in this exercise.
+7. On the **Hello World Identity** page, copy the values **Application (client) ID** and **Directory (tenant) ID**; you'll need these values later in this exercise.
 
   ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/01-01-03-azure-ad-portal-new-app-details.png)
 
-Select **Manage > Authentication** in the left-hand navigation.
+8. Select **Manage > Authentication** in the left-hand navigation.
 
-On the **Authentication** page, select **Add a platform**. When the **Configure platforms** panel appears, select **Single-page application**.
+9. On the **Authentication** page, select **+ Add a platform**. When the **Configure platforms** panel appears, select **Single-page application**.
 
 ![Screenshot of the Configure platforms panel](../../Linked_Image_Files/01-01-03-azure-ad-portal-new-app-details-02.png)
 
-In the **Configure single-page application** panel, add **http://localhost:3007** under **Redirect URIs**, and select **Configure**.
+10. In the **Configure single-page application** panel, add **http://localhost:3007** under **Redirect URIs**, and select **Configure**.
 
 ![Screenshot of the Configure Web panel](../../Linked_Image_Files/01-01-03-azure-ad-portal-new-app-details-03.png)
 
@@ -284,7 +285,7 @@ In the **Configure single-page application** panel, add **http://localhost:3007*
 
 The last step is to configure the web page to use the Azure AD application.
 
-Locate the `var msalConfig = {}` code in the **index.html** file. The `auth` object contains three properties you need to set as follows:
+1. Locate the `var msalConfig = {}` code in the **index.html** file. The `auth` object contains three properties you need to set as follows:
 
 - `clientId`: set to the Azure AD application's ID
 - `authority`: set to **https://login.microsoftonline.com/{{DIRECTORY_ID}}**, replacing the **{{DIRECTORY_ID}}** with the Azure AD directory ID of the Azure AD application
@@ -295,29 +296,29 @@ Locate the `var msalConfig = {}` code in the **index.html** file. The `auth` obj
 > [!IMPORTANT]
 > If you are using Internet Explorer, ensure that `http://localhost` and `https://login.microsoftonline.com` are both in the same **security zone** - **Trusted Sites** is recommended.
 
-To test the web page, first start the local web server. In the command prompt, execute the following command from the root of the project:
+1. To test the web page, first start the local web server. In the command prompt, execute the following command from the root of the project:
 
 ```shell
 node server.js
 ```
 
-Next, open a browser and navigate to http://localhost:3007. The page initially contains a default welcome message and sign in button.
+2. Next, open a browser and navigate to http://localhost:3007. The page initially contains a default welcome message and sign in button.
 
 ![Screenshot of the default web page for an anonymous user](../../Linked_Image_Files/01-01-03-test-01.png)
 
-Select the **sign in** button.
+3. Select the **sign in** button.
 
 Depending on the browser, you are using, a popup window will load or the page will redirect to the Azure AD sign in prompt.
 
-Sign in using a **Work or School Account** and accept the permissions requested for the application by selecting **Accept**
+4. Sign in using a **Work or School Account** and accept the permissions requested for the application by selecting **Accept**
 
 ![Screenshot of Azure AD popup sign in experience](../../Linked_Image_Files/01-01-03-test-02.png)
 
-Depending on the browser you're using, the popup will disappear or you will be redirected back to the web page. When the page loads, MSAL will request an access token and request your information from Microsoft Graph. After the request complete, it will display the results on the page:
+5. Depending on the browser you're using, the popup will disappear or you will be redirected back to the web page. When the page loads, MSAL will request an access token and request your information from Microsoft Graph. After the request complete, it will display the results on the page:
 
 ![Screenshot of the default web page for an authenticated user](../../Linked_Image_Files/01-01-03-test-03.png)
 
-Stop the local web server by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in the console.
+6. Stop the local web server by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in the console.
 
 ## Summary
 
