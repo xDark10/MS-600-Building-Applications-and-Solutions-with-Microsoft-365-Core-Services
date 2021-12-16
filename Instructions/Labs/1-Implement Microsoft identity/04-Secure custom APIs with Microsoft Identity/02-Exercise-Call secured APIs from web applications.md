@@ -36,7 +36,7 @@ In this first application, you'll create an Azure AD application and ASP.NET Cor
 
 ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/01-04-05-azure-ad-portal-new-app-details-01.png)
 
-8. On the **Product Catalog WebApp** page, select the **Add a Redirect URI** link under the **Redirect URIs**.
+8. On the **Product Catalog WebApp** page, select the **Add a Redirect URI** link under the **Redirect URIs** in the **Essentials**.
 
 9. Select **+ Add a platform**, then select **Web**.
 
