@@ -11,44 +11,44 @@ In this first application, you'll create an Azure AD application and ASP.NET Cor
 
 ### Create a single-tenant Azure AD application
 
-Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+1. Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
 ![Screenshot of the App registrations](../../Linked_Image_Files/01-04-azure-ad-portal-home.png)
 
-Select **Manage > App registrations** in the left-hand navigation.
+3. Select **Manage > App registrations** in the left-hand navigation.
 
-On the **App registrations** page, select **New registration**.
+4. On the **App registrations** page, select **+ New registration**.
 
 ![Screenshot of App Registrations page](../../Linked_Image_Files/01-04-azure-ad-portal-new-app-00.png)
 
-On the **Register an application** page, set the values as follows:
+5. On the **Register an application** page, set the values as follows:
 
 - **Name**: Product Catalog WebApp
 - **Supported account types**: Accounts in this organizational directory only (Single tenant)
 
   ![Screenshot of the Register an application page](../../Linked_Image_Files/01-04-05-azure-ad-portal-new-app-01.png)
 
-Select **Register** to create the application.
+6. Select **Register** to create the application.
 
-On the **Product Catalog WebApp** page, copy the values **Application (client) ID** and **Directory (tenant) ID**; you'll need these values later in this exercise.
+7. On the **Product Catalog WebApp** page, copy the values **Application (client) ID** and **Directory (tenant) ID**; you'll need these values later in this exercise.
 
 ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/01-04-05-azure-ad-portal-new-app-details-01.png)
 
-On the **Product Catalog WebApp** page, select the **Add a Redirect URI** link under the **Redirect URIs**.
+8. On the **Product Catalog WebApp** page, select the **Add a Redirect URI** link under the **Redirect URIs**.
 
-Select **Add a platform**, then select **Web**.
+9. Select **+ Add a platform**, then select **Web**.
 
 ![Screenshot of the add platform panel of the new app registration](../../Linked_Image_Files/01-04-05-azure-ad-portal-new-app-details-02.png)
 
-On the **Configure Web** panel, use the following values to configure the application:
+10. On the **Configure Web** panel, use the following values to configure the application:
 
 - **Redirect URIs**: https://localhost:5001/signin-oidc
 - **Front-channel logout URL**: https://localhost:5001/signout-oidc
 - **Implicit grant and hybrid flows**: select **ID tokens (used for implicit and hybrid flows)**
 
-Select **Configure** when finished setting these values.
+11. Select **Configure** when finished setting these values.
 
 ![Screenshot of the application configuration](../../Linked_Image_Files/01-04-05-azure-ad-portal-new-app-details-03.png)
 
@@ -56,15 +56,15 @@ Select **Configure** when finished setting these values.
 
 In order for the app to call the web API, it must acquire an access token with the user's context. The web app will use the Authorization code flow to acquire the token. The Authorization code flow requires the web app to authenticate with an application ID and either a certificate or secret. In this exercise, you'll use a secret.
 
-Select **Certificates & secrets** from the left-hand navigation panel.
+12. Select **Manage > Certificates & secrets** from the left-hand navigation panel.
 
-Select the **New client secret** button:
+13. Select the **+ New client secret** button:
 
 ![Screenshot of the Certificates & Secrets page in the Azure AD admin center](../../Linked_Image_Files/01-04-05-azure-ad-portal-new-app-secret-01.png)
 
-When prompted, give the secret a description and select one of the expiration duration options provided and select **Add**. *What you enter and select doesn't matter for the exercise.*
+14. When prompted, give the secret a description and select one of the expiration duration options provided and select **Add**. *What you enter and select doesn't matter for the exercise.*
 
-The **Certificate & Secrets** page will display the new secret. It's important you copy this value as it's only shown this one time; if you leave the page and come back, it will only show as a masked value.
+15. The **Certificate & Secrets** page will display the new secret. It's important you copy this value as it's only shown this one time; if you leave the page and come back, it will only show as a masked value.
 
 ![Screenshot showing the new secret](../../Linked_Image_Files/01-04-05-azure-ad-portal-new-app-secret-02.png)
 
@@ -73,15 +73,15 @@ The **Certificate & Secrets** page will display the new secret. It's important y
 > [!NOTE]
 > The instructions below assume you are using .NET 5. They were last tested using v5.0.202 of the .NET 5 SDK.
 
-Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder.
+1. Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder.
 
-Execute the following command to create a new ASP.NET Core MVC web application:
+2. Execute the following command to create a new ASP.NET Core MVC web application:
 
 ```console
 dotnet new mvc --auth SingleOrg -o ProductCatalogWeb
 ```
 
-After creating the application, run the following commands to ensure your new project runs correctly.
+3. After creating the application, run the following commands to ensure your new project runs correctly.
 
 ```console
 cd ProductCatalogWeb
@@ -89,25 +89,25 @@ dotnet add package Microsoft.Identity.Web
 dotnet add package Microsoft.Identity.Web.UI
 ```
 
-Open the scaffolded project folder, which is named **ProductCatalogWeb** in **Visual Studio Code**
+4. Open the scaffolded project folder, which is named **ProductCatalogWeb** in **Visual Studio Code**
 
 ### Configure the web application with the Azure AD application
 
-Locate and open the **./appsettings.json** file in the ASP.NET Core project.
+5. Locate and open the **./appsettings.json** file in the ASP.NET Core project.
 
-Set the `AzureAd.Domain` property to the domain of your Azure AD tenant where you created the Azure AD application (*for example: contoso.onmicrosoft.com*).
+6. Set the `AzureAd.Domain` property to the domain of your Azure AD tenant where you created the Azure AD application (*for example: contoso.onmicrosoft.com*).
 
-Set the `AzureAd.TenantId` property to the **Directory (tenant) ID** you copied when creating the Azure AD application in the previous section.
+7. Set the `AzureAd.TenantId` property to the **Directory (tenant) ID** you copied when creating the Azure AD application in the previous section.
 
-Set the `AzureAd.ClientId` property to the **Application (client) ID** you copied when creating the Azure AD application in the previous section.
+8. Set the `AzureAd.ClientId` property to the **Application (client) ID** you copied when creating the Azure AD application in the previous section.
 
-Create a new property, `ClientSecret`, immediately after the `ClientId`. Set the value of this to the client secret you created when creating the Azure AD application in the previous section.
+9. Create a new property, `ClientSecret`, immediately after the `ClientId`. Set the value of this to the client secret you created when creating the Azure AD application in the previous section.
 
 ### Configure the web API information
 
 The web application must know the URL and scopes required by the web API application created in the previous exercise. The scopes defined for the web API application are found in the **Expose an api** blade of the app registration in the Azure Active Directory portal. (The scopes are specified in the format `api://[client-id]/[scope]`).
 
-In the root folder of the project, create a file named **Constants.cs**. Add the following to the file, specifying the correct value for the web API application client ID. The claim IDs (which are strings that look like a URI) that are required for token acquisition are added to the Constants class.
+10. In the root folder of the project, create a file named **Constants.cs**. Add the following to the file, specifying the correct value for the web API application client ID. The claim IDs (which are strings that look like a URI) that are required for token acquisition are added to the Constants class.
 
 ```csharp
 using System.Collections.Generic;
@@ -139,15 +139,15 @@ namespace Constants
 
 ### Configure web application middleware
 
-Locate and open the **./Startup.cs** file in the ASP.NET Core project.
+11. Locate and open the **./Startup.cs** file in the ASP.NET Core project.
 
-Within the `ConfigureServices()` method, locate the following line:
+12. Within the `ConfigureServices()` method, locate the following line:
 
 ```csharp
 services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
 ```
-Update the line to the following. This will configure the web app's middleware to add support for the Microsoft Graph:
+13. Update the line to the following. This will configure the web app's middleware to add support for the Microsoft Graph:
 
 ```csharp
 services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
@@ -160,7 +160,7 @@ services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 
 The next step is to add a model, controller, and view to the web app that will display the Categories returned from the product catalog API.
 
-Add a new file **Category.cs** to the **Models** folder. add the following code to it:
+14. Add a new file **Category.cs** to the **Models** folder. add the following code to it:
 
 ```csharp
 namespace ProductCatalogWeb.Models
@@ -173,7 +173,7 @@ namespace ProductCatalogWeb.Models
 }
 ```
 
-Add a new file **CategoriesController.cs** to the **Controllers** folder. Add the following code to it:
+15. Add a new file **CategoriesController.cs** to the **Controllers** folder. Add the following code to it:
 
 ```csharp
 using System.Collections.Generic;
@@ -256,7 +256,7 @@ The action methods in the controller create new instances of the Microsoft Graph
 
 Now create the view to display the categories.
 
-Add a new folder **Categories** to the **Views** folder. Add a new file, **Index.cshtml**, to the new **Categories** folder and add the following code to it. This view will display all the categories provided by the API:
+16. Add a new folder **Categories** to the **Views** folder. Add a new file, **Index.cshtml**, to the new **Categories** folder and add the following code to it. This view will display all the categories provided by the API:
 
 ```cshtml
 @model IEnumerable<ProductCatalogWeb.Models.Category>
@@ -296,7 +296,7 @@ Add a new folder **Categories** to the **Views** folder. Add a new file, **Index
 </table>
 ```
 
-Add a new file, **Create.cshtml**, to the **Views\Categories** folder and add the following code to it. This view will provide a form for creating a new category:
+17. Add a new file, **Create.cshtml**, to the **Views\Categories** folder and add the following code to it. This view will provide a form for creating a new category:
 
 ```cshtml
 @model ProductCatalogWeb.Models.Category
@@ -337,7 +337,7 @@ Add a new file, **Create.cshtml**, to the **Views\Categories** folder and add th
 
 The final step is to add a model, controller, and view to the web app that will display the products returned from the product catalog API.
 
-Add a new file **Product.cs** to the **Models** folder. add the following code to it:
+18. Add a new file **Product.cs** to the **Models** folder. add the following code to it:
 
 ```csharp
 namespace ProductCatalogWeb.Models
@@ -351,7 +351,7 @@ namespace ProductCatalogWeb.Models
 }
 ```
 
-Add a new file **ProductViewModel.cs** to the **Models** folder. add the following code to it:
+19. Add a new file **ProductViewModel.cs** to the **Models** folder. add the following code to it:
 
 ```csharp
 using System.Collections.Generic;
@@ -367,7 +367,7 @@ namespace ProductCatalogWeb.Models
 }
 ```
 
-Add a new file **ProductsController.cs** to the **Controllers** folder. Add the following code to it:
+20. Add a new file **ProductsController.cs** to the **Controllers** folder. Add the following code to it:
 
 ```csharp
 using System.Collections.Generic;
@@ -472,7 +472,7 @@ The action methods in the controller create new instances of the Microsoft Graph
 
 Now create the view to display the categories.
 
-Add a new folder **Products** to the **Views** folder. Add a new file, **Index.cshtml**, to the new **Products** folder and add the following code to it. This view will display all the products provided by the API:
+21. Add a new folder **Products** to the **Views** folder. Add a new file, **Index.cshtml**, to the new **Products** folder and add the following code to it. This view will display all the products provided by the API:
 
 ```html
 @model IEnumerable<ProductCatalogWeb.Models.Product>
@@ -518,7 +518,7 @@ Add a new folder **Products** to the **Views** folder. Add a new file, **Index.c
 </table>
 ```
 
-Add a new file, **Create.cshtml**, to the **Views\Products** folder and add the following code to it. This will provide a form for creating a new product:
+22. Add a new file, **Create.cshtml**, to the **Views\Products** folder and add the following code to it. This will provide a form for creating a new product:
 
 ```html
 @model ProductCatalogWeb.Models.ProductViewModel
@@ -564,11 +564,11 @@ Add a new file, **Create.cshtml**, to the **Views\Products** folder and add the 
 
 In a separate instance of Visual Studio code, open the folder containing the web API application from the previous exercise.
 
-On the Visual Studio Code menu bar, select **Run** > **Run Without Debugging** to start the web API.
+23. On the Visual Studio Code menu bar, select **Run** > **Run Without Debugging** to start the web API.
 
 #### Build and test the web app
 
-Execute the following in a command prompt to compile and run the application:
+24. Execute the following in a command prompt to compile and run the application:
 
 ```console
 dotnet dev-certs https --trust
@@ -576,17 +576,17 @@ dotnet build
 dotnet run
 ```
 
-Open a browser and navigate to the url **https://localhost:5001**. The web application will redirect you to the Azure AD sign-in page.
+25. Open a browser and navigate to the url **https://localhost:5001**. The web application will redirect you to the Azure AD sign-in page.
 
-Sign in using a Work and School account from your Azure AD directory. The first login will prompt for consent to the scopes required by the web API. After consent, Azure AD will redirect you back to the web application.
+26. Sign in using a Work and School account from your Azure AD directory. The first login will prompt for consent to the scopes required by the web API. After consent, Azure AD will redirect you back to the web application.
 
 ![Screenshot of web API consent dialog](../../Linked_Image_Files/01-04-05-consent.png)
 
-Update the URL to **https://localhost:5001/Categories** to navigate to the **Categories** controller. Update the URL to **https://localhost:5001/Products** to navigate to the **Products** controller.
+27. Update the URL to **https://localhost:5001/Categories** to navigate to the **Categories** controller. Update the URL to **https://localhost:5001/Products** to navigate to the **Products** controller.
 
-The products and categories are stored in memory. If the web API is restarted, different values will be created.
+28. The products and categories are stored in memory. If the web API is restarted, different values will be created.
 
-The MSAL token cache is stored in memory. If the web app is restarted, log out and log in again to populate the cache with tokens.
+29. The MSAL token cache is stored in memory. If the web app is restarted, log out and log in again to populate the cache with tokens.
 
 ## Summary
 
