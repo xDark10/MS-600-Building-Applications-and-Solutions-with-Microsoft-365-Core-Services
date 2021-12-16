@@ -42,7 +42,7 @@ In this exercise, you'll learn how to add app roles (application permission) to 
 
 ## Task 2: Register daemon app to call a protected web API
 
-1. On the **App registrations** page, select **+ New registration**.
+1. On the **Manage > App registrations** page, select **+ New registration**.
 
 ![Screenshot of App Registrations page](../../Linked_Image_Files/01-04-azure-ad-portal-new-app-00.png)
 
@@ -81,7 +81,7 @@ The daemon app requires permission to call the web API. This permission is reque
 
 10. Select **Manage > API permissions** from the left-hand navigation panel.
 
-11. Select **Add a permission**. Select the app registration that represents the web API application.
+11. Select **+ Add a permission**. Select the app registration that represents the web API application.
 
 ![Screenshot of the API permissions page in the Azure AD admin center](../../Linked_Image_Files/01-04-07-azure-ad-portal-app-reg-api-perm-01.png)
 
