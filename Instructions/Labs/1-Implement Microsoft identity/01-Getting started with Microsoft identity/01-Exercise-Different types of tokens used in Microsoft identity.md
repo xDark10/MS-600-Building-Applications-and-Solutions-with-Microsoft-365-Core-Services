@@ -55,7 +55,7 @@ console.log('Press CTRL+C to stop the web server...');
 
 ## Task 2: Create a web page for the user to sign in and display details
 
-1. Create a new folder **web** in the current folder and add a new file **index.html** to the folder. Add the following code to the **index.html** file:
+1. Add a new file **index.html** to the folder. Add the following code to the **index.html** file:
 
 ```html
 <!DOCTYPE html>
