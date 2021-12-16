@@ -22,7 +22,7 @@ In this exercise, you’ll learn how to create a .NET Web application that uses 
 - **Supported account types**: Accounts in this organizational directory only (Single tenant)
 
 6. Select **Register** to create the application.
-7. On the **Product Catalog WebApp** page, copy the values **Application (client) ID** and **Directory (tenant) ID**; you'll need these values later in this exercise.
+7. On the **User Group Role** page, copy the values **Application (client) ID** and **Directory (tenant) ID**; you'll need these values later in this exercise.
 
 ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/01-05-03-azure-ad-portal-new-app-details-01.png)
 
