@@ -22,42 +22,42 @@ You must have the minimum versions of these prerequisites installed on your work
 
 ## Task 1: Create an Azure AD application
 
-Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+1. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
   ![Screenshot of the App registrations](../../Linked_Image_Files/02-01-azure-ad-portal-home.png)
 
-Select **Manage > App registrations** in the left-hand navigation.
+3. Select **Manage > App registrations** in the left-hand navigation.
 
-On the **App registrations** page, select **New registration**.
+4. On the **App registrations** page, select **+ New registration**.
 
   ![Screenshot of App Registrations page](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-00.png)
 
-On the **Register an application** page, set the values as follows:
+5. On the **Register an application** page, set the values as follows:
 
 - **Name**: Graph Console App
 - **Supported account types**: Accounts in this organizational directory only (Contoso only - Single tenant)
 
     ![Screenshot of the Register an application page](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-01.png)
 
-    Select **Register**.
+6. Select **Register**.
 
-On the **Graph Console App** page, copy the value of the **Application (client) ID** and **Directory (tenant) ID**; you'll need them later in this exercise.
+7. On the **Graph Console App** page, copy the value of the **Application (client) ID** and **Directory (tenant) ID**; you'll need them later in this exercise.
 
   ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-details.png)
 
-Select **Manage > Certificates & secrets**.
+8. Select **Manage > Certificates & secrets**.
 
-Select **New client secret**.
+9. Select **+ New client secret**.
 
 ![Screenshot of the Add a client secret dialog](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-secret.png)
 
-In the **Add a client secret** panel that appears, enter a value in **Description**, select one of the options for **Expires** and select **Add**.
+10. In the **Add a client secret** panel that appears, enter a value in **Description**, select one of the options for **Expires** and select **Add**.
 
 ![Screenshot of the newly added client secret](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-secret-02.png)
 
-The **Certificate & secrets** page will display the new secret. It's important you copy this value as it's only shown this one time; if you leave the page and come back, it will only show as a masked value.
+11. The **Certificate & secrets** page will display the new secret. It's important you copy this value as it's only shown this one time; if you leave the page and come back, it will only show as a masked value.
 
 ![Screenshot showing the new secret](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-secret-03.png)
 
@@ -65,23 +65,23 @@ The **Certificate & secrets** page will display the new secret. It's important y
 
 After creating the application, you need to grant it the necessary permissions to Microsoft Graph
 
-Select **API Permissions** in the left-hand navigation panel.
+12. Select **API Permissions** in the left-hand navigation panel.
 
 ![Screenshot of the API Permissions navigation item](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-permissions-01.png)
 
-Select the **Add a permission** button.
+13. Select the **+ Add a permission** button.
 
-In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
+14. In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
 
 ![Screenshot of Microsoft Graph in the Request API permissions panel](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-permissions-02.png)
 
-When prompted for the type of permission, select **Application permissions**.
+15. When prompted for the type of permission, select **Application permissions**.
 
 ![Screenshot of the User.Read.All permission in the Request API permissions panel](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-permissions-03.png)
 
-Enter **User.R** in the **Select permissions** search box and select the **User.Read.All** permission, followed by the **Add permission** button at the bottom of the panel.
+16. Enter **User.R** in the **Select permissions** search box and select the **User.Read.All** permission, followed by the **Add permissions** button at the bottom of the panel.
 
-In the **Configured permissions** panel, select the button **Grant admin consent for [tenant]**, and then select **Yes** when in the confirmation dialog.
+17. In the **Configured permissions** panel, select the button **Grant admin consent for [tenant]**, and then select **Yes** when in the confirmation dialog.
 
 ![Screenshot of the Configured permissions panel](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-permissions-04.png)
 
@@ -89,13 +89,13 @@ In the **Configured permissions** panel, select the button **Grant admin consent
 
 
 
-Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
+1. Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
 
 ```console
 dotnet new console -o graphconsoleapp
 ```
 
-After creating the application, run the following commands to ensure your new project runs correctly:
+2. After creating the application, run the following commands to ensure your new project runs correctly:
 
 ```console
 cd graphconsoleapp
@@ -106,17 +106,17 @@ dotnet add package Microsoft.Extensions.Configuration.FileExtensions
 dotnet add package Microsoft.Extensions.Configuration.Json
 ```
 
-Open the application in Visual Studio Code using the following command:
+3. Open the application in Visual Studio Code using the following command:
 
 ```console
 code .
 ```
 
-If Visual Studio Code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
+4. If Visual Studio Code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
 
 ### Update the console app to support Azure AD authentication
 
-Create a new file named **appsettings.json** in the root of the project and add the following code to it:
+5. Create a new file named **appsettings.json** in the root of the project and add the following code to it:
 
 ```json
 {
@@ -127,7 +127,7 @@ Create a new file named **appsettings.json** in the root of the project and add 
 }
 ```
 
-Update properties with the following values:
+6. Update properties with the following values:
 
 - `YOUR_TENANT_ID_HERE`: Azure AD directory ID
 - `YOUR_APP_ID_HERE`: Azure AD client ID
@@ -135,9 +135,9 @@ Update properties with the following values:
 
 #### Create helper classes
 
-Create a new folder **Helpers** in the project.
+7. Create a new folder **Helpers** in the project.
 
-Create a new file **AuthHandler.cs** in the **Helpers** folder and add the following code:
+8. Create a new file **AuthHandler.cs** in the **Helpers** folder and add the following code:
 
 ```csharp
 using System.Net.Http;
@@ -166,7 +166,7 @@ namespace Helpers
 }
 ```
 
-Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
+9. Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
 
 ```csharp
 using System.Net.Http;
@@ -206,7 +206,7 @@ namespace Helpers
 
 ### Incorporate Microsoft Graph into the console app
 
-Open the **Program.cs** file and add the following `using` statements to the top of the file:
+10. Open the **Program.cs** file and add the following `using` statements to the top of the file:
 
 ```csharp
 using System.Collections.Generic;
@@ -216,13 +216,13 @@ using Microsoft.Extensions.Configuration;
 using Helpers;
 ```
 
-Add the following static member to the `Program` class in the **Program.cs** file. This member will be used to instantiate the client used to call Microsoft Graph:
+11. Add the following static member to the `Program` class in the **Program.cs** file. This member will be used to instantiate the client used to call Microsoft Graph:
 
 ```csharp
 private static GraphServiceClient _graphClient;
 ```
 
-Add the following method `LoadAppSettings` to the `Program` class. This method retrieves the configuration details from the **appsettings.json** file previously created:
+12. Add the following method `LoadAppSettings` to the `Program` class. This method retrieves the configuration details from the **appsettings.json** file previously created:
 
 ```csharp
 private static IConfigurationRoot LoadAppSettings()
@@ -251,7 +251,7 @@ private static IConfigurationRoot LoadAppSettings()
 }
 ```
 
-Add the following method `CreateAuthorizationProvider` to the `Program` class. This method will create an instance of the clients used to call Microsoft Graph.
+13. Add the following method `CreateAuthorizationProvider` to the `Program` class. This method will create an instance of the clients used to call Microsoft Graph.
 
 ```csharp
 private static IAuthenticationProvider CreateAuthorizationProvider(IConfigurationRoot config)
@@ -273,7 +273,7 @@ private static IAuthenticationProvider CreateAuthorizationProvider(IConfiguratio
 }
 ```
 
-Add the following method `GetAuthenticatedGraphClient`  to the `Program` class. This method creates an instance of the `GraphServiceClient` object.
+14. Add the following method `GetAuthenticatedGraphClient`  to the `Program` class. This method creates an instance of the `GraphServiceClient` object.
 
 ```csharp
 private static GraphServiceClient GetAuthenticatedGraphClient(IConfigurationRoot config)
@@ -284,7 +284,7 @@ private static GraphServiceClient GetAuthenticatedGraphClient(IConfigurationRoot
 }
 ```
 
-Locate the `Main` method in the `Program` class. Add the following code to the end of the `Main` method to load the configuration settings from the **appsettings.json** file:
+15. Locate the `Main` method in the `Program` class. Add the following code to the end of the `Main` method to load the configuration settings from the **appsettings.json** file:
 
 ```csharp
 var config = LoadAppSettings();
@@ -295,7 +295,7 @@ if (config == null)
 }
 ```
 
-Add the following code to the end of the `Main` method, just after the code added in the last step. This code will obtain an authenticated instance of the `GraphServicesClient` and submit a request for the first user.
+16. Add the following code to the end of the `Main` method, just after the code added in the last step. This code will obtain an authenticated instance of the `GraphServicesClient` and submit a request for the first user.
 
 ```csharp
 var client = GetAuthenticatedGraphClient(config);
@@ -314,25 +314,25 @@ Console.WriteLine(graphRequest.GetHttpRequestMessage().RequestUri);
 
 ### Build and test the application
 
-Run the following command in a command prompt to ensure the developer certificate has been trusted:
+17. Run the following command in a command prompt to ensure the developer certificate has been trusted:
 
 ```console
 dotnet dev-certs https --trust
 ```
 
-Run the following command in a command prompt to compile the console application:
+18. Run the following command in a command prompt to compile the console application:
 
 ```console
 dotnet build
 ```
 
-Run the following command to run the console application:
+19. Run the following command to run the console application:
 
 ```console
 dotnet run
 ```
 
-When the application runs, you'll see a list of users displayed. The query retrieved all information about the users:
+20. When the application runs, you'll see a list of users displayed. The query retrieved all information about the users:
 
 ![Screenshot of the console application with no query parameters](../../Linked_Image_Files/02-01-app-run-01.png)
 
@@ -345,7 +345,7 @@ When the application runs, you'll see a list of users displayed. The query retri
 
 The current console application isn't efficient because it retrieves all information about all users in your organization but only displays three properties. The `$select` query parameter can limit the amount of data that is returned by Microsoft Graph, optimizing the query.
 
-Update the line that starts with `var graphRequest = client.Users` in the `Main` method with the following to limit the query to just two properties:
+21. Update the line that starts with `var graphRequest = client.Users` in the `Main` method with the following to limit the query to just two properties:
 
 ```csharp
 var graphRequest = client.Users
@@ -353,18 +353,18 @@ var graphRequest = client.Users
                     .Select(u => new { u.DisplayName, u.Mail });
 ```
 
-Rebuild and rerun the console application by executing the following commands in the command line:
+22. Rebuild and rerun the console application by executing the following commands in the command line:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-Now you see the `Id` property isn't populated with data as it wasn't included in the `$select` query parameter:
+23. Now you see the `Id` property isn't populated with data as it wasn't included in the `$select` query parameter:
 
 ![Screenshot of the console application with the $select query parameters](../../Linked_Image_Files/02-01-app-run-02.png)
 
-Let us further limit the results to just the first 15 results. Update the line that starts with `var graphRequest = client.Users` in the `Main` method with the following:
+24. Let us further limit the results to just the first 15 results. Update the line that starts with `var graphRequest = client.Users` in the `Main` method with the following:
 
 ```csharp
 var graphRequest = client.Users
@@ -373,7 +373,7 @@ var graphRequest = client.Users
                     .Top(15);
 ```
 
-Rebuild and rerun the console application by executing the following commands in the command line:
+25. Rebuild and rerun the console application by executing the following commands in the command line:
 
 ```console
 dotnet build
@@ -384,7 +384,7 @@ dotnet run
 
 Notice only 15 items are now returned by the query.
 
-Sort the results in reverse alphabetic order. Update the line that starts with `var graphRequest = client.Users` in the `Main` method with the following:
+26. Sort the results in reverse alphabetic order. Update the line that starts with `var graphRequest = client.Users` in the `Main` method with the following:
 
 ```csharp
 var graphRequest = client.Users
@@ -394,7 +394,7 @@ var graphRequest = client.Users
                     .OrderBy("DisplayName desc");
 ```
 
-Rebuild and rerun the console application by executing the following commands in the command line:
+27. Rebuild and rerun the console application by executing the following commands in the command line:
 
 ```console
 dotnet build
@@ -403,7 +403,7 @@ dotnet run
 
 ![Screenshot of the console application with the $orderby query parameters](../../Linked_Image_Files/02-01-app-run-04.png)
 
-Further refine the results by selecting Users who's surname starts with A, B, or C. You'll need to remove the `$orderby` query parameter added previously as the Users endpoint doesn't support combining the `$filter` and `$orderby` parameters. Update the line that starts with `var graphRequest = client.Users` in the `Main` method with the following:
+28. Further refine the results by selecting Users who's surname starts with A, B, or C. You'll need to remove the `$orderby` query parameter added previously as the Users endpoint doesn't support combining the `$filter` and `$orderby` parameters. Update the line that starts with `var graphRequest = client.Users` in the `Main` method with the following:
 
 ```csharp
 var graphRequest = client.Users
@@ -414,7 +414,7 @@ var graphRequest = client.Users
                     .Filter("startsWith(surname,'A') or startsWith(surname,'B') or startsWith(surname,'C')");
 ```
 
-Rebuild and rerun the console application by executing the following commands in the command line:
+29. Rebuild and rerun the console application by executing the following commands in the command line:
 
 ```console
 dotnet build
