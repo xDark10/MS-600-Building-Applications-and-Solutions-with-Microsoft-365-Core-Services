@@ -8,13 +8,13 @@ The Graph Explorer enables developers to create and test queries using the Micro
 
 In this example, you'll sign in to Microsoft Graph with a real user.
 
-Open a browser and navigate to https://developer.microsoft.com/graph/graph-explorer
+1. Open a browser and navigate to https://developer.microsoft.com/graph/graph-explorer
 
 ![Screenshot of the Graph Explorer](../../Linked_Image_Files/02-01-graph-explorer-01.png)
 
-Select the **Sign to Graph Explorer** button in the left-side panel and enter the credentials of a Work and School account.
+2. Select the **Sign to Graph Explorer** button in the left-side panel and enter the credentials of a Work and School account.
 
-After signing in, select the **...** menu to the right of your user profile and then select **Select permissions**. Verify the user has enough permissions to submit the requests in this exercise. You must consent to at least these minimum permissions:
+3. After signing in, select the **...** menu to the right of your user profile and then select **Select permissions**. Verify the user has enough permissions to submit the requests in this exercise. You must consent to at least these minimum permissions:
 
 - Mail.Read
 - Calendars.Read
@@ -28,9 +28,9 @@ After signing in, select the **...** menu to the right of your user profile and 
 
 All batch requests are submitted as HTTP POSTs to a specific endpoint: https://graph.microsoft.com/v1.0/$batch. The `$batch` query parameter is what tells Microsoft Graph to unpack the requests submitted in the body.
 
-Set the request to an HTTP **POST** and the endpoint of the request to **https://graph.microsoft.com/v1.0/$batch**.
+1. Set the request to an HTTP **POST** and the endpoint of the request to **https://graph.microsoft.com/v1.0/$batch**.
 
-Add the following JSON to the **Request Body** input box. This JSON code will issue three requests:
+2. Add the following JSON to the **Request Body** input box. This JSON code will issue three requests:
 
 - Request the current user's `displayName`, `jobTitle`, and `userPrincipalName` properties
 - Request the current user's email messages that are marked with high importance
@@ -61,9 +61,9 @@ Add the following JSON to the **Request Body** input box. This JSON code will is
 
 ![Screenshot of Microsoft Graph batch request](../../Linked_Image_Files/02-01-graph-explorer-03.png)
 
-Select the **Run Query** button.
+3. Select the **Run Query** button.
 
-Observe the results in the **Response Preview** box at the bottom of the page:
+4. Observe the results in the **Response Preview** box at the bottom of the page:
 
 ![Screenshot of Microsoft Graph batch response](../../Linked_Image_Files/02-01-graph-explorer-04.png)
 
@@ -75,7 +75,7 @@ Batch requests can also include both POST and GET requests.
 
 In this example, you'll submit a request that creates a new folder in the current user's OneDrive [for Business] and then requests the newly created folder. If the first request failed, the second request should come back empty as well.
 
-Enter the following JSON to the **Request Body** input box. This request will issue two requests:
+1. Enter the following JSON to the **Request Body** input box. This request will issue two requests:
 
 ```json
 {
@@ -105,13 +105,13 @@ Enter the following JSON to the **Request Body** input box. This request will is
 }
 ```
 
-Select the **Run Query** button.
+2. Select the **Run Query** button.
 
-Observe the results in the **Response Preview** box at the bottom of the page:
+3. Observe the results in the **Response Preview** box at the bottom of the page:
 
 ![Screenshot of Microsoft Graph batch response in Graph Explorer](../../Linked_Image_Files/02-01-graph-explorer-05.png)
 
-Notice this response contains two objects. The first request resulted in an HTTP 201 that says the item, or folder, was created.
+4. Notice this response contains two objects. The first request resulted in an HTTP 201 that says the item, or folder, was created.
 
 The second request was also successful and the name of the folder returned matched the folder the first request created.
 
