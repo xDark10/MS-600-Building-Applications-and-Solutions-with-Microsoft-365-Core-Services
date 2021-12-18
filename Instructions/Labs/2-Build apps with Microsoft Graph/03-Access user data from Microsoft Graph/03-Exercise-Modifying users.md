@@ -7,25 +7,25 @@ In this exercise, you'll modify an existing Azure AD application registration us
 
 ## Task 1: Set up the .NET Core console application
 
-Locate the **Program.cs** file from the application you created in a previous unit in this module.
+1. Locate the **Program.cs** file from the application you created in a previous unit in this module.
 
-Within the `Main` method, locate the following line
+2. Within the `Main` method, locate the following line
 
 ```csharp
 var client = GetAuthenticatedGraphClient(config, userName, userPassword);
 ```
 
-Delete all code within the `Main` method after the above line.
+3. Delete all code within the `Main` method after the above line.
 
 ## Task 2: Create a new user in your organization
 
-Add the following `using` statement to the top of the **Program.cs** file:
+1. Add the following `using` statement to the top of the **Program.cs** file:
 
 ```csharp
 using System.Threading.Tasks;
 ```
 
-Add the following code to the end of the `Main` method. This code will call a method that will use Microsoft Graph to create a new user:
+2. Add the following code to the end of the `Main` method. This code will call a method that will use Microsoft Graph to create a new user:
 
 ```csharp
 // request 1: create user
@@ -34,7 +34,7 @@ resultNewUser.Wait();
 Console.WriteLine("New user ID: " + resultNewUser.Id);
 ```
 
-Next, add the `CreateUserAsync()` method to the console application:
+3. Next, add the `CreateUserAsync()` method to the console application:
 
 ```csharp
 private static async Task<Microsoft.Graph.User> CreateUserAsync(GraphServiceClient client) {
@@ -55,11 +55,11 @@ private static async Task<Microsoft.Graph.User> CreateUserAsync(GraphServiceClie
 }
 ```
 
-Update the `{{REPLACE_YOUR_ORG_DOMAIN}}` string with the domain of your organization. You can find this if you sign in to the Azure AD admin portal (https://aad.portal.azure.com):
+4. Update the `{{REPLACE_YOUR_ORG_DOMAIN}}` string with the domain of your organization. You can find this if you sign in to the Azure AD admin portal (https://aad.portal.azure.com):
 
 ![Screenshot of the Azure AD admin portal home](../../Linked_Image_Files/02-03-azure-ad-portal-home-00.png)
 
-The last step is to update the permissions requested when the application runs. Locate the method `CreateAuthorizationProvider()`. Within this method, locate the code that creates a collection of scopes. Add the following permission request to the scopes collection:
+5. The last step is to update the permissions requested when the application runs. Locate the method `CreateAuthorizationProvider()`. Within this method, locate the code that creates a collection of scopes. Add the following permission request to the scopes collection:
 
 ```csharp
 scopes.Add("User.ReadWrite.All");
@@ -67,46 +67,46 @@ scopes.Add("User.ReadWrite.All");
 
 ### Update the Azure AD application's permissions
 
-The last step is to grant the application the necessary permission to create a new user.
+6. The last step is to grant the application the necessary permission to create a new user.
 
-Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+7. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
-Select **Azure Active Directory** in the left-hand navigation.
+8. Select **Azure Active Directory** in the left-hand navigation.
 
   ![Screenshot of the App registrations](../../Linked_Image_Files/02-03-azure-ad-portal-home.png)
 
-Select **Manage > App registrations** in the left-hand navigation.
+9. Select **Manage > App registrations** in the left-hand navigation.
 
-On the **App registrations** page, select the **Graph Console App**.
+10. On the **App registrations** page, select the **Graph Console App**.
 
-Select **API Permissions** in the left-hand navigation panel.
+11. Select **Manage > API Permissions** in the left-hand navigation panel.
 
 ![Screenshot of the API Permissions navigation item](../../Linked_Image_Files/02-03-07-azure-ad-portal-new-permission.png)
 
-Select the **Add a permission** button.
+12. Select the **+ Add a permission** button.
 
-In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
+13. In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
 
 ![Screenshot of Microsoft Graph in the Request API permissions panel](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-permissions-02.png)
 
-When prompted for the type of permission, select **Delegated permissions**.
+14. When prompted for the type of permission, select **Delegated permissions**.
 
-Enter **User.R** in the **Select permissions** search box and select the **User.ReadWrite.All** permission, followed by the **Add permission** button at the bottom of the panel.
+15. Enter **User.R** in the **Select permissions** search box and select the **User.ReadWrite.All** permission, followed by the **Add permissions** button at the bottom of the panel.
 
 ![Screenshot of the User.ReadWrite.All permission in the Request API permissions panel](../../Linked_Image_Files/02-03-07-azure-ad-portal-new-permission-02.png)
 
-In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select the **Yes** button in the consent dialog to grant all users in your organization this permission.
+16. In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select the **Yes** button in the consent dialog to grant all users in your organization this permission.
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile and run the console application:
+17. Run the following command in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After entering the username and password of a user, you'll see the ID of the new user. Verify the user was created by going back to the Azure Active Directory admin center, selecting **Manage > Users** and finding the new user:
+18. After entering the username and password of a user, you'll see the ID of the new user. Verify the user was created by going back to the Azure Active Directory admin center, selecting **Manage > Users** and finding the new user:
 
 ![Screenshot of the Azure AD admin center showing the new user](../../Linked_Image_Files/02-03-07-app-run-01.png)
 
@@ -114,7 +114,7 @@ After entering the username and password of a user, you'll see the ID of the new
 
 In this section, you'll update the .NET Core console application to update the user created in the previous section.
 
-First, comment out the following code you added in the previous section. Otherwise, the application will throw an error when it tries to create the same user again:
+1. First, comment out the following code you added in the previous section. Otherwise, the application will throw an error when it tries to create the same user again:
 
 ```csharp
 // request 1: create user
@@ -123,7 +123,7 @@ resultNewUser.Wait();
 Console.WriteLine("New user ID: " + resultNewUser.Id);
 ```
 
-Next, add the following code. This will update the user you created in the last section:
+2. Next, add the following code. This will update the user you created in the last section:
 
 ```csharp
 // request 2: update user
@@ -139,7 +139,7 @@ resultUpdatedUser.Wait();
 Console.WriteLine("Updated user ID: " + resultUpdatedUser.Id);
 ```
 
-Update the `{{REPLACE_YOUR_ORG_DOMAIN}}` string with the domain of your organization.
+3. Update the `{{REPLACE_YOUR_ORG_DOMAIN}}` string with the domain of your organization.
 
 Next, add the `UpdateUserAsync()` method to the console application:
 
@@ -154,14 +154,14 @@ private static async Task<Microsoft.Graph.User> UpdateUserAsync(GraphServiceClie
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile and run the console application:
+4. Run the following command in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After entering the username and password of a user, you'll see the ID of the updated user. Verify the user was updated by going back to the Azure Active Directory admin center, selecting **Manage > Users** and finding the user. Select the user and examine the **Mobile phone** property. It may take a moment to reflect the change, so be patient and keep refreshing the page:
+5. After entering the username and password of a user, you'll see the ID of the updated user. Verify the user was updated by going back to the Azure Active Directory admin center, selecting **Manage > Users** and finding the user. Select the user and examine the **Mobile phone** property. It may take a moment to reflect the change, so be patient and keep refreshing the page:
 
 ![Screenshot of the Azure AD admin center showing the updated user](../../Linked_Image_Files/02-03-07-app-run-02.png)
 
@@ -169,7 +169,7 @@ After entering the username and password of a user, you'll see the ID of the upd
 
 In this section, you'll update the .NET Core console application to delete the user updated in the previous section.
 
-Add the following code to the end of the `Main()` method in the console application:
+6. Add the following code to the end of the `Main()` method in the console application:
 
 ```csharp
 // request 3: delete user
@@ -177,7 +177,7 @@ var deleteTask = DeleteUserAsync(client, userToUpdate.Id);
 deleteTask.Wait();
 ```
 
-Next, add the `DeleteUserAsync()` method to the console application:
+7. Next, add the `DeleteUserAsync()` method to the console application:
 
 ```csharp
 private static async Task DeleteUserAsync(GraphServiceClient client, string userIdToDelete) {
@@ -187,14 +187,14 @@ private static async Task DeleteUserAsync(GraphServiceClient client, string user
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile and run the console application:
+8. Run the following command in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After entering the username and password of a user, you'll see the application exit without error. Verify the user was deleted by going back to the Azure Active Directory admin center, selecting **Manage > Users** and trying to find the user. They shouldn't be present in the search results:
+9. After entering the username and password of a user, you'll see the application exit without error. Verify the user was deleted by going back to the Azure Active Directory admin center, selecting **Manage > Users** and trying to find the user. They shouldn't be present in the search results:
 
 ![Screenshot of the Azure AD admin center showing the missing user](../../Linked_Image_Files/02-03-07-app-run-03.png)
 
