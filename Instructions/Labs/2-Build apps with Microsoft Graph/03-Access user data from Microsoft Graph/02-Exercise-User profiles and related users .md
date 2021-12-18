@@ -7,22 +7,22 @@ In this exercise, you'll update the existing Azure AD application registration u
 
 ## Task 1: Set up the .NET Core console application
 
-Locate the **Program.cs** file from the application you created in a previous unit in this module.
+1. Locate the **Program.cs** file from the application you created in a previous unit in this module.
 
-Within the `Main` method, locate the following line:
+2. Within the `Main` method, locate the following line:
 
 ```csharp
 var client = GetAuthenticatedGraphClient(config, userName, userPassword);
 ```
 
-Delete all code within the `Main` method after the above line.
+3. Delete all code within the `Main` method after the above line.
 
 ## Task 2: Get the currently signed in user's profile photo
 
 > [!NOTE]
 > This section assumes the currently signed in user has set their profile picture.
 
-Add the following code to the end of the `Main` method. This code will obtain a reference to the currently signed in user's profile photo and display its details:
+1. Add the following code to the end of the `Main` method. This code will obtain a reference to the currently signed in user's profile photo and display its details:
 
 ```csharp
 // request 1 - current user's photo
@@ -44,14 +44,14 @@ Console.WriteLine(requestUserPhoto.GetHttpRequestMessage().RequestUri);
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile and run the console application:
+2. Run the following command in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After entering the username and password of a user, you'll see the details of the user's profile photo:
+3. After entering the username and password of a user, you'll see the details of the user's profile photo:
 
 ![Screenshot of the console application showing a specific user](../../Linked_Image_Files/02-03-05-app-run-01.png)
 
@@ -59,14 +59,14 @@ After entering the username and password of a user, you'll see the details of th
 
 Next, save the profile photo to your workstation.
 
-Locate the comment `// get actual photo` from the code you added in the last section. Add the following lines after the comment:
+4. Locate the comment `// get actual photo` from the code you added in the last section. Add the following lines after the comment:
 
 ```csharp
 var requestUserPhotoFile = client.Me.Photo.Content.Request();
 var resultUserPhotoFile = requestUserPhotoFile.GetAsync().Result;
 ```
 
-Next, locate the comment `// create the file` from the code you added in the last section. Add the following lines after the comment:
+5. Next, locate the comment `// create the file` from the code you added in the last section. Add the following lines after the comment:
 
 ```csharp
 var profilePhotoPath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "profilePhoto_" + resultsUserPhoto.Id + ".jpg");
@@ -83,14 +83,14 @@ This code will create a new image file in the current folder of the application 
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile and run the console application:
+6. Run the following command in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After entering the username and password of a user, you'll find a file **profilePhoto_{{XXXX}}.jpg** in the root folder of the .NET Core console application project.
+7. After entering the username and password of a user, you'll find a file **profilePhoto_{{XXXX}}.jpg** in the root folder of the .NET Core console application project.
 
 ## Task 3: Get a user's manager
 
@@ -98,29 +98,29 @@ Microsoft Graph can display related users, such as a user's manager as defined i
 
 ### Set a user's manager property
 
-Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+1. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
   ![Screenshot of the App registrations](../../Linked_Image_Files/02-03-azure-ad-portal-home.png)
 
-Select **Manage > Users** in the left-hand navigation.
+3. Select **Manage > Users** in the left-hand navigation.
 
-Select a user within the organization and on their profile page, copy the user's **Object ID** property:
+4. Select a user within the organization and on their profile page, copy the user's **Object ID** property:
 
 ![Screenshot of a user's profile in the Azure AD portal](../../Linked_Image_Files/02-03-05-azure-ad-portal-user-profile-01.png)
 
-In the **Job info** section, verify the **Manager** property is set.
+5. In the **Job info** section, verify the **Manager** property is set.
 
-If it isn't set, select **edit** next to **Job info** and select a manager for the currently selected user.
+6. If it isn't set, select **edit** next to **Job info** and select a manager for the currently selected user.
 
 ### Update the .NET Core console application
 
-Go back to the .NET Core console application.
+7. Go back to the .NET Core console application.
 
-Locate the code you added above for `request 1 - current user's photo` and comment it out so it doesn't continue to execute.
+8. Locate the code you added above for `request 1 - current user's photo` and comment it out so it doesn't continue to execute.
 
-Add the following code immediately after the code you just commented out:
+9. Add the following code immediately after the code you just commented out:
 
 ```csharp
 // request 2 - user's manager
@@ -138,20 +138,20 @@ Console.WriteLine("\nGraph Request:");
 Console.WriteLine(requestUserManager.GetHttpRequestMessage().RequestUri);
 ```
 
-Set the value of the `userId` variable to the **Object ID** of the user you ensured had a manager configured on their profile in the Azure AD admin portal.
+10. Set the value of the `userId` variable to the **Object ID** of the user you ensured had a manager configured on their profile in the Azure AD admin portal.
 
-This code will get the specified user, and select that user's manager property. It will then display the manager's **ID** and **DisplayName** properties on the console.
+11. This code will get the specified user, and select that user's manager property. It will then display the manager's **ID** and **DisplayName** properties on the console.
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile and run the console application:
+12. Run the following command in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After entering the username and password of a user, the specified user and their manager details are displayed on the console:
+13. After entering the username and password of a user, the specified user and their manager details are displayed on the console:
 
 ![Screenshot of the running application](../../Linked_Image_Files/02-03-05-app-run-02.png)
 
