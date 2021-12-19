@@ -32,37 +32,37 @@ You must have the minimum versions of these prerequisites installed on your work
 The first step is to create a new Microsoft Teams bot for your messaging extension. Adding a bot to the Teams app involves two steps:
 
 1. Register the bot with Microsoft Azure's Bot Framework
-1. Add a bot to the project codebase
+2. Add a bot to the project codebase
 
 ### Register the bot with Microsoft Azure's Bot Framework
 
-Open a browser and navigate to the [Azure portal](https://portal.azure.com). Sign in using a **Work or School Account** that has rights to create resources in your Azure subscription.
+1. Open a browser and navigate to the [Azure portal](https://portal.azure.com). Sign in using a **Work or School Account** that has rights to create resources in your Azure subscription.
 
-Select **Create a resource** in the left-hand navigation:
+2. Select **+ Create a resource** in the left-hand navigation:
 
 ![Screenshot of the primary Azure navigation](../../Linked_Image_Files/04-02-03-azure-portal-01.png)
 
-Enter **resource group** in the **Search the marketplace** input box, and select **Resource group**.
+3. Enter **resource group** in the **Search the marketplace** input box, and select **Resource group**.
 
 ![Screenshot of creating a resource group - create a resource menu item](../../Linked_Image_Files/04-02-03-azure-portal-02.png)
 
-On the **Resource Group** page, select the **Create** button to create a new resource group.
+4. On the **Resource Group** page, select the **Create** button to create a new resource group.
 
-Select a valid subscription, enter a name for the resource group, and select the wanted region. *None of these choices will impact the bot registration and are up to you.*
+5. Select a valid subscription, enter a name for the resource group, and select the wanted region. *None of these choices will impact the bot registration and are up to you.*
 
 ![Screenshot of creating a resource group - search for resource group](../../Linked_Image_Files/04-02-03-azure-portal-03.png)
 
-Complete the wizard to create the resource group. Once Azure has completed the resource group creation process, navigate to the resource group.
+6. Complete the wizard to create the resource group. Once Azure has completed the resource group creation process, navigate to the resource group.
 
-From the resource group, select the **Add** or **Create resources** button.
+7. From the resource group, select the **Add** or **Create resources** button.
 
 ![Screenshot of creating a new resource - create resource group](../../Linked_Image_Files/04-02-03-azure-bot-registration-01.png)
 
-Enter **bot** in the **Search the marketplace** input box, and select **Azure Bot** from the list of resources returned. Then select **Create** on the next page to start the process of registering a new bot resource:
+8. Enter **bot** in the **Search the marketplace** input box, and select **Azure Bot** from the list of resources returned. Then select **Create** on the next page to start the process of registering a new bot resource:
 
 ![Screenshot of searching for the Azure Bot resource](../../Linked_Image_Files/04-02-03-azure-bot-registration-02.png)
 
-In the **Create an Azure Bot** blade, enter the following values and then select **Review + create**:
+9. In the **Create an Azure Bot** blade, enter the following values and then select **Review + create**:
 
 - **Bot handle**: *Enter a globally unique name for the bot*
 - **Subscription**: *Select the subscription you selected previously when creating the resource group*
@@ -70,9 +70,9 @@ In the **Create an Azure Bot** blade, enter the following values and then select
 - **Pricing tier**: *Select a preferred pricing tier; the F0 tier is free*
 - **Microsoft App ID**: Create new Microsoft App ID
 
-Select **Create**.
+10. Select **Create**.
 
-Azure will start to provision the new resource. This will take a moment or two. Once it's finished, navigate to the bot resource in the resource group.
+11. Azure will start to provision the new resource. This will take a moment or two. Once it's finished, navigate to the bot resource in the resource group.
 
 ![Screenshot of the created bot channel registration resource](../../Linked_Image_Files/04-02-03-azure-bot-registration-03.png)
 
@@ -80,63 +80,63 @@ Azure will start to provision the new resource. This will take a moment or two. 
 
 In order for the bot to interact with Microsoft Teams, you must enable the Teams channel.
 
-From the bot resource in Azure, select **Channels** in the left-hand navigation.
+1. From the bot resource in Azure, select **Channels** in the left-hand navigation.
 
-On the **Connect to channels** pane, select the Microsoft Teams channel, then select **Save** to confirm the action.
+2. On the **Connect to channels** pane, select the Microsoft Teams channel, then select **Save** to confirm the action.
 
 ![Screenshot enabling the Microsoft Teams channel](../../Linked_Image_Files/04-02-03-azure-bot-registration-04.png)
 
-Once this process is complete, you should see both the **Web Chat** and **Microsoft Teams** listed in your enabled channels:
+3. Once this process is complete, you should see both the **Web Chat** and **Microsoft Teams** listed in your enabled channels:
 
 ![Screenshot of the enabled bot channels](../../Linked_Image_Files/04-02-03-azure-bot-registration-05.png)
 
 ### Set Messaging Endpoint and retrieve the bot app ID and password
 
-Select **Configuration** from the left-hand navigation.
+1. Select **Configuration** from the left-hand navigation.
 
-On the **Configuration** pane, enter the **Messaging endpoint**: https://REPLACE_THIS.ngrok.io/api/messages
+2. On the **Configuration** pane, enter the **Messaging endpoint**: https://REPLACE_THIS.ngrok.io/api/messages
 
-Select **Apply**.
+3. Select **Apply**.
 
-When Azure created the bot, it also registered a new Azure AD app for the bot. You need to generate this new bot app a secret and copy the app's credentials.
+4. When Azure created the bot, it also registered a new Azure AD app for the bot. You need to generate this new bot app a secret and copy the app's credentials.
 
-Copy the ID of the bot as you'll need it later.
+5. Copy the ID of the bot as you'll need it later.
 
-Select **Manage** to navigate to the Azure AD app blade:
+6. Select **Manage** to navigate to the Azure AD app blade:
 
 ![Screenshot of the bot's settings page](../../Linked_Image_Files/04-02-03-azure-bot-registration-06.png)
 
 ### Create a client secret for the app
 
-In order for your code to connect to the bot framework service, it will sign in to Azure AD with an application ID and either a certificate or secret. In this exercise, you'll use a secret.
+1. In order for your code to connect to the bot framework service, it will sign in to Azure AD with an application ID and either a certificate or secret. In this exercise, you'll use a secret.
 
-Select **Certificates & secrets** from the left-hand navigation panel.
+2. Select **Certificates & secrets** from the left-hand navigation panel.
 
-Select the **New client secret** button:
+3. Select the **New client secret** button:
 
 ![Screenshot of the Certificates & Secrets page in the Azure AD admin center](../../Linked_Image_Files/04-02-03-azure-bot-registration-07.png)
 
-When prompted, give the secret a description and select one of the expiration duration options provided and select **Add**. *What you enter and select doesn't matter for the exercise.*
+4. When prompted, give the secret a description and select one of the expiration duration options provided and select **Add**. *What you enter and select doesn't matter for the exercise.*
 
-The **Certificate & Secrets** page will display the new secret. It's important you copy this value as it's only shown this one time; if you leave the page and come back, it will only show as a masked value.
+5. The **Certificate & Secrets** page will display the new secret. It's important you copy this value as it's only shown this one time; if you leave the page and come back, it will only show as a masked value.
 
 ![Screenshot showing the new secret](../../Linked_Image_Files/04-02-03-azure-bot-registration-08.png)
 
-Copy the value of the secret as you'll need it later.
+6. Copy the value of the secret as you'll need it later.
 
 ## Task 2: Create Microsoft Teams app
 
 In this section, you will create a new Node.js project.
 
-Open your command prompt, navigate to a directory where you want to save your work, create a new folder **learn-msteams-msgext**, and change directory into that folder.
+1. Open your command prompt, navigate to a directory where you want to save your work, create a new folder **learn-msteams-msgext**, and change directory into that folder.
 
-Run the Yeoman Generator for Microsoft Teams by running the following command:
+2. Run the Yeoman Generator for Microsoft Teams by running the following command:
 
 ```console
 yo teams
 ```
 
-Yeoman will launch and ask you a series of questions. Answer the questions with the following values:
+3. Yeoman will launch and ask you a series of questions. Answer the questions with the following values:
 
 - **What is your solution name?**: MessagingExt
 - **Where do you want to place the files?**: Use the current folder
@@ -151,17 +151,17 @@ Yeoman will launch and ask you a series of questions. Answer the questions with 
 > [!NOTE]
 > Most of the answers to these questions can be changed after creating the project. For example, the URL where the project will be hosted isn't important at the time of creating or testing the project.
 
-After answering the generator's questions, the generator will create the scaffolding for the project and then execute `npm install` that downloads all the dependencies required by the project.
+4. After answering the generator's questions, the generator will create the scaffolding for the project and then execute `npm install` that downloads all the dependencies required by the project.
 
 ### Add a bot to the project
 
-In this section, you'll manually add a bot to the project.
+1. In this section, you'll manually add a bot to the project.
 
-Create a new folder **planetBot** in the **./src/server** folder.
+2. Create a new folder **planetBot** in the **./src/server** folder.
 
-Create a new file **planetBot.ts** in this new folder **./src/server/planetBot/planetBot.ts**.
+3. Create a new file **planetBot.ts** in this new folder **./src/server/planetBot/planetBot.ts**.
 
-Add the following code to the **planetBot.ts** file:
+4. Add the following code to the **planetBot.ts** file:
 
 ```typescript
 import {
@@ -184,7 +184,7 @@ export class PlanetBot extends TeamsActivityHandler {
 
 After creating the bot, the next step is to expose it as part of the app's REST API.
 
-First, add the bot to the **./src/server/TeamsAppsComponents.ts** file by adding the following code to the end of that file:
+1. First, add the bot to the **./src/server/TeamsAppsComponents.ts** file by adding the following code to the end of that file:
 
 ```typescript
 export * from "./planetBot/planetBot";
@@ -192,9 +192,9 @@ export * from "./planetBot/planetBot";
 
 This file is used in the core web server file. This file needs to be updated to expose the bot to the app's API and to configure a bot adapter for the app.
 
-Locate and open the web server file, **./src/server/server.ts**.
+2. Locate and open the web server file, **./src/server/server.ts**.
 
-Add the following two `import` statements after the existing `import` statements in the file:
+3. Add the following two `import` statements after the existing `import` statements in the file:
 
 ```typescript
 import { BotFrameworkAdapter } from "botbuilder";
@@ -210,7 +210,7 @@ import { PlanetBot } from "./planetBot/planetBot";
 > express.use(MsTeamsApiRouter(allComponents));
 > ```
 
-The last step is to configure the bot framework and call the bot when requests are received through the `/api/messages` path. Add the following code to the end of the **./src/server/server.ts** file:
+4. The last step is to configure the bot framework and call the bot when requests are received through the `/api/messages` path. Add the following code to the end of the **./src/server/server.ts** file:
 
 ```typescript
 // register and load the bot
@@ -237,9 +237,9 @@ express.post("/api/messages", (request, response) => {
 
 In the code above, the first section initializes the Bot Framework adapter with the Azure AD app credentials created when you registered the bot in the Azure portal. These two properties, the Azure AD app's ID and secret, are pulled from an environment variable. This project contains a file, **./.env** that is used to set environment variables when it runs. You need to set these two values for the bot to work:
 
-Locate and open the file **./.env**.
+5. Locate and open the file **./.env**.
 
-Locate the following section in the file, and set the values of the two properties that you obtained when registering the bot:
+6. Locate the following section in the file, and set the values of the two properties that you obtained when registering the bot:
 
 ```txt
 # App Id and App Password for the Bot Framework bot
@@ -251,13 +251,13 @@ MICROSOFT_APP_PASSWORD=
 
 The last step to configure your project to host a messaging extension is to add it to the Microsoft Teams app manifest.
 
-Locate and open the **./src/manifest/manifest.json**.
+1. Locate and open the **./src/manifest/manifest.json**.
 
-Locate the property `version`. Change its value to **1.0.0**.
+2. Locate the property `version`. Change its value to **1.0.0**.
 
-Locate the property `id`. Change its value to match the GUID of the Azure AD app that was created when creating the bot in the Azure portal.
+3. Locate the property `id`. Change its value to match the GUID of the Azure AD app that was created when creating the bot in the Azure portal.
 
-Locate the property `composeExtensions`. Add a new action command messaging extension to the collection of extensions registered with this Microsoft Teams app by updating the `composeExtensions` property the following JSON. This code will add our action command to the compose box and the action command in a message when it's installed.
+4. Locate the property `composeExtensions`. Add a new action command messaging extension to the collection of extensions registered with this Microsoft Teams app by updating the `composeExtensions` property the following JSON. This code will add our action command to the compose box and the action command in a message when it's installed.
 
 ```json
 "composeExtensions": [
@@ -296,7 +296,7 @@ In this section, you'll code the action command for the messaging extension. You
 
 A production application would typically retrieve data from an external source such as a REST API or a database. However, for simplicity in this exercise, you'll use an in-memory dataset.
 
-Add a new file **planets.json** to the **./src/server/planetBot** folder and add the following JSON to it:
+1. Add a new file **planets.json** to the **./src/server/planetBot** folder and add the following JSON to it:
 
 ```json
 [
@@ -393,7 +393,7 @@ Add a new file **planets.json** to the **./src/server/planetBot** folder and add
 
 ### Add an Adaptive Card to display the modal dialog
 
-Add a new file **planetSelectorCard.json** to the **./src/server/planetBot** folder and add the following JSON to it. This file contains the Adaptive Card used to display the modal dialog:
+1. Add a new file **planetSelectorCard.json** to the **./src/server/planetBot** folder and add the following JSON to it. This file contains the Adaptive Card used to display the modal dialog:
 
 ```json
 {
@@ -433,14 +433,14 @@ Add a new file **planetSelectorCard.json** to the **./src/server/planetBot** fol
 
 ### Add the lodash utility library to the project
 
-To simplify working with collections, install the Lodash library by executing the following commands in the command line from the root folder of the project:
+1. To simplify working with collections, install the Lodash library by executing the following commands in the command line from the root folder of the project:
 
 ```console
 npm install lodash -S
 npm install @types/lodash -D
 ```
 
-In the **./src/server/planetBot/planetBot.ts** file, add the following `import` statement to import two functions from Lodash into the bot:
+2. In the **./src/server/planetBot/planetBot.ts** file, add the following `import` statement to import two functions from Lodash into the bot:
 
 ```typescript
 import { find, sortBy } from "lodash";
@@ -448,7 +448,7 @@ import { find, sortBy } from "lodash";
 
 ### Add the action command fetch handler to the bot
 
-Implement the action command messaging extension by implementing a well-known method to the bot. Within the **./src/server/planetBot/planetBot.ts** file, update the `import` statement for the **botbuilder** package to include the objects `CardFactory`, `MessagingExtensionAction`, `MessagingExtensionActionResponse`, & `MessagingExtensionAttachment`:
+1. Implement the action command messaging extension by implementing a well-known method to the bot. Within the **./src/server/planetBot/planetBot.ts** file, update the `import` statement for the **botbuilder** package to include the objects `CardFactory`, `MessagingExtensionAction`, `MessagingExtensionActionResponse`, & `MessagingExtensionAttachment`:
 
 ```typescript
 import {
@@ -459,7 +459,7 @@ import {
 } from "botbuilder";
 ```
 
-Next, add the following method to the `PlanetBot` class:
+2. Next, add the following method to the `PlanetBot` class:
 
 ```typescript
 protected handleTeamsMessagingExtensionFetchTask(context: TurnContext, action: MessagingExtensionAction): Promise<MessagingExtensionActionResponse> {
@@ -501,7 +501,7 @@ At this point, the first part of the action command is complete that will prompt
 
 ### Add an Adaptive Card to display the modal dialog
 
-Add a new file **planetDisplayCard.json** to the **./src/server/planetBot** folder and add the following JSON to it. This file contains the Adaptive Card used to generate the details of the planet:
+1. Add a new file **planetDisplayCard.json** to the **./src/server/planetBot** folder and add the following JSON to it. This file contains the Adaptive Card used to generate the details of the planet:
 
 ```json
 {
@@ -595,7 +595,7 @@ Add a new file **planetDisplayCard.json** to the **./src/server/planetBot** fold
 
 ### Add the action command submit handler to the bot
 
-Next, add a handler to process the message when the messaging extension's Adaptive Card is submitted. Add the following method to the `PlanetBot` class in the **./scr/server/planetBot/planetBot.ts**:
+1. Next, add a handler to process the message when the messaging extension's Adaptive Card is submitted. Add the following method to the `PlanetBot` class in the **./scr/server/planetBot/planetBot.ts**:
 
 ```typescript
 protected handleTeamsMessagingExtensionSubmitAction(context: TurnContext, action: MessagingExtensionAction): Promise<MessagingExtensionActionResponse> {
@@ -624,7 +624,7 @@ protected handleTeamsMessagingExtensionSubmitAction(context: TurnContext, action
 
 The `handleTeamsMessagingExtensionSubmitAction()` method first retrieves the planet selected in the selector Adaptive Card from the in-memory planets data set. It then uses a utility function to load and update the display Adaptive Card with the planet's details. Finally, it returns a `MessagingExtensionActionResponse` object that sets the Adaptive Card on the `composeExtension` property. Microsoft Teams will use this to display the details of the planet selected.
 
-Lastly, add the utility method `getPlanetDetailCard()` to the `PlanetBot` class in the **./scr/server/planetBot/planetBot.ts**:
+2. Lastly, add the utility method `getPlanetDetailCard()` to the `PlanetBot` class in the **./scr/server/planetBot/planetBot.ts**:
 
 ```typescript
 private getPlanetDetailCard(selectedPlanet: any): MessagingExtensionAttachment {
@@ -651,7 +651,7 @@ private getPlanetDetailCard(selectedPlanet: any): MessagingExtensionAttachment {
 
 ## Task 5: Test the conversation bot
 
-From the command line, navigate to the root folder for the project and execute the following command:
+1. From the command line, navigate to the root folder for the project and execute the following command:
 
 ```console
 gulp ngrok-serve
@@ -664,33 +664,33 @@ This gulp task will run many other tasks all displayed within the command-line c
 
 ![Screenshot of gulp ngrok-serve](../../Linked_Image_Files/04-02-03-test-01.png)
 
-Note the URL of the ngrok URL displayed in the console. In the previous screenshot, ngrok has created the temporary URL **ec7d937d.ngrok.io** that will map to our locally running web server. In order for the Bot Framework to route messages from Microsoft Teams to our locally running bot, you need to update the bot's messaging endpoint in the Azure portal.
+2. Note the URL of the ngrok URL displayed in the console. In the previous screenshot, ngrok has created the temporary URL **ec7d937d.ngrok.io** that will map to our locally running web server. In order for the Bot Framework to route messages from Microsoft Teams to our locally running bot, you need to update the bot's messaging endpoint in the Azure portal.
 
-Open a browser and navigate to the [Azure portal](https://portal.azure.com) and sign in using a **Work or School Account** that has rights to create resources in your Azure subscription.
+3. Open a browser and navigate to the [Azure portal](https://portal.azure.com) and sign in using a **Work or School Account** that has rights to create resources in your Azure subscription.
 
-Locate the bot by selecting the Azure Resource Group and Bot Channels Registration resource you created at the beginning of this exercise.
+4. Locate the bot by selecting the Azure Resource Group and Bot Channels Registration resource you created at the beginning of this exercise.
 
-Using the left-hand navigation, select **Bot management** > **Settings**.
+5. Using the left-hand navigation, select **Bot management** > **Settings**.
 
-Locate the property **Configuration** > **Messaging endpoint** and set the domain to the ngrok domain.
+6. Locate the property **Configuration** > **Messaging endpoint** and set the domain to the ngrok domain.
 
-Finally, save your changes to the bot configuration using the **Save** button at the top of the page.
+7. Finally, save your changes to the bot configuration using the **Save** button at the top of the page.
 
 > [!IMPORTANT]
 > The free version of ngrok will create a new URL each time you restart the web server. Make sure you update the **Messaging endpoint** of your URL each time you restart the web server when you are testing the app.
 
 ### Install the custom app in Microsoft Teams
 
-Now let's install the app in Microsoft Teams. In the browser, navigate to **https://teams.microsoft.com** and sign in with the credentials of a Work and School account.
+1. Now let's install the app in Microsoft Teams. In the browser, navigate to **https://teams.microsoft.com** and sign in with the credentials of a Work and School account.
 
 > [!NOTE]
 > Microsoft Teams is available for use as a web client, desktop client and a mobile client. In this module, we will use the web client but any of the clients can be used.
 
-Using the app bar navigation menu, select the **More added apps** button. Then select **Browse all apps** followed by **Upload for me or my teams**.
+2. Using the app bar navigation menu, select the **More added apps** button. Then select **Browse all apps** followed by **Upload for me or my teams**.
 
 ![Screenshot of More added apps dialog in Microsoft Teams](../../Linked_Image_Files/04-02-03-test-02.png)
 
-In the file dialog that appears, select the Microsoft Teams package in your project. This app package is a ZIP file that can be found in the project's **./package** folder.
+3. In the file dialog that appears, select the Microsoft Teams package in your project. This app package is a ZIP file that can be found in the project's **./package** folder.
 
 > [!NOTE]
 > If the **./package** folder is not present, this means you are affected by a bug in the yoteams-deploy package. To resolve the issue:
@@ -698,21 +698,21 @@ In the file dialog that appears, select the Microsoft Teams package in your proj
 > - Install the preview version of the **yoteams-deploy** package using the command `npm install yoteams-deploy@preview`
 > - Restart the server process: `gulp ngrok-serve`
 
-Once the package is uploaded, Microsoft Teams will display a summary of the app. Here you can see some "todo" items to address. *None of these "todo" items are important to this exercise, so you'll leave them as is.*
+4. Once the package is uploaded, Microsoft Teams will display a summary of the app. Here you can see some "todo" items to address. *None of these "todo" items are important to this exercise, so you'll leave them as is.*
 
 ![Screenshot of Microsoft Teams app](../../Linked_Image_Files/04-02-03-test-03.png)
 
-Select the **Add** button to install the app.
+5. Select the **Add** button to install the app.
 
-After installing the app, navigate to a 1:1 chat. In the compose box in the chat, select either the **Planet Messaging** icon or the **...** icon below the chat box. If you select the **...** icon, enter **planet** in the search box and select the **Planet Messaging** extension:
+6. After installing the app, navigate to a 1:1 chat. In the compose box in the chat, select either the **Planet Messaging** icon or the **...** icon below the chat box. If you select the **...** icon, enter **planet** in the search box and select the **Planet Messaging** extension:
 
 ![Screenshot of the installed Microsoft Teams messaging extension](../../Linked_Image_Files/04-02-03-test-05.png)
 
-When the messaging extension's task module is displayed, select a planet and then select the **Insert selected planet** button. The messaging extension's submit action handler is called which will add the updated Adaptive Card to the compose box:
+7. When the messaging extension's task module is displayed, select a planet and then select the **Insert selected planet** button. The messaging extension's submit action handler is called which will add the updated Adaptive Card to the compose box:
 
 ![Screenshot of messaging extension in the compose message box - step 1](../../Linked_Image_Files/04-02-03-test-06.png)
 
-You can also trigger the messaging extension from an existing message in the chat using the **...** menu in the upper-right corner of the message. Select **Mode actions** and then select the **Planet Expander** option.
+8. You can also trigger the messaging extension from an existing message in the chat using the **...** menu in the upper-right corner of the message. Select **Mode actions** and then select the **Planet Expander** option.
 
 ![Screenshot of messaging extension in the compose message box - step 2](../../Linked_Image_Files/04-02-03-test-07.png)
 
