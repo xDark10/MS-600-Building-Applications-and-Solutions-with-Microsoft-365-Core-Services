@@ -85,7 +85,7 @@ The daemon app requires permission to call the web API. This permission is reque
 
 ![Screenshot of the API permissions page in the Azure AD admin center](../../Linked_Image_Files/01-04-07-azure-ad-portal-app-reg-api-perm-01.png)
 
-12. Select **Application permissions**, select the **access_as_application** role, then select **Add permission**.
+12. Select **Application permissions**, select the **access_as_application** role, then select **Add permissions**.
 
 ![SScreenshot of adding the access_as_application permission](../../Linked_Image_Files/01-04-07-azure-ad-portal-app-reg-api-perm-02.png)
 
