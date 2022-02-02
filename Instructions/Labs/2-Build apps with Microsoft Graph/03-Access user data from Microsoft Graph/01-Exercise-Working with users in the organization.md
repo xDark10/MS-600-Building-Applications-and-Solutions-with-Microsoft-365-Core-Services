@@ -88,8 +88,6 @@ In the **Configured Permissions** panel, select the button **Grant admin consent
 
 ## Task 2: Create .NET Core console application
 
-
-
 Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
 
 ```console
@@ -114,6 +112,20 @@ code .
 ```
 
 If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
+
+### Update the console app to enable nullable reference types
+
+Nullable reference types refers to a group of features introduced in C# 8.0 that you can use to minimize the likelihood that your code causes the runtime to throw System.NullReferenceException.
+
+Nullable reference types are enabled by default in .NET 6 projects, they are disabled by default in .NET 5 projects.
+
+Ensuring that nullable reference types are enabled is not related to the use of Microsoft Graph, it just ensures the exercises in this module can contain a single set of code that will compile without warnings when using either .NET 5 or .NET 6.
+
+Open the **graphconsoleapp.csproj** file and ensure the `<PropertyGroup>` element contains the following child element:
+
+```xml
+<Nullable>enable</Nullable>
+```
 
 ### Update the console app to support Azure AD authentication
 
@@ -149,12 +161,12 @@ namespace Helpers
 {
   public class MsalAuthenticationProvider : IAuthenticationProvider
   {
-    private static MsalAuthenticationProvider _singleton;
+    private static MsalAuthenticationProvider? _singleton;
     private IPublicClientApplication _clientApplication;
     private string[] _scopes;
     private string _username;
     private SecureString _password;
-    private string _userId;
+    private string? _userId;
 
     private MsalAuthenticationProvider(IPublicClientApplication clientApplication, string[] scopes, string username, SecureString password)
     {
@@ -209,21 +221,33 @@ namespace Helpers
 
 ### Incorporate Microsoft Graph into the console app
 
-Open the **Program.cs** file and add the following `using` statements to the top fo the file:
+Open the **Program.cs** file and replace the entire contents with the following code:
 
 ```csharp
+using System;
 using System.Collections.Generic;
 using System.Security;
 using Microsoft.Identity.Client;
 using Microsoft.Graph;
 using Microsoft.Extensions.Configuration;
 using Helpers;
+
+namespace graphconsoleapp
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
 ```
 
 Add the following method `LoadAppSettings` to the `Program` class. The method retrieves the configuration details from the **appsettings.json** file previously created:
 
 ```csharp
-private static IConfigurationRoot LoadAppSettings()
+private static IConfigurationRoot? LoadAppSettings()
 {
   try
   {
@@ -307,10 +331,10 @@ Add the following method `ReadUsername` to the `Program` class. The method promp
 ```csharp
 private static string ReadUsername()
 {
-  string username;
+  string? username;
   Console.WriteLine("Enter your username");
   username = Console.ReadLine();
-  return username;
+  return username ?? "";
 }
 ```
 
@@ -375,8 +399,6 @@ After entering the username and password of a user, you'll see the results of al
 ![Screenshot of the console application showing all users in the organization](../../Linked_Image_Files/02-03-03-app-run-01.png)
 
 ## Task 3: Display the currently signed in user's details
-
-
 
 Now, update the console app to show details on the current user.
 

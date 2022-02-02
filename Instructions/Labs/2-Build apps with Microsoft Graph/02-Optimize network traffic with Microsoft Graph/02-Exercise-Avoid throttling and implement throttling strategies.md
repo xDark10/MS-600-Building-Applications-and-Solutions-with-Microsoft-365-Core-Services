@@ -1,6 +1,5 @@
 # Exercise 2: Avoid throttling and implement throttling strategies
 
-
 In this exercise, you'll use the Azure AD application and .NET console application you previously created and modify them to demonstrate two strategies to account for throttling in your application.
 
 The first strategy you'll employ involves working with the `HttpClient` object to call the base Microsoft Graph REST API. This approach will enable you to see the underlying protocol responses and how to handle them.
@@ -21,29 +20,30 @@ It's easier to work with strongly typed objects instead of untyped JSON response
 Create a new file, **Messages.cs** in the root of the project, and add the following code to it:
 
 ```csharp
+using System;
 using System.Text.Json.Serialization;
 
 namespace graphconsoleapp
 {
   public class Messages {
     [JsonPropertyName("@odata.context")]
-    public string ODataContext {get; set;}
+    public string ODataContext {get; set;} = string.Empty;
     [JsonPropertyName("@odata.nextLink")]
-    public string ODataNextLink {get; set;}
+    public string ODataNextLink {get; set;} = string.Empty;
 
     [JsonPropertyName("value")]
-    public Message[] Items {get; set;}
+    public Message[] Items {get; set;} = Array.Empty<Message>();
   }
 
   public class Message {
     [JsonPropertyName("@odata.etag")]
-    public string ETag {get; set;}
+    public string ETag {get; set;} = string.Empty;
 
     [JsonPropertyName("id")]
-    public string Id {get; set;}
+    public string Id {get; set;} = string.Empty;
 
     [JsonPropertyName("subject")]
-    public string Subject {get; set;}
+    public string Subject {get; set;} = string.Empty;
   }
 }
 ```
@@ -59,9 +59,9 @@ To address this, your code should inspect each response for situations when the 
 Within the **Program.cs** file, add a new method `GetMessageDetail()` and the following code to it:
 
 ```csharp
-private static Message GetMessageDetail(HttpClient client, string messageId, int defaultDelay = 2)
+private static Message? GetMessageDetail(HttpClient client, string messageId, int defaultDelay = 2)
 {
-  Message messageDetail = null;
+  Message? messageDetail = null;
 
   string endpoint = "https://graph.microsoft.com/v1.0/me/messages/" + messageId;
 
@@ -107,10 +107,11 @@ If there's a throttled response, add the following `else` statement to the `if` 
 else if (clientResponse.StatusCode == HttpStatusCode.TooManyRequests)
 {
   // get retry-after if provided; if not provided default to 2s
-  int retryAfterDelay = defaultDelay;
-  if (clientResponse.Headers.RetryAfter.Delta.HasValue && (clientResponse.Headers.RetryAfter.Delta.Value.Seconds > 0))
+  var retryAfterDelay = defaultDelay;
+  var retryAfter = clientResponse.Headers.RetryAfter;
+  if (retryAfter != null && retryAfter.Delta.HasValue && (retryAfter.Delta.Value.Seconds > 0))
   {
-    retryAfterDelay = clientResponse.Headers.RetryAfter.Delta.Value.Seconds;
+    retryAfterDelay = retryAfter.Delta.Value.Seconds;
   }
 
   // wait for specified time as instructed by Microsoft Graph's Retry-After header,
@@ -138,9 +139,9 @@ This code will do the following:
 The resulting method should look like the following:
 
 ```csharp
-private static Message GetMessageDetail(HttpClient client, string messageId, int defaultDelay = 2)
+private static Message? GetMessageDetail(HttpClient client, string messageId, int defaultDelay = 2)
 {
-  Message messageDetail = null;
+  Message? messageDetail = null;
 
   string endpoint = "https://graph.microsoft.com/v1.0/me/messages/" + messageId;
 
@@ -160,12 +161,11 @@ private static Message GetMessageDetail(HttpClient client, string messageId, int
   else if (clientResponse.StatusCode == HttpStatusCode.TooManyRequests)
   {
     // get retry-after if provided; if not provided default to 2s
-    int retryAfterDelay = defaultDelay;
-    if (clientResponse.Headers.RetryAfter.Delta.HasValue
-        && (clientResponse.Headers.RetryAfter.Delta.Value.Seconds > 0)
-       )
+    var retryAfterDelay = defaultDelay;
+    var retryAfter = clientResponse.Headers.RetryAfter;
+    if (retryAfter != null && retryAfter.Delta.HasValue && (retryAfter.Delta.Value.Seconds > 0))
     {
-      retryAfterDelay = clientResponse.Headers.RetryAfter.Delta.Value.Seconds;
+      retryAfterDelay = retryAfter.Delta.Value.Seconds;
     }
 
     // wait for specified time as instructed by Microsoft Graph's Retry-After header,
@@ -176,6 +176,7 @@ private static Message GetMessageDetail(HttpClient client, string messageId, int
     // call method again after waiting
     messageDetail = GetMessageDetail(client, messageId);
   }
+  // add code here
 
   return messageDetail;
 }
@@ -202,21 +203,26 @@ var clientResponse = client.GetAsync("https://graph.microsoft.com/v1.0/me/messag
 var httpResponseTask = clientResponse.Content.ReadAsStringAsync();
 httpResponseTask.Wait();
 var graphMessages = JsonSerializer.Deserialize<Messages>(httpResponseTask.Result);
+var items = graphMessages == null ? Array.Empty<Message>() : graphMessages.Items;
 ```
 
 Add the following code to create individual requests for each message. These tasks are created as asynchronous tasks that will be executed in parallel:
 
 ```csharp
 var tasks = new List<Task>();
-foreach(var graphMessage in graphMessages.Items)
+foreach (var graphMessage in items)
 {
-  tasks.Add(Task.Run(() => {
+  tasks.Add(Task.Run(() =>
+  {
 
     Console.WriteLine("...retrieving message: {0}", graphMessage.Id);
 
     var messageDetail = GetMessageDetail(client, graphMessage.Id);
 
-    Console.WriteLine("SUBJECT: {0}", messageDetail.Subject);
+    if (messageDetail != null)
+    {
+      Console.WriteLine("SUBJECT: {0}", messageDetail.Subject);
+    }
 
   }));
 }
@@ -272,8 +278,6 @@ The important point is that the application completed successfully, retrieving a
 
 ## Task 2: Implement Microsoft Graph SDK for throttling retry strategy
 
-
-
 In the last section, you modified the application to implement a strategy to determine if a request is throttled. In the case the request was throttled, as indicated by the response to the REST endpoint request, you implemented a retry strategy using the `HttpClient`.
 
 Let's change the application to use the Microsoft Graph SDK client, which has all the logic built in for implementing the retry strategy when a request is throttled.
@@ -288,10 +292,10 @@ Locate the method `GetAuthenticatedHTTPClient` and make the following changes to
 - rename the method from `GetAuthenticatedHTTPClient` to `GetAuthenticatedGraphClient`
 - replace the last two lines in the method with the following lines to obtain and return an instance of the `GraphServiceClient`:
 
-    ```csharp
-    var graphClient = new GraphServiceClient(authenticationProvider);
-    return graphClient;
-    ```
+```csharp
+var graphClient = new GraphServiceClient(authenticationProvider);
+return graphClient;
+```
 
 ### Update the application to use the `GraphServiceClient`
 
@@ -319,6 +323,7 @@ var clientResponse = client.GetAsync("https://graph.microsoft.com/v1.0/me/messag
 var httpResponseTask = clientResponse.Content.ReadAsStringAsync();
 httpResponseTask.Wait();
 var graphMessages = JsonConvert.DeserializeObject<Messages>(httpResponseTask.Result);
+var items = graphMessages == null ? Array.Empty<Message>() : graphMessages.Items;
 ```
 
 Replace those lines with the following code to request the same information using the microsoft Graph SDK:
@@ -330,12 +335,7 @@ var clientResponse = client.Me.Messages
                               .Top(100)
                               .GetAsync()
                               .Result;
-```
-
-The collection returned by SDK is in a different format than what the REST API returned. Locate the `foreach` loop that enumerates through all returned messages to request each message's details. Change the collection to the following code:
-
-```csharp
-foreach (var graphMessage in clientResponse.CurrentPage)
+var items = clientResponse.CurrentPage;
 ```
 
 ### Update the `GetMessageDetail` method
@@ -377,6 +377,6 @@ After entering the username and password for the current user, the application w
 
 The application will do the same thing as the **HttpClient** version of the application. However, one difference is that the application won't display the status code returned in the response to the requests or any of the *sleeping* log messages because the Microsoft Graph SDK handles all the retry logic internally.
 
-## Summary
+### Summary
 
 In this exercise, you modified the Azure AD application and .NET console application you previously created to demonstrate two strategies to account for throttling in your application. One strategy used the **HttpClient** object but required you to implement the detect, delay, and retry logic yourself when requests were throttled. The other strategy used the Microsoft Graph SDK's included support for handling this same scenario.
