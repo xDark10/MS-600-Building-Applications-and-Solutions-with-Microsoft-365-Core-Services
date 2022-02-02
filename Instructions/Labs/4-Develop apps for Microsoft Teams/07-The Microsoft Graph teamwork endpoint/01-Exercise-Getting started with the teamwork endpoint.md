@@ -1,5 +1,7 @@
 # Exercise 1: Getting started with the teamwork endpoint
 
+
+
 In this exercise, you’ll learn how to create a project using the Yeoman Generator for Microsoft Teams and configure the custom Microsoft Teams app with single sign-on to submit requests to Microsoft Graph.
 
 ## Prerequisites
@@ -15,11 +17,11 @@ You'll use Node.js to create custom Microsoft Teams tabs in this module. The exe
 > [!IMPORTANT]
 > In most cases, installing the latest version of the following tools is the best option. The versions listed here were used when this module was published and last tested.
 
-- [Node.js](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-nodejs)- v12.\* (or higher)
+- [Node.js](https://nodejs.org/) - v12.\* (or higher)
 - NPM (installed with Node.js) - v6.\* (or higher)
 - [Visual Studio Code](https://code.visualstudio.com)
-- [Yeoman](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-yeoman) - v3.\* (or higher)
-- [Yeoman Generator for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-yeoman) - v3.2.0 (or higher)
+- [Yeoman](https://yeoman.io/) - v3.\* (or higher)
+- [Yeoman Generator for Microsoft Teams](https://github.com/OfficeDev/generator-teams) - v3.2.0 (or higher)
 
 You must have the minimum versions of these prerequisites installed on your workstation.
 
@@ -99,9 +101,9 @@ Next, select **Add a scope** to add a new permission for the app. Create a new s
 
 - **Scope name:** access_as_user
 - **Who can consent?** Admins and users
-- **Admin consent title:** Teams can access the user’s profile.
+- **Admin consent display name:** Teams can access the user’s profile.
 - **Admin consent description:** Teams can call the app’s web APIs as the current user.
-- **User consent title:** Teams can access the user profile and make requests on the user's behalf.
+- **User consent display name:** Teams can access the user profile and make requests on the user's behalf.
 - **User consent description:** Teams can call this app’s APIs with the same rights as the user.
 - **State**: Enabled
 
@@ -159,7 +161,7 @@ Before customizing the tab, let's test the tab to see the initial developer expe
 From the command line, navigate to the root folder for the project and execute the following command:
 
 ```console
-gulp ngrok-serve
+gulp ngrok-serve --debug
 ```
 
 This gulp task will run many other tasks all displayed within the command-line console. The **ngrok-serve** task builds your project and starts a local web server (http://localhost:3007). It then starts ngrok with a random subdomain that creates a secure URL to your local webserver.
@@ -198,7 +200,7 @@ Locate and select the Microsoft Teams app package, found in the **./package** fo
 > If the **./package** folder is not present, this means you are affected by a bug in the yoteams-deploy package. To resolve the issue:
 > - Stop the local web server by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in the console.
 > - Install the preview version of the **yoteams-deploy** package using the command `npm install yoteams-deploy@preview`
-> - Restart the server process: `gulp ngrok-serve`
+> - Restart the server process: `gulp ngrok-serve --debug`
 
 Microsoft Teams will display the details of the app in a dialog. Select the **Add** button to install the app into the current team:
 
@@ -492,6 +494,8 @@ Immediately following the closing `</div>` element, add the following code that 
 {photo && <div><Avatar image={photo} size='largest' /></div>}
 ```
 
+Save your changes. The `gulp` task should detect the changes are re-run the webpack task.
+
 ### Test the application
 
 Go back to the browser and navigate back to the tab you added earlier in this exercise. Notice it's now displaying the current user's profile photo:
@@ -545,10 +549,10 @@ Locate and open the **./.env**. At the end of the file, locate the environment v
 TAB_APP_SCOPES=https://graph.microsoft.com/User.Read https://graph.microsoft.com/Team.ReadBasic.All email openid profile offline_access
 ```
 
-In order for this to get picked up and included in the environment variables, you'll need to stop the **gulp ngrok-serve** task by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> and restart it.
+The `gulp` task should detect the change in environment and re-run the webpack task and re-start the host process. 
 
 > [!IMPORTANT]
-> When you restart ngrok, remember the dynamic subdomain will change. Therefore, you'll need to not only update all the places where you've entered the ngrok URL in your project and registered Azure AD app, but also reinstall the Microsoft Teams app package as well.
+> If you restart ngrok, remember the dynamic subdomain will change. Therefore, you'll need to not only update all the places where you've entered the ngrok URL in your project and registered Azure AD app, but also reinstall the Microsoft Teams app package as well.
 
 Locate and open the file **./src/client/msGraphTeamworkTab/MsGraphTeamworkTab.tsx**.
 
@@ -606,7 +610,7 @@ Update this code to include another call to the `getJoinTeams` you just added to
 useEffect(() => {
   getJoinedTeams();
   getProfilePhoto();
-}, [getProfilePhoto, msGraphOboToken]);
+}, [getJoinedTeams, getProfilePhoto, msGraphOboToken]);
 ```
 
 The last step is to update the rendering in the component's `return` statement to include the list of teams if they've been set. Locate the code you added to display the profile photo and add the following code immediately after it:
@@ -621,4 +625,4 @@ Go back to the browser and navigate back to the tab you added earlier in this ex
 
 ![Screenshot of the tab displaying the user's joined teams](../../Linked_Image_Files/04-07-03-test-user-joined-teams.png)
 
-You can now stop the web project and web API projects in their respective consoles by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in each one. However, you can leave the ngrok process running so the dynamic subdomain won't change for future exercises in this module.
+You can now stop the Teams app project in the consoles by pressing <kbd>CTRL</kbd>+<kbd>C</kbd>. However, you can leave the ngrok process running so the dynamic subdomain won't change for future exercises in this module.
