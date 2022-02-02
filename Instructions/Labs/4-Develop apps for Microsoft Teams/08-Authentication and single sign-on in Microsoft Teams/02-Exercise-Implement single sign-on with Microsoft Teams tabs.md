@@ -1,5 +1,7 @@
 # Exercise 2: Implement single sign-on with Microsoft Teams tabs
 
+
+
 In this exercise, you'll add a custom tab to a Microsoft Teams app and use single sign-on (SSO) to obtain an access token to submit requests to Microsoft Graph.
 
 > [!IMPORTANT]
@@ -18,11 +20,11 @@ You'll use Node.js to create a custom Microsoft Teams app in this module. The ex
 > [!IMPORTANT]
 > In most cases, installing the latest version of the following tools is the best option. The versions listed here were used when this module was published and last tested.
 
-- [Node.js](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-nodejs)- v12.\* (or higher)
+- [Node.js](https://nodejs.org/) - v12.\* (or higher)
 - NPM (installed with Node.js) - v6.\* (or higher)
-- [Gulp](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-gulp) - v4.\* (or higher)
-- [Yeoman](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-yeoman) - v3.\* (or higher)
-- [Yeoman Generator for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-yeoman) - v3.2.0 (or higher)
+- [Gulp](https://gulpjs.com/) - v4.\* (or higher)
+- [Yeoman](https://yeoman.io/) - v3.\* (or higher)
+- [Yeoman Generator for Microsoft Teams](https://github.com/OfficeDev/generator-teams) - v3.2.0 (or higher)
 - [Visual Studio Code](https://code.visualstudio.com)
 
 You must have the minimum versions of these prerequisites installed on your workstation.
@@ -453,7 +455,7 @@ Add the following code immediately before the existing `return` statement.
 ```typescript
 useEffect(() => {
   getRecentEmails();
-}, [msGraphOboToken]);
+}, [getRecentEmails, msGraphOboToken]);
 ```
 
 The last step is to update the rendering in the component's `return` statement to include the list of recent emails. Locate following code in the `return` statement:
@@ -482,3 +484,4 @@ Go back to the browser and navigate back to the tab you added earlier in this ex
 > In addition, you'll need to reinstall your app package because the Microsoft Teams app manifest contains the URL. To do this, you'll first need to increment the `version` property in the app's **./manifest/manifest.json** file. This value is dynamically set using the `version` property from the **./package.json** file. When you repeat the installation process of the app, it will update the existing installation.
 
 ![Screenshot displaying the list emails the user recently received](../../Linked_Image_Files/04-08-05-test-recent-emails.png)
+

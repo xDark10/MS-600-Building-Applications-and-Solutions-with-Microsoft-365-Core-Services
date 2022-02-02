@@ -1,5 +1,7 @@
 # Exercise 1: Implement single sign-on for Microsoft Teams apps
 
+
+
 The Microsoft Teams Toolkit can to register the Azure Active Directory (Azure AD) application in a single sign-in (SSO) project.
 
 In this exercise, you'll learn how to manually register and configure the Azure AD app that can be used to implement SSO in a Microsoft Teams app to better understand all the required settings.
@@ -80,9 +82,9 @@ Next, select **Add a scope** to add a new permission for the app. Create a new s
 
 - **Scope name:** access_as_user
 - **Who can consent?** Admins and users
-- **Admin consent title:** Teams can access the user’s profile.
+- **Admin consent display name:** Teams can access the user’s profile.
 - **Admin consent description:** Teams can call the app’s web APIs as the current user.
-- **User consent title:** Teams can access the user profile and make requests on the user's behalf.
+- **User consent display name:** Teams can access the user profile and make requests on the user's behalf.
 - **User consent description:** Teams can call this app’s APIs with the same rights as the user.
 - **State**: Enabled
 
@@ -98,7 +100,7 @@ Add the following client applications by selecting the **Add a client applicatio
   - *Microsoft Teams web client*
 
 
-## Review
+## Task 2: Review
 
 At this point, you've now registered an Azure AD application that can be used by Microsoft Teams apps to support SSO for your users.
 
