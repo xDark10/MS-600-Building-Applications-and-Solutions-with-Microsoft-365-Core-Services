@@ -99,6 +99,9 @@ dotnet add package Microsoft.Identity.Web
       "ASPNETCORE_URLS":"https://localhost:5050"
     }
     ```
+    
+  > [!NOTE]
+  > If you cannot find launch.json, create the file by going to Run & Debug >> Create a launch.json file.
 
 7. The web API application doesn't contain any HTML pages, so there's no need to launch the browser. In the **launch.json** file, locate and remove the entire `serverReadyAction` node.
 
