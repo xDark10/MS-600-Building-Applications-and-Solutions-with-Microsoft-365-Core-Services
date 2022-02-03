@@ -26,7 +26,7 @@ npm install express morgan
 ```console
 code .
 ```
-If a message pop-ups **Do you trust the authors of the files in the folder?** check the **Trust the authors of all files in the parent folder <created on the step#1>**  and click the **Yes, I trust the authors**
+If a message pop-ups **Do you trust the authors of the files in the folder?** check the **Trust the authors of all files in the parent folder <created on the step #1>**  and click the **Yes, I trust the authors**
 
 5. Create a new file **server.js** in the root of the folder and add the following JavaScript to it. This code will start the web server:
 
