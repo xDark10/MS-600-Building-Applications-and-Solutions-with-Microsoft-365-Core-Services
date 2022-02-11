@@ -1,5 +1,7 @@
 # Exercise 3: Using task modules with bots
 
+
+
 In this exercise, you'll learn how to use task modules with bots in Microsoft Teams.
 
 The first step will be to create a bot and add it to our existing Microsoft Teams app. You'll then extend the bot to support the existing task modules to display a video and change the selected video.
@@ -221,7 +223,7 @@ export * from "./learningTeamsBot/learningTeamsBot";
 
 ### Test the bot in Microsoft Teams
 
-Increment the `version` property in the app's **./manifest/manifest.json** file so you can update the previously deployed Teams app.
+Increment the `version` property in the app's **./manifest/manifest.json** file so you can update the previously deployed Teams app. (Alternatively, use the npm program to update the version of the solution: `npm version patch`.)
 
 From the command line, navigate to the root folder for the project and execute the following command:
 
@@ -348,7 +350,7 @@ protected handleTeamsTaskModuleFetch(context: TurnContext, request: TaskModuleRe
 
 ### Test the video player task module
 
-After saving the page, let the project rebuild itself and restart the web server. Once that's happened, select the **Watch `Overview of Microsoft Teams`** button in the Hero card. Notice the task module from the previous exercise is displayed:
+After saving the page, let the project rebuild itself and restart the web server. Once that's happened, select the **Watch 'Task-oriented interactions in Microsoft Teams with messaging extensions'** button in the Hero card. Notice the task module from the previous exercise is displayed:
 
 ![Screenshot of the player task module](../../Linked_Image_Files/04-05-07-task-module-02.png)
 
