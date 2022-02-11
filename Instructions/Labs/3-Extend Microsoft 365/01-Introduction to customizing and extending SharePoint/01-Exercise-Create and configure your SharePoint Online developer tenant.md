@@ -1,6 +1,5 @@
 # Exercise 1: Create and configure your SharePoint Online developer tenant
 
-
 In this exercise, you'll configure your SharePoint environment to be ready for SharePoint Framework development.
 
 Open a browser and navigate to your Office 365 tenant's **SharePoint admin center** site: **https://{{REPLACE_WITH_YOUR_TENANTID}}-admin.sharepoint.com/_layouts/15/online/AdminHome.aspx**.
@@ -27,9 +26,11 @@ When the new page opens, select **App Catalog**.
 >
 > ![Screenshot of the app catalog creation options](../../Linked_Image_Files/03-app-catalog-05.png)
 
-Select **Create a new app catalog site** option and select the **OK** button.
+Select the **Automatically create a new app catalog site** option if you want SharePoint to create the app catalog site for you, or select the **Manually create a new app catalog site (classic)** option if you wish to configure the app catalog site settings prior to the site creation. 
 
-On the **Create App Catalog Site Collection** page, enter the following details, and select **OK**.
+Select the **OK** button.
+
+If you selected the **Create a new app catalog site** option, then on the **Create App Catalog Site Collection** page, enter the following details, and select **OK**.
 
 - **Title**: App Catalog
 - **Web Site Address (suffix)**: appcatalog
@@ -69,4 +70,4 @@ On the **Other options** panel, keep the default value of **Team site** in the *
 
 ## Summary
 
-In this exercise, you configured your SharePoint environment to be ready for SharePoint Framework development.
+In this exercise, you configured your SharePoint environment to be ready for SharePoint Framework development. 
