@@ -17,7 +17,7 @@ In a previous exercise, you created a .NET console application that triggered a 
 
 It's easier to work with strongly typed objects instead of untyped JSON responses from a REST request. Create a helper class to simplify working with the messages objects returned from the REST request.
 
-Create a new file, **Messages.cs** in the root of the project, and add the following code to it:
+1. Create a new file, **Messages.cs** in the root of the project, and add the following code to it:
 
 ```csharp
 using System;
@@ -56,7 +56,7 @@ The application is going to be modified to first get a list of messages in the c
 
 To address this, your code should inspect each response for situations when the request has been throttled. In those situations, the code should check for the presence of a `Retry-After` header in the response that specifies the number of seconds your application should wait before issuing another request. If a `Retry-After` header isn't present, you should have a default value to fall back on.
 
-Within the **Program.cs** file, add a new method `GetMessageDetail()` and the following code to it:
+2. Within the **Program.cs** file, add a new method `GetMessageDetail()` and the following code to it:
 
 ```csharp
 private static Message? GetMessageDetail(HttpClient client, string messageId, int defaultDelay = 2)
@@ -71,7 +71,7 @@ private static Message? GetMessageDetail(HttpClient client, string messageId, in
 }
 ```
 
-Add the following code before the `// add code here` comment to create a request and wait for the response from Microsoft Graph:
+3. Add the following code before the `// add code here` comment to create a request and wait for the response from Microsoft Graph:
 
 ```csharp
 // submit request to Microsoft Graph & wait to process response
@@ -82,13 +82,13 @@ httpResponseTask.Wait();
 
 If there's a successful response, return the deserialized response back to the caller to display the messages.
 
-Add the following lines to the top of the **Program.cs** file to update the `using` statements:
+4. Add the following lines to the top of the **Program.cs** file to update the `using` statements:
 
 ```csharp
 using System.Text.Json;
 ```
 
-Add the following code before the `// add code here` comment:
+5. Add the following code before the `// add code here` comment:
 
 ```csharp
 Console.WriteLine("...Response status code: {0}  ", clientResponse.StatusCode);
@@ -100,7 +100,7 @@ if (clientResponse.StatusCode == HttpStatusCode.OK)
 }
 ```
 
-If there's a throttled response, add the following `else` statement to the `if` statement you just added:
+6. If there's a throttled response, add the following `else` statement to the `if` statement you just added:
 
 ```csharp
 // ELSE IF request was throttled (429, aka: TooManyRequests)...
@@ -124,7 +124,7 @@ else if (clientResponse.StatusCode == HttpStatusCode.TooManyRequests)
 }
 ```
 
-This code will do the following:
+7. This code will do the following:
 
 1. set a default delay of two seconds before the next request is made
 1. if the `Retry-After` header value is present and greater than zero seconds, use that value to overwrite the default delay
@@ -136,7 +136,7 @@ This code will do the following:
 >
 > Real-world applications should have an upper limit on how long they will delay so to avoid a situation where users are left with an unresponsive experience.
 
-The resulting method should look like the following:
+8. The resulting method should look like the following:
 
 ```csharp
 private static Message? GetMessageDetail(HttpClient client, string messageId, int defaultDelay = 2)
@@ -186,13 +186,13 @@ private static Message? GetMessageDetail(HttpClient client, string messageId, in
 
 The next step is to update the `Main` method to use the new method so the application will use an intelligent throttling strategy.
 
-Locate the following line that obtains an instance of an authenticated **HttpClient** object in the `Main` method. Delete all code in the `Main` method after this line:
+9. Locate the following line that obtains an instance of an authenticated **HttpClient** object in the `Main` method. Delete all code in the `Main` method after this line:
 
 ```csharp
 var client = GetAuthenticatedHTTPClient(config, userName, userPassword);
 ```
 
-Add the following code after obtaining the **HttpClient** object. This code will request the top 100 messages from the current user's mailbox and deserialize the response into a typed object you previously created:
+10. Add the following code after obtaining the **HttpClient** object. This code will request the top 100 messages from the current user's mailbox and deserialize the response into a typed object you previously created:
 
 ```csharp
 var stopwatch = new System.Diagnostics.Stopwatch();
@@ -206,7 +206,7 @@ var graphMessages = JsonSerializer.Deserialize<Messages>(httpResponseTask.Result
 var items = graphMessages == null ? Array.Empty<Message>() : graphMessages.Items;
 ```
 
-Add the following code to create individual requests for each message. These tasks are created as asynchronous tasks that will be executed in parallel:
+11. Add the following code to create individual requests for each message. These tasks are created as asynchronous tasks that will be executed in parallel:
 
 ```csharp
 var tasks = new List<Task>();
@@ -228,7 +228,7 @@ foreach (var graphMessage in items)
 }
 ```
 
-Next, add the following code to execute all tasks in parallel and wait for them to complete. 
+12. Next, add the following code to execute all tasks in parallel and wait for them to complete. 
 
 ```csharp
 // do all work in parallel & wait for it to complete
@@ -240,7 +240,7 @@ try
  catch {}
 ```
 
-With all work, complete write the results to the console:
+13. With all work, complete write the results to the console:
 
 ```csharp
 stopwatch.Stop();
@@ -250,19 +250,19 @@ Console.WriteLine("Elapsed time: {0} seconds", stopwatch.Elapsed.Seconds);
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile the console application:
+14. Run the following command in a command prompt to compile the console application:
 
 ```console
 dotnet build
 ```
 
-Run the following command to run the console application:
+15. Run the following command to run the console application:
 
 ```console
 dotnet run
 ```
 
-After entering the username and password for the current user, the application will write multiple log entries to the console like the following figure:
+16. After entering the username and password for the current user, the application will write multiple log entries to the console like the following figure:
 
 ![Screenshot of .NET console application logging messages](../../Linked_Image_Files/02-02-05-app-run-01.png)
 
@@ -286,7 +286,7 @@ Let's change the application to use the Microsoft Graph SDK client, which has al
 
 The application will use the Microsoft Graph SDK to submit requests, not the **HttpClient**, so you need to update it.
 
-Locate the method `GetAuthenticatedHTTPClient` and make the following changes to it:
+1. Locate the method `GetAuthenticatedHTTPClient` and make the following changes to it:
 
 - set the return type from `HttpClient` to `GraphServiceClient`
 - rename the method from `GetAuthenticatedHTTPClient` to `GetAuthenticatedGraphClient`
@@ -301,21 +301,21 @@ return graphClient;
 
 The next step is to update the application to use the Graph SDK that includes an intelligent throttling strategy.
 
-Locate the **Messages.cs** file in the project. Delete this file or comment all code within the file out. The application will get **Message** object this file contains will get confused with the **Message** object in the Microsoft Graph SDK.
+2. Locate the **Messages.cs** file in the project. Delete this file or comment all code within the file out. The application will get **Message** object this file contains will get confused with the **Message** object in the Microsoft Graph SDK.
 
-Next, within the `Main` method, locate the following line:
+3. Next, within the `Main` method, locate the following line:
 
 ```csharp
 var client = GetAuthenticatedHTTPClient(config, userName, userPassword);
 ```
 
-Update the method called in that line to use the method you updated, `GetAuthenticatedGraphClient`:
+4. Update the method called in that line to use the method you updated, `GetAuthenticatedGraphClient`:
 
 ```csharp
 var client = GetAuthenticatedGraphClient(config, userName, userPassword);
 ```
 
-The next few lines used the **HttpClient** to call the Microsoft Graph REST endpoint to get a list of all messages. Find these lines, as shown below, and remove them:
+5. The next few lines used the **HttpClient** to call the Microsoft Graph REST endpoint to get a list of all messages. Find these lines, as shown below, and remove them:
 
 ```csharp
 var clientResponse = client.GetAsync("https://graph.microsoft.com/v1.0/me/messages?$select=id&$top=100").Result;
@@ -326,7 +326,7 @@ var graphMessages = JsonConvert.DeserializeObject<Messages>(httpResponseTask.Res
 var items = graphMessages == null ? Array.Empty<Message>() : graphMessages.Items;
 ```
 
-Replace those lines with the following code to request the same information using the microsoft Graph SDK:
+6. Replace those lines with the following code to request the same information using the microsoft Graph SDK:
 
 ```csharp
 var clientResponse = client.Me.Messages
@@ -336,13 +336,14 @@ var clientResponse = client.Me.Messages
                               .GetAsync()
                               .Result;
 var items = clientResponse.CurrentPage;
+
 ```
 
 ### Update the `GetMessageDetail` method
 
 The last step is to modify the `GetMessageDetail` method that retrieved the message details for each message. Recall from previous section in this unit, you had to write the code to detect when requests were throttled. In the case they were throttled, you added code to retry the request after a specified delay. Fortunately, the Microsoft Graph SDK has this logic included in it.
 
-Locate the `GetMessageDetail()` method.
+8. Locate the `GetMessageDetail()` method.
 
 Update the signature of the method so the first parameter expects an instance of the `GraphServiceClient`, not the `HttpClient`, and remove the last parameter of a default delay. The method signature should now look like the following:
 
@@ -350,7 +351,7 @@ Update the signature of the method so the first parameter expects an instance of
 private static Message GetMessageDetail(GraphServiceClient client, string messageId)
 ```
 
-Next, remove all code within this method and replace it with this single line:
+9. Next, remove all code within this method and replace it with this single line:
 
 ```csharp
 // submit request to Microsoft Graph & wait to process response
@@ -359,19 +360,19 @@ return client.Me.Messages[messageId].Request().GetAsync().Result;
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile the console application:
+10. Run the following command in a command prompt to compile the console application:
 
 ```console
 dotnet build
 ```
 
-Run the following command to run the console application:
+11. Run the following command to run the console application:
 
 ```console
 dotnet run
 ```
 
-After entering the username and password for the current user, the application will write multiple log entries to the console like the following:
+12. After entering the username and password for the current user, the application will write multiple log entries to the console like the following:
 
 ![Screenshot of .NET console application logging email subjects](../../Linked_Image_Files/02-02-05-app-run-03.png)
 
