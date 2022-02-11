@@ -20,81 +20,82 @@ You must have the minimum versions of these prerequisites installed on your work
 
 ## Task 1: Create an Azure AD application
 
-Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+1. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
-Select **Manage > App registrations** in the left-hand navigation.
+3. Select **Manage > App registrations** in the left-hand navigation.
 
   ![Screenshot of the App registrations](../../Linked_Image_Files/02-03-azure-ad-portal-home.png)
 
-On the **App registrations** page, select **New registration**.
+4. On the **App registrations** page, select **+ New registration**.
 
   ![Screenshot of App Registrations page](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-00.png)
 
-On the **Register an application** page, set the values as follows:
+5. On the **Register an application** page, set the values as follows:
 
 - **Name**: Graph Console App
 - **Supported account types**: Accounts in this organizational directory only (Contoso only - Single tenant)
 
     ![Screenshot of the Register an application page](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-01.png)
 
-    Select **Register**.
+6. Select **Register**.
 
-On the **Graph Console App** page, copy the value of the **Application (client) ID** and **Directory (tenant) ID**; you'll need these in the application.
+7. On the **Graph Console App** page, copy the value of the **Application (client) ID** and **Directory (tenant) ID**; you'll need these in the application.
 
   ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-details.png)
 
-Select **Manage > Authentication**.
+8. Select **Manage > Authentication**.
 
-In the **Platform configurations** section, select the **Add a platform** button. Then in the **Configure platforms** panel, select the **Mobile and desktop applications** button:
+9. In the **Platform configurations** section, select the **+ Add a platform** button. Then in the **Configure platforms** panel, select the **Mobile and desktop applications** button:
 
 ![Screenshot of the Platform configurations section](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-02.png)
 
-In the **Redirect URIs** section of the **Configure Desktop + devices** panel, select the entry that ends with **nativeclient**, and then select the **Configure** button:
+10. In the **Redirect URIs** section of the **Configure Desktop + devices** panel, select the entry that ends with **nativeclient**, and then select the **Configure** button:
 
 ![Screenshot of the Configure Desktop + devices panel](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-03.png)
 
-In the **Authentication** panel, scroll down to the **Allow public client flows** section and set the toggle to **Yes**.
+11. In the **Authentication** panel, scroll down to the **Allow public client flows** section and set the toggle to **Yes**.
 
 ![Screenshot of the Default client type section](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-04.png)
 
-Select **Save** in the top menu to save your changes.
+12. Select **Save** in the top menu to save your changes.
 
 ### Grant Azure AD application permissions to Microsoft Graph
 
 After creating the application, you need to grant it the necessary permissions to Microsoft Graph.
 
-Select **API Permissions** in the left-hand navigation panel.
+13. Select **Manage > API Permissions** in the left-hand navigation panel.
 
 ![Screenshot of the API Permissions navigation item](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-permissions-01.png)
 
-Select the **Add a permission** button.
+14. Select the **+ Add a permission** button.
 
-In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
+15. In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
 
 ![Screenshot of Microsoft Graph in the Request API permissions panel](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-permissions-02.png)
 
-When prompted for the type of permission, select **Delegated permissions**.
+16. When prompted for the type of permission, select **Delegated permissions**.
 
-Enter **User.R** in the **Select permissions** search box and select the **User.Read.All** permission, followed by the **Add permission** button at the bottom of the panel.
+17. Enter **User.R** in the **Select permissions** search box and select the **User.Read.All** permission, followed by the **Add permissions** button at the bottom of the panel.
 
 ![Screenshot of the User.Read.All permission in the Request API permissions panel](../../Linked_Image_Files/02-03-azure-ad-portal-new-app-permissions-03.png)
 
-In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select the **Yes** button in the consent dialog to grant all users in your organization this permission.
+18. In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select the **Yes** button in the consent dialog to grant all users in your organization this permission.
 
 > [!NOTE]
 > The option to **Grant admin consent** here in the Azure AD admin center is pre-consenting the permissions to the users in the tenant to simplify the exercise. This approach allows the console application to use the [resource owner password credential grant](/azure/active-directory/develop/v2-oauth-ropc), so the user isn't prompted to grant consent to the application that simplifies the process of obtaining an OAuth access token. You could elect to implement alternative options such as the [device code flow](/azure/active-directory/develop/v2-oauth2-device-code) to utilize dynamic consent as another option.
 
 ## Task 2: Create .NET Core console application
 
-Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
+
+1. Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
 
 ```console
 dotnet new console -o graphconsoleapp
 ```
 
-After creating the application, run the following commands to add the Microsoft Authentication Library (MSAL), Microsoft Graph .NET SDK, and a few configuration packages to the project:
+2. After creating the application, run the following commands to add the Microsoft Authentication Library (MSAL), Microsoft Graph .NET SDK, and a few configuration packages to the project:
 
 ```console
 cd graphconsoleapp
@@ -105,13 +106,13 @@ dotnet add package Microsoft.Extensions.Configuration.FileExtensions
 dotnet add package Microsoft.Extensions.Configuration.Json
 ```
 
-Open the application in Visual Studio Code using the following command:
+3. Open the application in Visual Studio Code using the following command:
 
 ```console
 code .
 ```
 
-If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
+4. If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
 
 ### Update the console app to enable nullable reference types
 
@@ -129,7 +130,7 @@ Open the **graphconsoleapp.csproj** file and ensure the `<PropertyGroup>` elemen
 
 ### Update the console app to support Azure AD authentication
 
-Create a new file named **appsettings.json** in the root of the project and add the following code to it:
+5. Create a new file named **appsettings.json** in the root of the project and add the following code to it:
 
 ```json
 {
@@ -138,16 +139,16 @@ Create a new file named **appsettings.json** in the root of the project and add 
 }
 ```
 
-Update properties with the following values:
+6. Update properties with the following values:
 
 - `YOUR_TENANT_ID_HERE`: Azure AD directory ID
 - `YOUR_APP_ID_HERE`: Azure AD client ID
 
 #### Create helper class
 
-Create a new folder **Helpers** in the project.
+7. Create a new folder **Helpers** in the project.
 
-Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
+8. Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
 
 ```csharp
 using System.Net.Http;
@@ -221,7 +222,7 @@ namespace Helpers
 
 ### Incorporate Microsoft Graph into the console app
 
-Open the **Program.cs** file and replace the entire contents with the following code:
+9. Open the **Program.cs** file and add the following `using` statements to the top fo the file:
 
 ```csharp
 using System;
@@ -244,7 +245,7 @@ namespace graphconsoleapp
 }
 ```
 
-Add the following method `LoadAppSettings` to the `Program` class. The method retrieves the configuration details from the **appsettings.json** file previously created:
+10. Add the following method `LoadAppSettings` to the `Program` class. The method retrieves the configuration details from the **appsettings.json** file previously created:
 
 ```csharp
 private static IConfigurationRoot? LoadAppSettings()
@@ -271,7 +272,7 @@ private static IConfigurationRoot? LoadAppSettings()
 }
 ```
 
-Add the following method `CreateAuthorizationProvider` to the `Program` class. The method will create an instance of the clients used to call Microsoft Graph.
+11. Add the following method `CreateAuthorizationProvider` to the `Program` class. The method will create an instance of the clients used to call Microsoft Graph.
 
 ```csharp
 private static IAuthenticationProvider CreateAuthorizationProvider(IConfigurationRoot config, string userName, SecureString userPassword)
@@ -293,7 +294,7 @@ private static IAuthenticationProvider CreateAuthorizationProvider(IConfiguratio
 > [!IMPORTANT]
 > Notice in the previous code that two scopes will be included in the request. These are the permissions you added to the Azure AD app.
 
-Add the following method `GetAuthenticatedGraphClient` to the `Program` class. The method creates an instance of the `GraphServiceClient` object.
+12. Add the following method `GetAuthenticatedGraphClient` to the `Program` class. The method creates an instance of the `GraphServiceClient` object.
 
 ```csharp
 private static GraphServiceClient GetAuthenticatedGraphClient(IConfigurationRoot config, string userName, SecureString userPassword)
@@ -304,7 +305,7 @@ private static GraphServiceClient GetAuthenticatedGraphClient(IConfigurationRoot
 }
 ```
 
-Add the following method `ReadPassword` to the `Program` class. The method prompts the user for their password:
+13. Add the following method `ReadPassword` to the `Program` class. The method prompts the user for their password:
 
 ```csharp
 private static SecureString ReadPassword()
@@ -326,7 +327,7 @@ private static SecureString ReadPassword()
 }
 ```
 
-Add the following method `ReadUsername` to the `Program` class. The method prompts the user for their username:
+14. Add the following method `ReadUsername` to the `Program` class. The method prompts the user for their username:
 
 ```csharp
 private static string ReadUsername()
@@ -338,7 +339,7 @@ private static string ReadUsername()
 }
 ```
 
-Locate the `Main` method in the `Program` class. Add the following code to the end of the `Main` method to load the configuration settings from the **appsettings.json** file:
+15. Locate the `Main` method in the `Program` class. Add the following code to the end of the `Main` method to load the configuration settings from the **appsettings.json** file:
 
 ```csharp
 var config = LoadAppSettings();
@@ -349,7 +350,7 @@ if (config == null)
 }
 ```
 
-Add the following code to the end of the `Main` method, just after the code added in the last step. This code will obtain an authenticated instance of the `GraphServiceClient` and submit a request for the current user's email:
+16. Add the following code to the end of the `Main` method, just after the code added in the last step. This code will obtain an authenticated instance of the `GraphServiceClient` and submit a request for the current user's email:
 
 ```csharp
 var userName = ReadUsername();
@@ -358,7 +359,7 @@ var userPassword = ReadPassword();
 var client = GetAuthenticatedGraphClient(config, userName, userPassword);
 ```
 
-Add the following code to request all users from the current organization and write them to the console.
+17. Add the following code to request all users from the current organization and write them to the console.
 
 ```csharp
 // request 1 - all users
@@ -376,25 +377,25 @@ Console.WriteLine(requestAllUsers.GetHttpRequestMessage().RequestUri);
 
 ### Build and test the application
 
-Run the following command in a command prompt to ensure the developer certificate has been trusted:
+18. Run the following command in a command prompt to ensure the developer certificate has been trusted:
 
 ```console
 dotnet dev-certs https --trust
 ```
 
-Run the following command in a command prompt to compile the console application:
+19. Run the following command in a command prompt to compile the console application:
 
 ```console
 dotnet build
 ```
 
-Run the following command to run the console application:
+20. Run the following command to run the console application:
 
 ```console
 dotnet run
 ```
 
-After entering the username and password of a user, you'll see the results of all users in the organization written to the console.
+21. After entering the username and password of a user, you'll see the results of all users in the organization written to the console.
 
 ![Screenshot of the console application showing all users in the organization](../../Linked_Image_Files/02-03-03-app-run-01.png)
 
@@ -402,9 +403,9 @@ After entering the username and password of a user, you'll see the results of al
 
 Now, update the console app to show details on the current user.
 
-Locate the code you added above for `// request 1 - all users` and optionally comment it out so it doesn't continue to execute.
+1. Locate the code you added above for `// request 1 - all users` and optionally comment it out so it doesn't continue to execute.
 
-Add the following code to the `Main` method of the console application. This will get and display the details of the currently signed in user:
+2. Add the following code to the `Main` method of the console application. This will get and display the details of the currently signed in user:
 
 ```csharp
 // request 2 - current user
@@ -419,14 +420,14 @@ Console.WriteLine(requestMeUser.GetHttpRequestMessage().RequestUri);
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile and run the console application:
+3. Run the following command in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After entering the username and password of a user, you'll see the details of the currently signed in user in the organization written to the console.
+4. After entering the username and password of a user, you'll see the details of the currently signed in user in the organization written to the console.
 
 ![Screenshot of the console application showing the currently signed in user](../../Linked_Image_Files/02-03-03-app-run-02.png)
 
@@ -434,11 +435,11 @@ After entering the username and password of a user, you'll see the details of th
 
 In this last section, you'll learn how to obtain a specific user's details.
 
-Locate the code you added above for `// request 2 - current user` and optionally comment it out so it doesn't continue to execute.
+1. Locate the code you added above for `// request 2 - current user` and optionally comment it out so it doesn't continue to execute.
 
 The first step is finding a specific user's unique identifier in your organization. From the first example above, copy the `Id` of a user in your organization other than the one that is currently signed in.
 
-Add the following code to the `Main` method of the console application. This will obtain the details of a specific user:
+2. Add the following code to the `Main` method of the console application. This will obtain the details of a specific user:
 
 ```csharp
 // request 3 - specific user
@@ -450,18 +451,18 @@ Console.WriteLine("\nGraph Request:");
 Console.WriteLine(requestSpecificUser.GetHttpRequestMessage().RequestUri);
 ```
 
-Update the `{{REPLACE_WITH_USER_ID}}` string with the `Id` of an existing user you copied previously. Notice that this code will get a specific user by passing in their `Id` into the `Users` collection.
+3. Update the `{{REPLACE_WITH_USER_ID}}` string with the `Id` of an existing user you copied previously. Notice that this code will get a specific user by passing in their `Id` into the `Users` collection.
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile and run the console application:
+4. Run the following command in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After entering the username and password of a user, you'll see the details of a specific user.
+5. After entering the username and password of a user, you'll see the details of a specific user.
 
 ![Screenshot of the console application showing a specific user](../../Linked_Image_Files/02-03-03-app-run-03.png)
 
