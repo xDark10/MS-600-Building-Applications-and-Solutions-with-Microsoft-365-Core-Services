@@ -9,33 +9,33 @@ In this exercise, you’ll learn how to create and configure an application regi
 
 App Roles for an app registration are defined by editing the manifest. The roles have a unique identifier, a display name and a value. The value can be inspected at runtime to make authorization decisions.
 
-Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenant.
+1. Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenant.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
-Select **App registrations** in the left-hand navigation.
+3. Select **Manage > App registrations** in the left-hand navigation.
 
 ![Screenshot of the App registrations](../../Linked_Image_Files/01-05-azure-ad-portal-home.png)
 
-On the **App registrations** page, locate the application registration that represents the Users Group Roles application from the first exercise in this module. To verify the application, compare the **Application (client) ID** and **Directory (tenant) ID** in the portal to the values copied in the first exercise.
+4. On the **App registrations** page, locate the application registration that represents the Users Group Roles application from the first exercise in this module. To verify the application, compare the **Application (client) ID** and **Directory (tenant) ID** in the portal to the values copied in the first exercise.
 
 ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/01-05-03-azure-ad-portal-new-app-details-01.png)
 
-In the application registration for your application, select **Manifest**.
+5. In the application registration for your application, select **Manifest**.
 
-In the manifest editor, find the node named `groupMembershipClaims`. Set the `groupMembershipClaims` node back to its default value, `null`:
+6. In the manifest editor, find the node named `groupMembershipClaims`. Set the `groupMembershipClaims` node back to its default value, `null`:
 
 ```json
 "groupMembershipClaims": null,
 ```
 
-Next, within the manifest editor, find the node `optionalClaims`. Set the `optionalClaims` node back to its default value, `null`:
+7. Next, within the manifest editor, find the node `optionalClaims`. Set the `optionalClaims` node back to its default value, `null`:
 
 ```json
 "optionalClaims": null,
 ```
 
-Finally, within the manifest editor, find the node named `appRoles`. The default value is an empty array. Replace the `appRoles` node with the following code:
+8. Finally, within the manifest editor, find the node named `appRoles`. The default value is an empty array. Replace the `appRoles` node with the following code:
 
 ```json
 "appRoles": [
@@ -62,7 +62,7 @@ Finally, within the manifest editor, find the node named `appRoles`. The default
 ],
 ```
 
-When updating the value of the `appRoles` node, consider the following requirements:
+9. When updating the value of the `appRoles` node, consider the following requirements:
 
 - Leave allowedMemberTypes set to "User" only.
 - Make sure displayName and value don't contain spaces.
@@ -72,43 +72,43 @@ When updating the value of the `appRoles` node, consider the following requireme
     New-Guid
     ```
 
-Save the manifest.
+10. Save the manifest.
 
 ### Assign users to app roles
 
-Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenant.
+11. Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenant.
 
-Select **Azure Active Directory** in the left-hand navigation.
+12. Select **Azure Active Directory** in the left-hand navigation.
 
-Select **Enterprise applications** in the left-hand navigation.
+13. Select **Enterprise applications** in the left-hand navigation.
 
 ![Screenshot of the Enterprise Applications](../../Linked_Image_Files/01-05-07-azure-ad-portal-entapp.png)
 
-On the **Enterprise applications** page, locate the application registration that represents the Users Group Roles application from the first exercise in this module. To verify the application, compare the **Application (client) ID** of the app registration with the **Application ID** entry in the **Enterprise Applications** list. Select the correct application.
+14. On the **Enterprise applications** page, locate the application registration that represents the Users Group Roles application from the first exercise in this module. To verify the application, compare the **Application (client) ID** of the app registration with the **Application ID** entry in the **Enterprise Applications** list. Select the correct application.
 
-On the enterprise application overview pane, select **Users and Groups**.
+15. On the enterprise application overview pane, select **Users and Groups**.
 
 ![Screenshot of the Users and Groups](../../Linked_Image_Files/01-05-07-azure-ad-portal-entapp-users.png)
 
-Select **Add User**. On the add **Assignment** pane, select **Users and groups**. Select one or more users or groups from the list and then select the **Select** button at the bottom of the pane.
+16. Select **Add User**. On the add **Assignment** pane, select **Users and groups**. Select one or more users or groups from the list and then select the **Select** button at the bottom of the pane.
 
-On the **Add Assignment** pane, select **Role**. Select the **ProductAdministrator** role to apply to the selected users or groups, then select **Select** at the bottom of the pane.
+17. On the **Add Assignment** pane, select **Role**. Select the **ProductAdministrator** role to apply to the selected users or groups, then select **Select** at the bottom of the pane.
 
 ![Screenshot of adding an assignment to the User Group Role page](../../Linked_Image_Files/01-05-07-app-roles-add-roles-users.png)
 
-Select **Assign** at the bottom of the pane. The assigned users or groups have the permissions defined by the selected role for this enterprise app.
+18. Select **Assign** at the bottom of the pane. The assigned users or groups have the permissions defined by the selected role for this enterprise app.
 
 ### Update role check-in controller/view
 
-Open the **ProductsController.cs** file in the Controllers folder.
+19. Open the **ProductsController.cs** file in the Controllers folder.
 
-Update the `[Authorize]` attribute to use the role names (specify multiple values allows access to members in either role):
+20. Update the `[Authorize]` attribute to use the role names (specify multiple values allows access to members in either role):
 
 ```csharp
 [Authorize(Roles =("ProductViewers,ProductAdministrators"))]
 ```
 
-Open the **_Layout.cshtml** file in the **Views\Shared** folder. Locate the call to **User.IsInRole** and change the statement to the following code:
+21. Open the **_Layout.cshtml** file in the **Views\Shared** folder. Locate the call to **User.IsInRole** and change the statement to the following code:
 
 ```cshtml
 @if (User.IsInRole("ProductViewers") || User.IsInRole("ProductAdministrators"))
@@ -116,7 +116,7 @@ Open the **_Layout.cshtml** file in the **Views\Shared** folder. Locate the call
 
 ### Add action and view to allow creating new products
 
-Create a new file in the **Models** folder name **ProductViewModel.cs**. Add the following to the file:
+22. Create a new file in the **Models** folder name **ProductViewModel.cs**. Add the following to the file:
 
 ```csharp
 using System.Collections.Generic;
@@ -132,14 +132,14 @@ namespace UserGroupRole.Models
 }
 ```
 
-Open the **ProductsController.cs** file in the **Controllers** folder. Add the following to the top of the file:
+23. Open the **ProductsController.cs** file in the **Controllers** folder. Add the following to the top of the file:
 
 ```csharp
 using System.Linq;
 using UserGroupRole.Models;
 ```
 
-Add the following methods to the **ProductsController.cs** file:
+24. Add the following methods to the **ProductsController.cs** file:
 
 ```csharp
 [Authorize(Roles = ("ProductAdministrators"))]
@@ -171,7 +171,7 @@ public ActionResult Create([Bind("ProductName", "CategoryId")] ProductViewModel 
 }
 ```
 
-Open the **Index.cshtml** file in the **Views\Products** folder. Above the `<table>` element, add the following code:
+25. Open the **Index.cshtml** file in the **Views\Products** folder. Above the `<table>` element, add the following code:
 
 ```cshtml
 @if (User.IsInRole("ProductAdministrators"))
@@ -182,7 +182,7 @@ Open the **Index.cshtml** file in the **Views\Products** folder. Above the `<tab
 }
 ```
 
-Create a new file in the **Views\Products** folder named **Create.cshtml**. Add the following to the file:
+26. Create a new file in the **Views\Products** folder named **Create.cshtml**. Add the following to the file:
 
 ```cshtml
 @model UserGroupRole.Models.ProductViewModel
@@ -226,7 +226,7 @@ Create a new file in the **Views\Products** folder named **Create.cshtml**. Add 
 
 #### Build and test the web app
 
-Execute the following commands in a command prompt to compile and run the application:
+27. Execute the following commands in a command prompt to compile and run the application:
 
 ```console
 dotnet dev-certs https --trust
@@ -234,13 +234,13 @@ dotnet build
 dotnet run
 ```
 
-Open a browser and navigate to the url **https://localhost:5001**. The web application will redirect you to the Azure AD sign-in page.
+28. Open a browser and navigate to the url **https://localhost:5001**. The web application will redirect you to the Azure AD sign-in page.
 
-Sign in using a Work and School account from your Azure AD directory. The first login will prompt for consent to the scopes required by the web API. After consent, Azure AD will redirect you back to the web application.
+29. Sign in using a Work and School account from your Azure AD directory. The first login will prompt for consent to the scopes required by the web API. After consent, Azure AD will redirect you back to the web application.
 
 > Note: You must login after assigning app roles to the user. Any logins that occurred before the update will result in a token that does not reflect the assignments. Close the browser or select **Sign out** to sign out of the session.
 
-On the home page, the assigned roles are included in the list of claims. If the user is a member of the correct group, the navigation will include a link to the Products controller.
+30. On the home page, the assigned roles are included in the list of claims. If the user is a member of the correct group, the navigation will include a link to the Products controller.
 
 ![Screenshot of the application home page, highlighting the navigation and group claims.](../../Linked_Image_Files/01-05-07-home-page-with-roles.png)
 

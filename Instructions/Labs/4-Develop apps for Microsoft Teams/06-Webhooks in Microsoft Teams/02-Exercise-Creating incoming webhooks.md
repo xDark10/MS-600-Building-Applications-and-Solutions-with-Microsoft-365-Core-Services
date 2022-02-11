@@ -1,5 +1,7 @@
 # Exercise 2: Creating incoming webhooks
 
+
+
 In this exercise, you’ll learn how to register an incoming webhook in a Microsoft Teams channel and post a message to it.
 
 ## Task 1: Register a new incoming webhook
