@@ -17,58 +17,58 @@ In the previous exercise, an administrator granted consent to the Azure AD app o
 
 The web page you created will submit a request to Microsoft Graph to retrieve the user's emails. All requests to Microsoft Graph must include an access token as proof of the user's identity and that they have the necessary permissions to call Microsoft Graph. To obtain an access token, you must create an Azure AD application.
 
-Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+1. Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
-Then select **Manage > App registrations** in the left-hand navigation.
+3. Then select **Manage > App registrations** in the left-hand navigation.
 
   ![Screenshot of the App registrations](../../Linked_Image_Files/01-03-azure-ad-portal-home.png)
 
-On the **App registrations** page, select **New registration**.
+4. On the **App registrations** page, select **+ New registration**.
 
   ![Screenshot of App Registrations page](../../Linked_Image_Files/01-03-azure-ad-portal-new-app-00.png)
 
-On the **Register an application** page, set the values as follows:
+5. On the **Register an application** page, set the values as follows:
 
 - **Name**: Identity Exercise 02
 - **Supported account types**: Accounts in this organizational directory only (Single tenant)
 
     ![Screenshot of the Register an application page](../../Linked_Image_Files/01-03-05-azure-ad-portal-new-app-01.png)
 
-Select **Register** to create the application.
+6. Select **Register** to create the application.
 
-On the **Identity Exercise 02** page, copy the values **Application (client) ID** and **Directory (tenant) ID**; you'll need these values later in this exercise.
+7. On the **Identity Exercise 02** page, copy the values **Application (client) ID** and **Directory (tenant) ID**; you'll need these values later in this exercise.
 
   ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/01-03-05-azure-ad-portal-new-app-details-01.png)
 
-Select **Manage > Authentication** in the left-hand navigation.
+8. Select **Manage > Authentication** in the left-hand navigation.
 
-On the **Authentication** page, select **Add a platform**. When the **Configure platforms** panel appears, select **Single-page application**.
+9. On the **Authentication** page, select **+ Add a platform**. When the **Configure platforms** panel appears, select **Single-page application**.
 
 ![Screenshot of the Configure platforms panel](../../Linked_Image_Files/01-03-05-azure-ad-portal-new-app-details-02.png)
 
-In the **Configure single-page application** panel, add **http://localhost:3007** under **Redirect URIs**, and select **Configure**.
+10. In the **Configure single-page application** panel, add **http://localhost:3007** under **Redirect URIs**, and select **Configure**.
 
 ![Screenshot of the Configure Web panel](../../Linked_Image_Files/01-03-03-azure-ad-portal-new-app-details-03.png)
 
 #### Add permissions to the Azure AD app
 
-Select **API Permissions** from the left-hand navigation, and then select **Add a permission**:
+11. Select **API Permissions** from the left-hand navigation, and then select **+ Add a permission**:
 
   ![Screenshot of the Configured Permissions page in Azure AD](../../Linked_Image_Files/01-03-05-azure-ad-portal-new-app-permissions-01.png)
 
-On the **Request API Permissions** page, select **Microsoft APIs**, **Microsoft Graph**, and then select **Delegated permissions**:
+12. On the **Request API Permissions** page, select **Microsoft APIs**, **Microsoft Graph**, and then select **Delegated permissions**:
 
   ![Screenshot of selecting Microsoft Graph Delegated permissions](../../Linked_Image_Files/01-03-05-azure-ad-portal-new-app-permissions-02.png)
 
-In the search box in the **Select permissions** section, enter **Mail.R**, select the permission **Mail.Read** permission, and then select **Add permissions**.
+13. In the search box in the **Select permissions** section, enter **Mail.R**, select the permission **Mail.Read** permission, and then select **Add permissions**.
 
 ### Update the SPA with the Azure AD application details
 
 The last step is to configure the SPA to use the Azure AD application.
 
-Locate the `var msalConfig = {}` code in the **index.html** file. The `auth` object contains three properties you need to set as follows:
+14. Locate the `var msalConfig = {}` code in the **index.html** file. The `auth` object contains three properties you need to set as follows:
 
 - `clientId`: set to the Azure AD application's ID
 - `authority`: set to **https://login.microsoftonline.com/{{DIRECTORY_ID}}**, replacing the **{{DIRECTORY_ID}}** with the Azure AD directory ID of the Azure AD application
@@ -76,21 +76,21 @@ Locate the `var msalConfig = {}` code in the **index.html** file. The `auth` obj
 
 ### Test the web application
 
-To test the web page, first start the local web server. In the command prompt, execute the following command from the root of the project:
+15. To test the web page, first start the local web server. In the command prompt, execute the following command from the root of the project:
 
 ```console
 node server.js
 ```
 
-Next, open a browser and navigate to **http://localhost:3007**. The page initially contains a default welcome message and sign-in button.
+16. Next, open a browser and navigate to **http://localhost:3007**. The page initially contains a default welcome message and sign-in button.
 
 ![Screenshot of the default web page for an anonymous user](../../Linked_Image_Files/01-03-03-test-01.png)
 
-Select the **Sign In** button.
+17. Select the **Sign In** button.
 
 Depending on the browser, you're using, a popup window will load or the page will redirect to the Azure AD sign-in prompt.
 
-Sign in using a **Work or School Account** of a user in your organization. On the next screen, **don't select** the **Accept** button. Instead, examine the dialog:
+18. Sign in using a **Work or School Account** of a user in your organization. On the next screen, **don't select** the **Accept** button. Instead, examine the dialog:
 
 ![Screenshot of Azure AD popup sign-in experience for user 'meganb'](../../Linked_Image_Files/01-03-05-test-02.png)
 
@@ -98,15 +98,15 @@ This screenshot demonstrates the *user consent experience* in Microsoft identity
 
 One way you can see a difference between the static and dynamic permissions is using the admin consent endpoint.
 
-In a new browser window, navigate to the following URL. Make sure you replace the `{{APPLICATION_ID}}` with the ID of the Azure AD application you created
+19. In a new browser window, navigate to the following URL. Make sure you replace the `{{APPLICATION_ID}}` with the ID of the Azure AD application you created
 
 `https://login.microsoftonline.com/common/adminconsent?client_id={{APPLICATION_ID}}&state=12345&redirect_uri=http://localhost:3007`
 
 ![Screenshot of the admin consent dialog](../../Linked_Image_Files/01-03-05-test-03.png)
 
-One permission, *Sign in and read user profile*, is the default one that all apps have: **User.Read**. The other permission, *Read user mail*, was the one that you added in the Azure AD admin center: **Mail.Read**.
+20. One permission, *Sign in and read user profile*, is the default one that all apps have: **User.Read**. The other permission, *Read user mail*, was the one that you added in the Azure AD admin center: **Mail.Read**.
 
-Stop the local web server by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in the console.
+21. Stop the local web server by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in the console.
 
 ## Task 2: Dynamic permissions
 
@@ -116,7 +116,7 @@ Let's see how this differs from dynamic permissions.
 
 In this section, you'll update the existing SPA to display calendar events. To do this, the app needs a new permission to access the currently signed-in user's calendar. However, you won't add the permission to the Azure AD app. Instead, you will add the permission as a demand when the app needs it.
 
-Locate the `var graphConfig = {}` code in the **index.html** file. The `scopes` array contains the permissions the app will request in the access token when the user signs-in. Replace the **mail.read** permission with **calendars.read**.
+1. Locate the `var graphConfig = {}` code in the **index.html** file. The `scopes` array contains the permissions the app will request in the access token when the user signs-in. Replace the **mail.read** permission with **calendars.read**.
 
 The `graphConfig` object should now look like the following code:
 
@@ -129,37 +129,37 @@ var graphConfig = {
 };
 ```
 
-Now change the Microsoft Graph requests to request calendar items instead of email messages. Search for `/messages?` in the SPA and replace it with `/events?`. The rest of the request can remain as is because both email messages and calendar events have a *subject* property.
+2. Now change the Microsoft Graph requests to request calendar items instead of email messages. Search for `/messages?` in the SPA and replace it with `/events?`. The rest of the request can remain as is because both email messages and calendar events have a *subject* property.
 
 ### Test the web application
 
-To test the web page, first start the local web server. In the command prompt, execute the following command from the root of the project:
+3. To test the web page, first start the local web server. In the command prompt, execute the following command from the root of the project:
 
 ```console
 node server.js
 ```
 
-Next, open a browser and navigate to http://localhost:3007. The page initially contains a default welcome message and sign-in button.
+4. Next, open a browser and navigate to http://localhost:3007. The page initially contains a default welcome message and sign-in button.
 
-Select the **Sign In** button.
+5. Select the **Sign In** button.
 
 Depending on the browser, you're using, a popup window will load or the page will redirect to the Azure AD sign-in prompt.
 
-Sign in using a **Work or School Account** of a user in your organization. On the next screen, notice how the list of permissions has changed:
+6. Sign in using a **Work or School Account** of a user in your organization. On the next screen, notice how the list of permissions has changed:
 
 ![Screenshot of Azure AD popup sign-in experience - Calendar.Read permission added](../../Linked_Image_Files/01-03-05-test-04.png)
 
 This time, you're prompted to grant the application access to your calendar. This is a dynamic permission because it was defined in the SPA's code and included in the list of permissions in the access token request.
 
-Select the **Accept** button.
+7. Select the **Accept** button.
 
-Depending on the browser you're using, the popup will disappear or you will be redirected back to the web page. When the page loads, MSAL will request an access token and request your information from Microsoft Graph. After the request complete, it will display the results on the page:
+8. Depending on the browser you're using, the popup will disappear or you will be redirected back to the web page. When the page loads, MSAL will request an access token and request your information from Microsoft Graph. After the request complete, it will display the results on the page:
 
 ![Screenshot of events from the user's calendar](../../Linked_Image_Files/01-03-05-test-05.png)
 
-Stop the local web server by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in the console.
+9. Stop the local web server by pressing <kbd>CTRL</kbd>+<kbd>C</kbd> in the console.
 
-Try the admin consent experience. In a new browser window, navigate to the following URL. Make sure you replace the `{{APPLICATION_ID}}` with the ID of the Azure AD application you created
+10. Try the admin consent experience. In a new browser window, navigate to the following URL. Make sure you replace the `{{APPLICATION_ID}}` with the ID of the Azure AD application you created
 
 `https://login.microsoftonline.com/common/adminconsent?client_id={{APPLICATION_ID}}&state=12345&redirect_uri=http://localhost:3007`
 

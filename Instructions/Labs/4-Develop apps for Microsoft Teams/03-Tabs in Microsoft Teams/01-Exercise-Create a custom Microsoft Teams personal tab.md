@@ -1,5 +1,7 @@
 # Exercise 1: Create a custom Microsoft Teams personal tab
 
+
+
 In this exercise, you'll create a new Microsoft Teams personal tab by using the Microsoft Teams Yeoman generator, Visual Studio Code, and App Studio.
 
 ## Prerequisites
@@ -15,11 +17,11 @@ You'll use Node.js to create custom Microsoft Teams tabs in this module. The exe
 > [!IMPORTANT]
 > In most cases, installing the latest version of the following tools is the best option. The versions listed here were used when this module was published and last tested.
 
-- [Node.js](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-nodejs)- v12.\* (or higher)
+- [Node.js](https://nodejs.org/) - v12.\* (or higher)
 - NPM (installed with Node.js) - v6.\* (or higher)
-- [Gulp](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-gulp) - v4.\* (or higher)
-- [Yeoman](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-development-environment#install-yeoman) - v3.\* (or higher)
-- [Yeoman Generator for Microsoft Teams](https://docs.microsoft.com/en-us/microsoftteams/platform/get-started/get-started-yeoman) - v3.2.0 (or higher)
+- [Gulp](https://gulpjs.com/) - v4.\* (or higher)
+- [Yeoman](https://yeoman.io/) - v3.\* (or higher)
+- [Yeoman Generator for Microsoft Teams](https://github.com/OfficeDev/generator-teams) - v3.2.0 (or higher)
 - [Visual Studio Code](https://code.visualstudio.com)
 
 *You must have the minimum versions of these prerequisites installed on your workstation.
@@ -63,7 +65,7 @@ Before you customize the tab, let's test the tab to see the initial developer ex
 From the command line, go to the root folder for the project and run the following command:
 
 ```console
-gulp ngrok-serve
+gulp ngrok-serve --debug
 ```
 
 This gulp task runs many other tasks all displayed within the command-line console. The ngrok-serve task builds your project and starts a local web server (http://localhost:3007). It then starts ngrok with a random subdomain that creates a secure URL to your local web server.
@@ -167,7 +169,8 @@ return (
       <Text content="These are your to-do items:" size="medium"></Text>
       <List selectable>
         {todoItems.map((todoItem, i) => (
-          <List.Item media={<WindowMaximizeIcon outline />}
+          <List.Item key={i}
+            media={<WindowMaximizeIcon outline />}
             content={todoItem} index={i} >
           </List.Item>))
         }
@@ -182,7 +185,7 @@ return (
 ```
 
 > [!TIP]
-> At this point, you can test your tab without loading it in Microsoft Teams. Run the command **gulp ngrok-serve** from the command line, and go to **https://`{your-ngrok-subdomain}`.ngrok.io/learnPersonalTab/index.html** in the browser.
+> At this point, you can test your tab without loading it in Microsoft Teams. Run the command **gulp ngrok-serve --debug** from the command line, and go to **https://`{your-ngrok-subdomain}`.ngrok.io/learnPersonalTab/index.html** in the browser.
 >
 > ![Screenshot of the update tab page in the default theme](../../Linked_Image_Files/04-03-03-yo-teams-11.png)
 >

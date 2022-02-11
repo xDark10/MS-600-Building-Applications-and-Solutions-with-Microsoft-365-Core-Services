@@ -15,7 +15,7 @@ You'll use the .NET SDK to create custom Microsoft Graph app in this module. The
 > In most cases, installing the latest version of the following tools is the best option. The versions listed here were used when this module was published and last tested.
 
 - [.NET SDK](https://dotnet.microsoft.com/) - v5.\* (or higher)
-- [ngrok](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-channel-ngrok?view=azure-bot-service-4.0#run-ngrok)
+- [ngrok](https://ngrok.com/)
 - [Visual Studio Code](https://code.visualstudio.com)
 
 You must have the minimum versions of these prerequisites installed on your workstation.
@@ -101,7 +101,6 @@ Copy the https forwarding address. In the following sample output, that is **htt
 ngrok by @inconshreveable
 
 Session Status                online
-Account                       ???? ???? (Plan: Free)
 Version                       2.3.15
 Region                        United States (us)
 Web Interface                 http://127.0.0.1:4040
@@ -155,6 +154,20 @@ code .
 ```
 
 If Visual Studio Code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
+
+## Task 3: Update the console app to enable nullable reference types
+
+Nullable reference types refers to a group of features introduced in C# 8.0 that you can use to minimize the likelihood that your code causes the runtime to throw System.NullReferenceException.
+
+Nullable reference types are enabled by default in .NET 6 projects, they are disabled by default in .NET 5 projects.
+
+Ensuring that nullable reference types are enabled is not related to the use of Microsoft Graph, it just ensures the exercises in this module can contain a single set of code that will compile without warnings when using either .NET 5 or .NET 6.
+
+Open the **msgraphapp.csproj** file and ensure the `<PropertyGroup>` element contains the following child element:
+
+```xml
+<Nullable>enable</Nullable>
+```
 
 ## Summary
 
