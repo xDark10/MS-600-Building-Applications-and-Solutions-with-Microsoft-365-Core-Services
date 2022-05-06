@@ -10,7 +10,7 @@ In this exercise, you’ll learn about the different types of permissions suppor
 ## Task 1: Create a Node.js web application
 
 > [!NOTE]
-> The instructions below assume you are using v2.14.2 of the Microsoft Authentication Library for JavaScript 2.0.
+> The instructions below assume you are using v2.23.0 of the Microsoft Authentication Library for JavaScript 2.0.
 
 In this first section, you'll create a web application to host a web page that will host the single page application. To do this, you'll create a Node.js web server to serve the HTML page from a web server running on your workstation as http://localhost:3007.
 
@@ -142,7 +142,7 @@ function updateUserInterface() {
 }
 ```
 
-3. Next, add the following function to **index.html** immediately before the `// TODO: add FUNCTIONS before this line` comment. This function requests an access token from Microsoft identity and submits a request to Microsoft Graph for the current user's information. The function uses the popup approach for modern browsers and it uses the redirect approach for Internet Explorer:
+3. Next, add the following function to **index.html** immediately before the `// TODO: add FUNCTIONS before this line` comment. This function requests an access token from Microsoft identity and submits a request to Microsoft Graph for the current user's information. The function uses the popup approach for modern browsers:
 
 ```javascript
 function acquireTokenAndGetUserEmails() {

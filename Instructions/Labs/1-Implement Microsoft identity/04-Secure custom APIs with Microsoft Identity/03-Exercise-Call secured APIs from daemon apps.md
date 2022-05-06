@@ -103,11 +103,11 @@ Since this exercise is creating a daemon application that doesn't have a user in
 ## Task 3: Create a .NET Core console application
 
 > [!NOTE]
-> The instructions below assume you are using .NET 5. They were last tested using v5.0.202 of the .NET 5 SDK.
+> The instructions below assume you are using .NET 6. They were last tested using v6.0.202 of the .NET 6 SDK.
 
 1. Open your command prompt, navigate to a directory where you want to save your work.
 
-2. Execute the following command to create a new .NET 5 console application:
+2. Execute the following command to create a new .NET 6 console application:
 
 ```console
 dotnet new console -o ProductCatalogDaemon
@@ -183,122 +183,121 @@ namespace ProductCatalogDaemon
 
 The scope doesn't include the delegated scopes (Category.Read, etc.) nor does it include the application role (access_as_application).  Apps using the client credentials flow must use a static scope definition that has been configured in the portal. The `.default` suffix indicates that the pre-configured scopes/roles are used.
 
-10. Open the file **Program.cs**. Add the following code at the top of the file:
+10. Create a new file in the root folder of the project named **Main.cs**. This class will demonstrate how to get sample data from web api. Add the following to the file:
 
 ```csharp
 using Microsoft.Identity.Client;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Text.Json;
 using System.Net.Http.Headers;
+
+namespace ProductCatalogDaemon;
+
+internal class Main
+{
+    public async Task RunAsync()
+    {
+        AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
+
+        IConfidentialClientApplication app =
+          ConfidentialClientApplicationBuilder.Create(config.ClientId)
+              .WithClientSecret(config.ClientSecret)
+              .WithAuthority(new Uri(config.Authority))
+              .Build();
+
+        // With client credentials flows the scopes is ALWAYS of the shape "resource/.default", as the
+        // application permissions need to be set statically (in the portal or by PowerShell), and then granted by
+        // a tenant administrator
+        string[] scopes = new string[] { config.ApiScope };
+
+        AuthenticationResult result = null;
+        try
+        {
+            result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Token acquired \n");
+            Console.ResetColor();
+        }
+        catch (MsalServiceException ex) when (ex.Message.Contains("AADSTS70011"))
+        {
+            // Invalid scope. The scope has to be of the form "https://resourceurl/.default"
+            // Mitigation: change the scope to be as expected
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Scope provided is not supported");
+            Console.ResetColor();
+        }
+
+        if (result != null)
+        {
+            var httpClient = new HttpClient();
+            var defaultRequestHeaders = httpClient.DefaultRequestHeaders;
+            if (defaultRequestHeaders.Accept == null || !defaultRequestHeaders.Accept.Any(m => m.MediaType == "application/json"))
+            {
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            }
+            defaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
+
+            HttpResponseMessage response = await httpClient.GetAsync($"{config.ApiBaseAddress}/api/Categories");
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                var results = JsonDocument.Parse(json);
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Display(results.RootElement.EnumerateArray());
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Failed to call the Web Api: {response.StatusCode}");
+                string content = await response.Content.ReadAsStringAsync();
+
+                // Note that if you got reponse.Code == 403 and reponse.content.code == "Authorization_RequestDenied"
+                // this is because the tenant admin as not granted consent for the application to call the Web API
+                Console.WriteLine($"Content: {content}");
+            }
+            Console.ResetColor();
+
+        }
+    }
+
+    private void Display(JsonElement.ArrayEnumerator results)
+    {
+        Console.WriteLine("Web Api result: \n");
+
+        foreach (JsonElement element in results)
+        {
+            var id = -1;
+            var name = string.Empty;
+
+            if (element.TryGetProperty("id", out JsonElement idElement))
+            {
+                id = idElement.GetInt32();
+            }
+            if (element.TryGetProperty("name", out JsonElement nameElement))
+            {
+                name = nameElement.GetString();
+            }
+            Console.WriteLine($"ID: {id} - {name}");
+        }
+    }
+}
 ```
 
-11. Leave the namespace declaration untouched, then replace the contents of the `Program` class with the following code:
+11. Open the file **Program.cs**, then replace the contents with the following code:
 
 ```csharp
-class Program
+ProductCatalogDaemon.Main main = new ProductCatalogDaemon.Main();
+
+try
 {
-  static void Main(string[] args)
-  {
-    try
-    {
-      RunAsync().GetAwaiter().GetResult();
-    }
-    catch (Exception ex)
-    {
-      Console.ForegroundColor = ConsoleColor.Red;
-      Console.WriteLine(ex.Message);
-      Console.ResetColor();
-    }
-  }
-
-  private static async Task RunAsync()
-  {
-    AuthenticationConfig config = AuthenticationConfig.ReadFromJsonFile("appsettings.json");
-
-    IConfidentialClientApplication app =
-      ConfidentialClientApplicationBuilder.Create(config.ClientId)
-          .WithClientSecret(config.ClientSecret)
-          .WithAuthority(new Uri(config.Authority))
-          .Build();
-
-    // With client credentials flows the scopes is ALWAYS of the shape "resource/.default", as the
-    // application permissions need to be set statically (in the portal or by PowerShell), and then granted by
-    // a tenant administrator
-    string[] scopes = new string[] { config.ApiScope };
-
-    AuthenticationResult result = null;
-    try
-    {
-      result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
-      Console.ForegroundColor = ConsoleColor.Green;
-      Console.WriteLine("Token acquired \n");
-      Console.ResetColor();
-    }
-    catch (MsalServiceException ex) when (ex.Message.Contains("AADSTS70011"))
-    {
-      // Invalid scope. The scope has to be of the form "https://resourceurl/.default"
-      // Mitigation: change the scope to be as expected
-      Console.ForegroundColor = ConsoleColor.Red;
-      Console.WriteLine("Scope provided is not supported");
-      Console.ResetColor();
-    }
-
-    if (result != null)
-    {
-      var httpClient = new HttpClient();
-      var defaultRequestHeaders = httpClient.DefaultRequestHeaders;
-      if (defaultRequestHeaders.Accept == null || !defaultRequestHeaders.Accept.Any(m => m.MediaType == "application/json"))
-      {
-        httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-      }
-      defaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
-
-      HttpResponseMessage response = await httpClient.GetAsync($"{config.ApiBaseAddress}/api/Categories");
-      if (response.IsSuccessStatusCode)
-      {
-        string json = await response.Content.ReadAsStringAsync();
-        var results = JsonDocument.Parse(json);
-        Console.ForegroundColor = ConsoleColor.Gray;
-        Display(results.RootElement.EnumerateArray());
-      }
-      else
-      {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"Failed to call the Web Api: {response.StatusCode}");
-        string content = await response.Content.ReadAsStringAsync();
-
-        // Note that if you got reponse.Code == 403 and reponse.content.code == "Authorization_RequestDenied"
-        // this is because the tenant admin as not granted consent for the application to call the Web API
-        Console.WriteLine($"Content: {content}");
-      }
-      Console.ResetColor();
-
-    }
-  }
-
-  private static void Display(JsonElement.ArrayEnumerator results)
-  {
-    Console.WriteLine("Web Api result: \n");
-
-    foreach (JsonElement element in results)
-    {
-      var id = -1;
-      var name = string.Empty;
-
-      if (element.TryGetProperty("id", out JsonElement idElement))
-      {
-        id = idElement.GetInt32();
-      }
-      if (element.TryGetProperty("name", out JsonElement nameElement))
-      {
-        name = nameElement.GetString();
-      }
-      Console.WriteLine($"ID: {id} - {name}");
-    }
-  }
+    main.RunAsync().GetAwaiter().GetResult();
 }
+catch (Exception ex)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine(ex.Message);
+    Console.ResetColor();
+}
+
 ```
 
 ## Task 4: Update web API application to authorize application roles

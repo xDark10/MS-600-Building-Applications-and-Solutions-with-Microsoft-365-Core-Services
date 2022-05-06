@@ -68,7 +68,7 @@ In order for the app to run without user involvement, it will sign in to Azure A
 ## Task 2: Create a single organization ASP.NET web application
 
 > [!NOTE]
-> The instructions below assume you are using .NET 5. They were last tested using v5.0.202 of the .NET 5 SDK.
+> The instructions below assume you are using .NET 6. They were last tested using v6.0.202 of the .NET 6 SDK.
 
 1. Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder.
 
@@ -103,6 +103,8 @@ code .
 
 3. Set the **iisSettings.iisExpress.sslPort** property to **3007**.
 
+4. Set the **profiles.IdentityWeb.applicationUrl** property to **https://localhost:3007**.
+
 ### Configure the web application with the Azure AD application
 
 1. Locate and open the **./appsettings.json** file in the ASP.NET Core project.
@@ -115,19 +117,19 @@ code .
 
 5. Create a new property, **ClientSecret**, immediately after the **ClientId**. Set the value of this to the client secret you created when creating the Azure AD application in the previous section.
 
-6. Locate and open the **./Startup.cs** file in the ASP.NET Core project.
+6. Locate and open the **./Program.cs** file in the ASP.NET Core project.
 
-7. Within the `ConfigureServices()` method, locate the following line:
+7. Locate the following line:
 
 ```csharp
-services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 ```
 8. Update the line to the following. This will configure the web app's middleware to add support for the Microsoft Graph:
 
 ```csharp
-services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
     .EnableTokenAcquisitionToCallDownstreamApi(new string[] { "User.Read" })
     .AddMicrosoftGraph("https://graph.microsoft.com/v1.0", "User.Read")
     .AddInMemoryTokenCaches();
@@ -200,11 +202,11 @@ dotnet build
 dotnet run
 ```
 
-2. Open a browser and navigate to the url **https://localhost:5001**. The web application will redirect you to the Azure AD sign-in page.
+2. Open a browser and navigate to the url **https://localhost:3007**. The web application will redirect you to the Azure AD sign-in page.
 
 3. Sign in using a Work and School account from your Azure AD directory. Azure AD will redirect you back to the web application.
 
-4. Update the URL to **https://localhost:5001/User** to navigate to the **User** controller. Notice the name of the currently signed in user is displayed on the page:
+4. Update the URL to **https://localhost:3007/User** to navigate to the **User** controller. Notice the name of the currently signed in user is displayed on the page:
 
 ![Screenshot of the web application with user details](../../Linked_Image_Files/01-02-05-test-01.png)
 

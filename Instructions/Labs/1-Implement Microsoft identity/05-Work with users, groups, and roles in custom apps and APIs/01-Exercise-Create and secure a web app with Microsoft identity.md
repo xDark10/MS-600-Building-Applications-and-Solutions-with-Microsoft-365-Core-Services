@@ -45,7 +45,7 @@ In this exercise, you’ll learn how to create a .NET Web application that uses 
 ## Task 2: Create a single organization ASP.NET web application
 
 > [!NOTE]
-> The instructions below assume you are using .NET 5. They were last tested using v5.0.202 of the .NET 5 SDK.
+> The instructions below assume you are using .NET 6. They were last tested using v6.0.202 of the .NET 6 SDK.
 
 1. Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder.
 
@@ -121,7 +121,7 @@ dotnet build
 13. Run the following command to run the application:
 
 ```console
-dotnet run
+dotnet run --urls https://localhost:5001
 ```
 
 14. Open a browser and navigate to the url **https://localhost:5001**. The web application will redirect you to the Azure AD sign-in page.

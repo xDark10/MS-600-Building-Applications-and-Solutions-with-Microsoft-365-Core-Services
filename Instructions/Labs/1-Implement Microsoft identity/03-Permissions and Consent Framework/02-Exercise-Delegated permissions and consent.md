@@ -88,9 +88,9 @@ node server.js
 
 17. Select the **Sign In** button.
 
-Depending on the browser, you're using, a popup window will load or the page will redirect to the Azure AD sign-in prompt.
+Depending on the browser you're using, a popup window will load or the page will redirect to the Azure AD sign-in prompt.
 
-18. Sign in using a **Work or School Account** of a user in your organization. On the next screen, **don't select** the **Accept** button. Instead, examine the dialog:
+18. Sign in using a **Work or School Account** of a user with admin privileges in your organization. On the next screen, **don't select** the **Accept** button. Instead, examine the dialog:
 
 ![Screenshot of Azure AD popup sign-in experience for user 'meganb'](../../Linked_Image_Files/01-03-05-test-02.png)
 
@@ -143,9 +143,9 @@ node server.js
 
 5. Select the **Sign In** button.
 
-Depending on the browser, you're using, a popup window will load or the page will redirect to the Azure AD sign-in prompt.
+Depending on the browser you're using, a popup window will load or the page will redirect to the Azure AD sign-in prompt.
 
-6. Sign in using a **Work or School Account** of a user in your organization. On the next screen, notice how the list of permissions has changed:
+6. Sign in using a **Work or School Account** of a user with admin privileges in your organization. On the next screen, notice how the list of permissions has changed:
 
 ![Screenshot of Azure AD popup sign-in experience - Calendar.Read permission added](../../Linked_Image_Files/01-03-05-test-04.png)
 

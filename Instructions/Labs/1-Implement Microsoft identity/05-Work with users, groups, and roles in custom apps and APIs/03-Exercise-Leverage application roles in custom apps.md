@@ -127,7 +127,7 @@ namespace UserGroupRole.Models
   {
     public string ProductName { get; set; }
     public int CategoryId { get; set; }
-    public List<Category> Categories { get; set; }
+    public List<Category>? Categories { get; set; }
   }
 }
 ```
@@ -231,7 +231,7 @@ public ActionResult Create([Bind("ProductName", "CategoryId")] ProductViewModel 
 ```console
 dotnet dev-certs https --trust
 dotnet build
-dotnet run
+dotnet run --urls https://localhost:5001
 ```
 
 28. Open a browser and navigate to the url **https://localhost:5001**. The web application will redirect you to the Azure AD sign-in page.

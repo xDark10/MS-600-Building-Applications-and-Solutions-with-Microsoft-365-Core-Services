@@ -63,7 +63,7 @@ In this exercise, you’ll learn how to create a .NET Core web API application a
 ## Task 2: Create a .NET Core web API application
 
 > [!NOTE]
-> The instructions below assume you are using .NET 5. They were last tested using v5.0.202 of the .NET 5 SDK.
+> The instructions below assume you are using .NET 6. They were last tested using v6.0.202 of the .NET 6 SDK.
 
 A web API application is typically a dynamic web application that is called by client applications, returning information as JSON. This example will use an Azure AD application to authenticate calls made to the application using a token provided in the Authentication header of the Http request.
 
@@ -138,7 +138,7 @@ namespace ProductCatalog.Models
   public class Category
   {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string? Name { get; set; }
   }
 }
 ```
@@ -204,10 +204,10 @@ namespace ProductCatalog
 }
 ```
 
-16. The sample data will be stored as a singleton in the dependency injection container built into ASP.NET Core. Open the **Startup.cs** file in the root folder of the project. Add the following line at the bottom of the `ConfigureServices()` method:
+16. The sample data will be stored as a singleton in the dependency injection container built into ASP.NET Core. Open the **Program.cs** file in the root folder of the project. Add the following line immediately before this line of code `var app = builder.Build();`:
 
 ```csharp
-services.AddSingleton(SampleData.Initialize());
+builder.Services.AddSingleton(ProductCatalog.SampleData.Initialize());
 ```
 
 ### Web API Controllers
