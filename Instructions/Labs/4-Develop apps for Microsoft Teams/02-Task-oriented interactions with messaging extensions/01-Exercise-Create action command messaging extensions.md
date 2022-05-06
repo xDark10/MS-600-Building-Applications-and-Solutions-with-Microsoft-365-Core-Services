@@ -2,7 +2,7 @@
 
 
 
-In this exercise, you'll create an action command messaging extension for a custom Microsoft Teams app. Action commands allow you present your users with a modal popup to collect or display information, then process their interaction and send information back to Teams.
+In this exercise, you'll create an action command messaging extension for a custom Microsoft Teams app. Action commands allow you to present your users with a modal popup to collect or display information, then process their interaction and send information back to Teams.
 
 > [!NOTE]
 > This exercise requires a valid Azure subscription in order to create a bot using Bot Framework. However, if you do not have an Azure subscription, you can use the legacy Bot Framework Registration Portal. Refer to the following docs for more information: [Create a bot for Microsoft Teams](/microsoftteams/platform/bots/how-to/create-a-bot-for-teams)
@@ -22,9 +22,9 @@ You'll use Node.js to create a custom Microsoft Teams app in this module. The ex
 
 - [Node.js](https://nodejs.org/) - v12.\* (or higher)
 - NPM (installed with Node.js) - v6.\* (or higher)
-- [Gulp](https://gulpjs.com/) - v4.\* (or higher)
+- [Gulp-cli](https://gulpjs.com/) - v2.\* (or higher)
 - [Yeoman](https://yeoman.io/) - v3.\* (or higher)
-- [Yeoman Generator for Microsoft Teams](https://github.com/OfficeDev/generator-teams) - v3.2.0 (or higher)
+- [Yeoman Generator for Microsoft Teams](https://github.com/pnp/generator-teams) - v3.5.0 (or higher)
 - [Visual Studio Code](https://code.visualstudio.com)
 
 You must have the minimum versions of these prerequisites installed on your workstation.
@@ -70,6 +70,7 @@ The first step is to create a new Microsoft Teams bot for your messaging extensi
 - **Subscription**: *Select the subscription you selected previously when creating the resource group*
 - **Resource group**: *Select the resource group you created previously*
 - **Pricing tier**: *Select a preferred pricing tier; the F0 tier is free*
+- **Type of App**: *Select Multi Tenant*
 - **Microsoft App ID**: Create new Microsoft App ID
 
 10. Select **Create**.
@@ -144,7 +145,7 @@ yo teams
 - **Where do you want to place the files?**: Use the current folder
 - **Title of your Microsoft Teams App project?**: Planet Messaging
 - **Your (company) name? (max 32 characters)**: Contoso
-- **Which manifest version would you like to use?**: v1.10
+- **Which manifest version would you like to use?**: v1.11
 - **Quick scaffolding**: Yes
 - **What features do you want to add to your project?**: *(uncheck the default option **A Tab** using the <kbd>space</kbd> key and press <kbd>enter</kbd>)*
 - **The URL where you will host this solution?**: (Accept the default option)
@@ -688,9 +689,11 @@ This gulp task will run many other tasks all displayed within the command-line c
 > [!NOTE]
 > Microsoft Teams is available for use as a web client, desktop client and a mobile client. In this module, we will use the web client but any of the clients can be used.
 
-2. Using the app bar navigation menu, select the **More added apps** button. Then select **Browse all apps** followed by **Upload for me or my teams**.
+2. Using the app bar navigation menu, select the **More added apps** button. Then select **More apps**.
 
 ![Screenshot of More added apps dialog in Microsoft Teams](../../Linked_Image_Files/04-02-03-test-02.png)
+
+On the Apps page, select **Manage your apps** followed by **Upload a custom app**.
 
 3. In the file dialog that appears, select the Microsoft Teams package in your project. This app package is a ZIP file that can be found in the project's **./package** folder.
 
