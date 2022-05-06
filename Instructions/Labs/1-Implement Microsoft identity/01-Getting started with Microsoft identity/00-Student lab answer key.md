@@ -19,7 +19,7 @@ Observe the taskbar located at the bottom of your Windows client desktop. The ta
 
 - Visual Studio Code
 
-- Microsoft Visual Studio 2019
+- Microsoft Visual Studio 2022
 
 - PowerShell
 

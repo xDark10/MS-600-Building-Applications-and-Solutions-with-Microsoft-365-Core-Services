@@ -5,7 +5,7 @@ In this exercise, you’ll learn how to create and configure a single-page appli
 ## Task 1: Create a single-page application
 
 > [!NOTE]
-> The instructions below assume you are using v2.14.2 of the Microsoft Authentication Library for JavaScript 2.0.
+> The instructions below assume you are using v2.23.0 of the Microsoft Authentication Library for JavaScript 2.0.
 
 A single-page application (SPA) is typically a dynamic web application that runs entirely client side in the browser, usually in a single web page. To do this, the SPA must be served up as a routable page with a web server. The first step is to create a small web server and then create the SPA.
 
@@ -66,7 +66,7 @@ console.log('Press CTRL+C to stop the web server...');
 <head>
   <title>Getting Started with Microsoft identity</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.7.2/bluebird.min.js"></script>
-  <script src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.js"></script>
+  <script src="https://alcdn.msauth.net/browser/2.23.0/js/msal-browser.js"></script>
 </head>
 
 <body>
@@ -136,7 +136,7 @@ function updateUserInterface() {
 }
 ```
 
-7. Next, add the following function to **index.html** immediately before the `// TODO: add FUNCTIONS before this line` comment. This function requests an access token from Microsoft identity and submits a request to Microsoft Graph for the current user's information. The function uses the popup approach for modern browsers and it uses the redirect approach for Internet Explorer:
+7. Next, add the following function to **index.html** immediately before the `// TODO: add FUNCTIONS before this line` comment. This function requests an access token from Microsoft identity and submits a request to Microsoft Graph for the current user's information. The function uses the popup approach for modern browsers:
 
 ```javascript
 function acquireTokenAndGetUserEmails() {
@@ -311,7 +311,7 @@ node server.js
 
 3. Select the **Sign in** button.
 
-Depending on the browser, you're using, a popup window will load or the page will redirect to the Azure AD sign-in prompt.
+Depending on the browser you're using, a popup window will load or the page will redirect to the Azure AD sign-in prompt.
 
 4. Sign in using a **Work or School Account** and accept the permissions requested for the application by selecting **Accept**.
 

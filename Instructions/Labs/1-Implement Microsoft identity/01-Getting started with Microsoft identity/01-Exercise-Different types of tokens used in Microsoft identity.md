@@ -5,7 +5,7 @@ In this exercise, you'll create an Azure AD application and single page applicat
 ## Task 1: Create a Node.js web application
 
 > [!NOTE]
-> The instructions below assume you are using v2.14.2 of the Microsoft Authentication Library for JavaScript 2.0.
+> The instructions below assume you are using v2.23.0 of the Microsoft Authentication Library for JavaScript 2.0.
 
 1. Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder.
 
@@ -63,7 +63,7 @@ console.log('Press CTRL+C to stop the web server...');
 <head>
   <title>Getting Started with Microsoft identity</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.7.2/bluebird.min.js"></script>
-  <script src="https://alcdn.msauth.net/browser/2.11.1/js/msal-browser.js"></script>
+  <script src="https://alcdn.msauth.net/browser/2.23.0/js/msal-browser.js"></script>
 </head>
 
 <body>
@@ -134,7 +134,7 @@ function updateUserInterface() {
 }
 ```
 
-3. Next, add the following function to **index.html** immediately before the `// TODO: add FUNCTIONS before this line` comment. This function requests an access token from Microsoft identity and submits a request to Microsoft Graph for the current user's information. The function uses the popup approach for modern browsers and it uses the redirect approach for Internet Explorer:
+3. Next, add the following function to **index.html** immediately before the `// TODO: add FUNCTIONS before this line` comment. This function requests an access token from Microsoft identity and submits a request to Microsoft Graph for the current user's information. The function uses the popup approach for modern browsers:
 
 ```js
 function acquireTokenAndGetUser() {
@@ -246,7 +246,7 @@ function signOut() {
 
 The web page you created will submit a request to Microsoft Graph to retrieve the user's details. All requests to Microsoft Graph must include an access token as proof of the user's identity and that they have the necessary permissions to call Microsoft Graph. To obtain an access token, you must create an Azure AD application.
 
-1. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+1. Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
 2. Select **Azure Active Directory** in the left-hand navigation.
 
@@ -293,9 +293,6 @@ The last step is to configure the web page to use the Azure AD application.
 
 ## Task 5: Test the web application
 
-> [!IMPORTANT]
-> If you are using Internet Explorer, ensure that `http://localhost` and `https://login.microsoftonline.com` are both in the same **security zone** - **Trusted Sites** is recommended.
-
 1. To test the web page, first start the local web server. In the command prompt, execute the following command from the root of the project:
 
 ```shell
@@ -308,7 +305,7 @@ node server.js
 
 3. Select the **sign in** button.
 
-Depending on the browser, you are using, a popup window will load or the page will redirect to the Azure AD sign in prompt.
+Depending on the browser you are using, a popup window will load or the page will redirect to the Azure AD sign in prompt.
 
 4. Sign in using a **Work or School Account** and accept the permissions requested for the application by selecting **Accept**
 

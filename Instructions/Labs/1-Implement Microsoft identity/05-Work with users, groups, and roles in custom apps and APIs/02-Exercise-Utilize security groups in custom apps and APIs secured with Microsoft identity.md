@@ -160,10 +160,10 @@ namespace UserGroupRole
 }
 ```
 
-19. The sample data will be stored as a singleton in the dependency injection container built into ASP.NET core. Open the **Startup.cs** file in the root folder of the project. Add the following line at the bottom of the `ConfigureServices()` method:
+19. The sample data will be stored as a singleton in the dependency injection container built into ASP.NET Core. Open the **Program.cs** file in the root folder of the project. Add the following line immediately before this line of code `var app = builder.Build();`:
 
 ```csharp
-services.AddSingleton(SampleData.Initialize());
+builder.Services.AddSingleton(UserGroupRole.SampleData.Initialize());
 ```
 
 ### Add controller and view for Products
@@ -265,7 +265,7 @@ The ASP.NET identity system allows for an imperative test of membership via the 
 ```console
 dotnet dev-certs https --trust
 dotnet build
-dotnet run
+dotnet run --urls https://localhost:5001
 ```
 
 26. Open a browser and navigate to the url **https://localhost:5001**. The web application will redirect you to the Azure AD sign-in page.

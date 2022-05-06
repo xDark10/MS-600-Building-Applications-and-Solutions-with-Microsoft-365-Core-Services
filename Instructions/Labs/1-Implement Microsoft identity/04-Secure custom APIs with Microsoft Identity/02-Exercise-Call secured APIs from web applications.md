@@ -36,9 +36,9 @@ In this first application, you'll create an Azure AD application and ASP.NET Cor
 
 ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/01-04-05-azure-ad-portal-new-app-details-01.png)
 
-8. On the **Product Catalog WebApp** page, select the **Add a Redirect URI** link under the **Redirect URIs** in the **Essentials**.
+8. Select **Manage > Authentication** in the left-hand navigation.
 
-9. Select **+ Add a platform**, then select **Web**.
+9. On the **Authentication** page, select **+ Add a platform**. When the **Configure platforms** panel appears, then select **Web**.
 
 ![Screenshot of the add platform panel of the new app registration](../../Linked_Image_Files/01-04-05-azure-ad-portal-new-app-details-02.png)
 
@@ -139,19 +139,19 @@ namespace Constants
 
 ### Configure web application middleware
 
-11. Locate and open the **./Startup.cs** file in the ASP.NET Core project.
+11. Locate and open the **./Program.cs** file in the ASP.NET Core project.
 
-12. Within the `ConfigureServices()` method, locate the following line:
+12. Locate the following line:
 
 ```csharp
-services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 ```
 13. Update the line to the following. This will configure the web app's middleware to add support for the Microsoft Graph:
 
 ```csharp
-services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"))
+builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+    .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
     .EnableTokenAcquisitionToCallDownstreamApi(Constants.ProductCatalogAPI.SCOPES)
     .AddInMemoryTokenCaches();
 ```
@@ -168,7 +168,7 @@ namespace ProductCatalogWeb.Models
   public class Category
   {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string? Name { get; set; }
   }
 }
 ```
@@ -345,8 +345,8 @@ namespace ProductCatalogWeb.Models
   public class Product
   {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public Category Category { get; set; }
+    public string? Name { get; set; }
+    public Category? Category { get; set; }
   }
 }
 ```
@@ -360,9 +360,9 @@ namespace ProductCatalogWeb.Models
 {
   public class ProductViewModel
   {
-    public string ProductName { get; set; }
+    public string? ProductName { get; set; }
     public int CategoryId { get; set; }
-    public List<Category> Categories { get; set; }
+    public List<Category>? Categories { get; set; }
   }
 }
 ```
@@ -573,7 +573,7 @@ In a separate instance of Visual Studio code, open the folder containing the web
 ```console
 dotnet dev-certs https --trust
 dotnet build
-dotnet run
+dotnet run --urls https://localhost:5001
 ```
 
 25. Open a browser and navigate to the url **https://localhost:5001**. The web application will redirect you to the Azure AD sign-in page.

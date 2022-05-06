@@ -43,60 +43,60 @@ In this exercise, you'll learn about application permissions, how to define them
 
 ![Screenshot of the Configure Desktop + devices panel](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-authentication-02.png)
 
-11. Select **Save** in the top menu to save your changes.
-
 ### Create a client secret for the app
 
 In order for the daemon app to run without user involvement, it will sign in to Azure AD with an application ID and either a certificate or secret. In this exercise, you'll use a secret.
 
-12. Select **Manage > Certificates & secrets** from the left-hand navigation panel.
+11. Select **Manage > Certificates & secrets** from the left-hand navigation panel.
 
-13. Select the **+ New client secret** button:
+12. Select the **+ New client secret** button:
 
 ![Screenshot of the Certificates & Secrets page in the Azure AD admin center](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-secret-01.png)
 
-14. When prompted, give the secret a description and select one of the expiration duration options provided and select **Add**. *What you enter and select doesn't matter for the exercise.*
+13. When prompted, give the secret a description and select one of the expiration duration options provided and select **Add**. *What you enter and select doesn't matter for the exercise.*
 
 ![Screenshot of creating a new client secret](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-secret-02.png)
 
-15. The **Certificate & Secrets** page will display the new secret. Its important you copy this value as its only shown this one time; if you leave the page and come back, it will only show as a masked value.
+14. The **Certificate & Secrets** page will display the new secret. Its important you copy this value as its only shown this one time; if you leave the page and come back, it will only show as a masked value.
 
 ![Screenshot showing the new secret](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-secret-03.png)
 
-16. Copy the value of the secret as you'll need it later.
+15. Copy the value of the secret as you'll need it later.
 
 ### Grant Azure AD application permissions to Microsoft Graph
 
 After creating the application, you need to grant it the necessary permissions to Microsoft Graph
 
-17. Select **Manage > API Permissions** in the left-hand navigation panel.
+16. Select **Manage > API Permissions** in the left-hand navigation panel.
 
-18. From the **Identity Daemon - API Permissions** page, select the **+ Add a permission** button.
+17. From the **Identity Daemon - API Permissions** page, select the **+ Add a permission** button.
 
 ![Screenshot of the API Permissions page](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-permissions-01.png)
 
-19. In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
+18. In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
 
 ![Screenshot of Microsoft Graph in the Request API permissions panel](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-permissions-02.png)
 
-20. When prompted for the type of permission, select **Application permissions**.
+19. When prompted for the type of permission, select **Application permissions**.
 
-21. Enter **Mail.R** in the **Select permissions** search box and select the **Mail.Read** permission, followed by the **Add permissions** button at the bottom of the panel.
+20. Enter **Mail.R** in the **Select permissions** search box and select the **Mail.Read** permission, followed by the **Add permissions** button at the bottom of the panel.
 
 ![Screenshot of the Mail.Read permission in the Request API permissions panel](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-permissions-03.png)
 
-22. Notice that the permission has **Yes** listed in the column **Admin Consent Required** in the previous screenshot? This means that an administrator must grant this permission.
+21. Notice that the permission has **Yes** listed in the column **Admin Consent Required** in the following screenshot. This means that an administrator must grant this permission.
 
-23. On the **Identity Daemon - API Permissions** panel, select the button **Grant admin consent for [tenant]**, followed by the **Yes** button to grant all users in your organization this permission.
+![Screenshot of the permission needs to be granted by admin](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-permissions-04.png)
 
-![Screenshot of granting admin consent to Contoso for all requested permissions](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-permissions-04.png)
+22. On the **Identity Daemon - API Permissions** panel, select the button **Grant admin consent for [tenant]**, followed by the **Yes** button to grant all users in your organization this permission.
+
+![Screenshot of granting admin consent to Contoso for all requested permissions](../../Linked_Image_Files/01-03-07-azure-ad-portal-new-app-permissions-05.png)
 
 ## Task 2: Create a headless application
 
 > [!NOTE]
-> The instructions below assume you are using .NET 5. They were last tested using v5.0.202 of the .NET 5 SDK.
+> The instructions below assume you are using .NET 6. They were last tested using v6.0.202 of the .NET 6 SDK.
 
-You'll use a .NET 5 console application to run as a service. This app can then be configured to run on a defined schedule with no user involvement.
+You'll use a .NET 6 console application to run as a service. This app can then be configured to run on a defined schedule with no user involvement.
 
 1. Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
 
@@ -121,11 +121,11 @@ dotnet add package Microsoft.Extensions.Configuration.Json
 code .
 ```
 
-4. If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
+If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
 
 ### Update the console app to support Azure AD authentication
 
-5. Create a new file named **appsettings.json** in the root of the project and add the following code to it:
+4. Create a new file named **appsettings.json** in the root of the project and add the following code to it:
 
 ```json
 {
@@ -136,7 +136,7 @@ code .
 }
 ```
 
-6. Update properties with the following values:
+5. Update properties with the following values:
 
 - `YOUR_TENANT_ID_HERE`: Azure AD directory ID
 - `YOUR_APP_ID_HERE`: Azure AD client ID
@@ -144,9 +144,9 @@ code .
 
 #### Create helper classes
 
-7. Create a new folder **Helpers** in the project.
+6. Create a new folder **Helpers** in the project.
 
-8. Create a new file **AuthHandler.cs** in the **Helpers** folder and add the following code:
+7. Create a new file **AuthHandler.cs** in the **Helpers** folder and add the following code:
 
 ```cs
 using System.Net.Http;
@@ -175,7 +175,7 @@ namespace Helpers
 }
 ```
 
-9. Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
+8. Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
 
 ```cs
 using System.Net.Http;
@@ -226,83 +226,82 @@ namespace Helpers
   }
 }
 ```
+9. Create a new file **GraphHandler.cs** in the **Helpers** folder and add the following code:
 
-### Incorporate Microsoft Graph into the console app
-
-10. Open the **Program.cs** file and add the following `using` statements to the top fo the file:
-
-```cs
+```csharp
 using System.Collections.Generic;
 using Microsoft.Identity.Client;
 using Microsoft.Graph;
 using Microsoft.Extensions.Configuration;
+
+namespace Helpers
+{
+    public class GraphHandler
+    {
+        public IConfigurationRoot LoadAppSettings()
+        {
+            try
+            {
+                var config = new ConfigurationBuilder()
+                                  .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                                  .AddJsonFile("appsettings.json", false, true)
+                                  .Build();
+
+                if (string.IsNullOrEmpty(config["applicationId"]) ||
+                    string.IsNullOrEmpty(config["applicationSecret"]) ||
+                    string.IsNullOrEmpty(config["tenantId"]) ||
+                    string.IsNullOrEmpty(config["targetUserId"]))
+                {
+                    return null;
+                }
+
+                return config;
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                return null;
+            }
+        }
+
+        private IAuthenticationProvider CreateAuthorizationProvider(IConfigurationRoot config)
+        {
+            var tenantId = config["tenantId"];
+            var clientId = config["applicationId"];
+            var clientSecret = config["applicationSecret"];
+            var authority = $"https://login.microsoftonline.com/{config["tenantId"]}/v2.0";
+
+            List<string> scopes = new List<string>();
+            scopes.Add("https://graph.microsoft.com/.default");
+
+            var cca = ConfidentialClientApplicationBuilder.Create(clientId)
+                                                    .WithAuthority(authority)
+                                                    .WithClientSecret(clientSecret)
+                                                    .Build();
+            return MsalAuthenticationProvider.GetInstance(cca, scopes.ToArray());
+        }
+
+        public GraphServiceClient GetAuthenticatedGraphClient(IConfigurationRoot config)
+        {
+            var authenticationProvider = CreateAuthorizationProvider(config);
+            return new GraphServiceClient(authenticationProvider);
+        }
+    }
+}
+```
+
+### Incorporate Microsoft Graph into the console app
+
+10. Open the **Program.cs** file and add the following `using` statements to the top of the file:
+
+```csharp
 using Helpers;
 ```
 
-11. Add the following method `LoadAppSettings` to the `Program` class. The method retrieves the configuration details from the **appsettings.json** file previously created:
+11. Add the following code to the end of the file to load the configuration settings from the **appsettings.json** file:
 
-```cs
-private static IConfigurationRoot LoadAppSettings()
-{
-  try
-  {
-    var config = new ConfigurationBuilder()
-                      .SetBasePath(System.IO.Directory.GetCurrentDirectory())
-                      .AddJsonFile("appsettings.json", false, true)
-                      .Build();
-
-    if (string.IsNullOrEmpty(config["applicationId"]) ||
-        string.IsNullOrEmpty(config["applicationSecret"]) ||
-        string.IsNullOrEmpty(config["tenantId"]) ||
-        string.IsNullOrEmpty(config["targetUserId"]))
-    {
-      return null;
-    }
-
-    return config;
-  }
-  catch (System.IO.FileNotFoundException)
-  {
-    return null;
-  }
-}
-```
-
-12. Add the following method `CreateAuthorizationProvider` to the `Program` class. The method will create an instance of the clients used to call Microsoft Graph.
-
-```cs
-private static IAuthenticationProvider CreateAuthorizationProvider(IConfigurationRoot config)
-{
-  var tenantId = config["tenantId"];
-  var clientId = config["applicationId"];
-  var clientSecret = config["applicationSecret"];
-  var authority = $"https://login.microsoftonline.com/{config["tenantId"]}/v2.0";
-
-  List<string> scopes = new List<string>();
-  scopes.Add("https://graph.microsoft.com/.default");
-
-  var cca = ConfidentialClientApplicationBuilder.Create(clientId)
-                                          .WithAuthority(authority)
-                                          .WithClientSecret(clientSecret)
-                                          .Build();
-  return MsalAuthenticationProvider.GetInstance(cca, scopes.ToArray());
-}
-```
-
-13. Add the following method `GetAuthenticatedGraphClient` to the `Program` class. The method creates an instance of the `GraphServiceClient` object.
-
-```cs
-private static GraphServiceClient GetAuthenticatedGraphClient(IConfigurationRoot config)
-{
-  var authenticationProvider = CreateAuthorizationProvider(config);
-  return new GraphServiceClient(authenticationProvider);
-}
-```
-
-14. Locate the `Main` method in the `Program` class. Add the following code to the end of the `Main` method to load the configuration settings from the **appsettings.json** file:
-
-```cs
-var config = LoadAppSettings();
+```csharp
+var graphHandler = new GraphHandler();
+var config = graphHandler.LoadAppSettings();
 if (config == null)
 {
   Console.WriteLine("Invalid appsettings.json file.");
@@ -310,15 +309,15 @@ if (config == null)
 }
 ```
 
-15. Add the following code to the end of the `Main()` method to obtain an instance of the Microsoft Graph .NET SDK client that you'll use to get a user's email messages:
+12. Add the following code to the end of the file to obtain an instance of the Microsoft Graph .NET SDK client that you'll use to get a user's email messages:
 
-```cs
-var client = GetAuthenticatedGraphClient(config);
+```csharp
+var client = graphHandler.GetAuthenticatedGraphClient(config);
 ```
 
-16. Next, add the following code to the end of the `Main()` method. This will create a request using Microsoft Graph for a specific user's email messages and display them in the console. The ID of the user is pulled from the **appsettings.json** file:
+13. Next, add the following code to the end of the file. This will create a request using Microsoft Graph for a specific user's email messages and display them in the console. The ID of the user is pulled from the **appsettings.json** file:
 
-```cs
+```csharp
 var requestUserEmail = client.Users[config["targetUserId"]].Messages.Request();
 var results = requestUserEmail.GetAsync().Result;
 foreach (var message in results)
@@ -335,35 +334,35 @@ Console.WriteLine(requestUserEmail.GetHttpRequestMessage().RequestUri);
 
 ### Obtain the ID of a user to use in the test
 
-17. Using the [Azure AD admin center](https://aad.portal.azure.com/), select **Users**, and then select one of the users from the organization:
+14. Using the [Azure AD admin center](https://aad.portal.azure.com/), select **Users**, and then select one of the users from the organization:
 
 ![Screenshot of the All Users page in the Azure AD admin center](../../Linked_Image_Files/01-03-07-test-01.png)
 
-18. Locate the **Object ID** property and copy the value.
+15. Locate the **Object ID** property and copy the value.
 
-19. In the **appsettings.json** file in the console application, replace  `TARGET_USER_ID_HERE` value with the user's Object ID property you copied.
+16. In the **appsettings.json** file in the console application, replace  `TARGET_USER_ID_HERE` value with the user's Object ID property you copied.
 
 ### Build and test the application
 
-20. Run the following command in a command prompt to ensure the developer certificate has been trusted:
+17. Run the following command in a command prompt to ensure the developer certificate has been trusted:
 
 ```console
 dotnet dev-certs https --trust
 ```
 
-21. Run the following command in a command prompt to compile the console application:
+18. Run the following command in a command prompt to compile the console application:
 
 ```console
 dotnet build
 ```
 
-22. Run the following command to run the console application:
+19. Run the following command to run the console application:
 
 ```console
 dotnet run
 ```
 
-23. After a moment, the app will display a list of all the specified user's emails obtained using the Microsoft Graph .NET SDK.
+20. After a moment, the app will display a list of all the specified user's emails obtained using the Microsoft Graph .NET SDK.
 
 ![Screenshot of the All Users page in the console](../../Linked_Image_Files/01-03-07-test-02.png)
 
