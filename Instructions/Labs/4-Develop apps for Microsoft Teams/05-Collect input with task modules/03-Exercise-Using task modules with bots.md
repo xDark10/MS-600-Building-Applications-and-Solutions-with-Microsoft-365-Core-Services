@@ -1,7 +1,5 @@
 # Exercise 3: Using task modules with bots
 
-
-
 In this exercise, you'll learn how to use task modules with bots in Microsoft Teams.
 
 The first step will be to create a bot and add it to our existing Microsoft Teams app. You'll then extend the bot to support the existing task modules to display a video and change the selected video.
@@ -53,6 +51,7 @@ In the **Create an Azure Bot** blade, enter the following values and then select
 - **Subscription**: *Select the subscription you selected previously when creating the resource group*
 - **Resource group**: *Select the resource group you created previously*
 - **Pricing tier**: *Select a preferred pricing tier; the F0 tier is free*
+- **Type of App**: *Select Multi Tenant*
 - **Microsoft App ID**: Create new Microsoft App ID
 
 Select **Create**.
