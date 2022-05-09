@@ -10,7 +10,7 @@ In this example, you'll sign in to Microsoft Graph with a real user.
 
 1. Open a browser and navigate to https://developer.microsoft.com/graph/graph-explorer
 
-![Screenshot of the Graph Explorer](../media/graph-explorer-01.png)
+![Screenshot of the Graph Explorer](../../Linked_Image_Files/02-01-graph-explorer-01.png)
 
 2. Select the **Sign to Graph Explorer** button in the left-side panel and enter the credentials of a Work and School account.
 
@@ -20,9 +20,9 @@ In this example, you'll sign in to Microsoft Graph with a real user.
 - Calendars.Read
 - Files.ReadWrite
 
-![Screenshot of the Graph Explorer user options](../media/07-graph-explorer-select-permissions-01.png)
+![Screenshot of the Graph Explorer user options](../../Linked_Image_Files/02-01-07-graph-explorer-select-permissions-01.png)
 
-![Screenshot of the Graph Explorer permissions panel](../media/07-graph-explorer-select-permissions-02.png)
+![Screenshot of the Graph Explorer permissions panel](../../Linked_Image_Files/02-01-07-graph-explorer-select-permissions-02.png)
 
 ## Task 2: Submit three (3) GET requests in a single batch
 
@@ -59,13 +59,13 @@ All batch requests are submitted as HTTP POSTs to a specific endpoint: https://g
 }
 ```
 
-![Screenshot of Microsoft Graph batch request](../media/graph-explorer-03.png)
+![Screenshot of Microsoft Graph batch request](../../Linked_Image_Files/02-01-graph-explorer-03.png)
 
 3. Select the **Run Query** button.
 
 4. Observe the results in the **Response Preview** box at the bottom of the page:
 
-![Screenshot of Microsoft Graph batch response](../media/graph-explorer-04.png)
+![Screenshot of Microsoft Graph batch response](../../Linked_Image_Files/02-01-graph-explorer-04.png)
 
 Notice the response includes three individual responses within the `responses` collection. Also notice for response `id:3`, the data that was returned, as indicated by the `@odata.nextLink` property, is from the **/me/events** collection. This query matches the third request in the initial request submitted.
 
@@ -109,7 +109,7 @@ In this example, you'll submit a request that creates a new folder in the curren
 
 3. Observe the results in the **Response Preview** box at the bottom of the page:
 
-![Screenshot of Microsoft Graph batch response in Graph Explorer](../media/graph-explorer-05.png)
+![Screenshot of Microsoft Graph batch response in Graph Explorer](../../Linked_Image_Files/02-01-graph-explorer-05.png)
 
 4. Notice this response contains two objects. The first request resulted in an HTTP 201 that says the item, or folder, was created.
 

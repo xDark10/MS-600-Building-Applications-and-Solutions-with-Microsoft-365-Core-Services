@@ -19,13 +19,13 @@ In this exercise, you'll use the `$expand` query parameter to retrieve the conte
 
 5. Select **Manage > API Permissions** in the left-hand navigation panel.
 
-![Screenshot of the API Permissions navigation item](../media/05-azure-ad-portal-new-app-permissions-01.png)
+![Screenshot of the API Permissions navigation item](../../Linked_Image_Files/02-01-05-azure-ad-portal-new-app-permissions-01.png)
 
 6. Select the **+ Add a permission** button.
 
 7. In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
 
-![Screenshot of Microsoft Graph in the Request API permissions panel](../media/azure-ad-portal-new-app-permissions-02.png)
+![Screenshot of Microsoft Graph in the Request API permissions panel](../../Linked_Image_Files/02-01-azure-ad-portal-new-app-permissions-02.png)
 
 8. When prompted for the type of permission, select **Application permissions**.
 
@@ -67,7 +67,7 @@ dotnet run
 
 15. Notice how the name of each group is written to the console, and the names of the members:
 
-![Screenshot of the console application with the $expand query parameters](../media/app-run-06.png)
+![Screenshot of the console application with the $expand query parameters](../../Linked_Image_Files/02-01-app-run-06.png)
 
 This example focuses on using the Microsoft Graph .NET SDK to create queries. In the previous screenshot, notice the query endpoint submitted to Microsoft Graph after the results are written to the console.
 
@@ -77,13 +77,13 @@ The Graph Explorer enables developers to create and test queries using the Micro
 
 1. Open a browser and navigate to https://developer.microsoft.com/graph/graph-explorer
 
-![Screenshot of the Graph Explorer](../media/graph-explorer-01.png)
+![Screenshot of the Graph Explorer](../../Linked_Image_Files/02-01-graph-explorer-01.png)
 
 The Graph Explorer will execute the query entered at the top of the page and display the results in the lower half of the page.
 
 2. Select the **Run Query** button to execute the default query **https://graph.microsoft.com/v1.0/me/**:
 
-![Screenshot of the Graph Explorer displaying results from the default query](../media/graph-explorer-02.png)
+![Screenshot of the Graph Explorer displaying results from the default query](../../Linked_Image_Files/02-01-graph-explorer-02.png)
 
 Without logging in, the Graph Explorer will query a sample data collection.
 
