@@ -400,8 +400,20 @@ Add the following code to the page. Most of this code mirrors what you would see
 import * as React from "react";
 import { Provider, Flex, Text, Button, Header, Input } from "@fluentui/react-northstar";
 import { useState, useEffect } from "react";
-import { useTeams, getQueryVariable } from "msteams-react-base-component";
+import { useTeams } from "msteams-react-base-component";
 import * as microsoftTeams from "@microsoft/teams-js";
+
+const getQueryVariable = (variable: string): string | undefined => {
+  const query = window.location.search.substring(1);
+  const vars = query.split("&");
+  for (const varPairs of vars) {
+      const pair = varPairs.split("=");
+      if (decodeURIComponent(pair[0]) === variable) {
+          return decodeURIComponent(pair[1]);
+      }
+  }
+  return undefined;
+};
 
 export const VideoSelectorTaskModule = () => {
 
