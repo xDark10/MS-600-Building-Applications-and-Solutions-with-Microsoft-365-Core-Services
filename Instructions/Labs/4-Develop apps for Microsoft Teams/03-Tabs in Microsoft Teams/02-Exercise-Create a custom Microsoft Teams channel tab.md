@@ -111,11 +111,12 @@ Locate the `useEffect` method that depends upon the `context` variable. This met
 ```typescript
 useEffect(() => {
   if (context) {
-    setMathOperator(context.entityId.replace("MathPage", ""));
-    entityId.current = context.entityId;
-    microsoftTeams.settings.registerOnSaveHandler(onSaveHandler);
-    microsoftTeams.settings.setValidityState(true);
-    microsoftTeams.appInitialization.notifySuccess();
+    setMathOperator(context.page.id.replace("MathPage", ""));
+    entityId.current = context.page.id;
+    pages.config.registerOnSaveHandler(onSaveHandler);
+    pages.config.registerOnSaveHandler(onSaveHandler);
+    pages.config.setValidityState(true);
+    app.notifySuccess();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [context]);
@@ -207,10 +208,10 @@ Locate the `useEffect` hook that depends upon the Microsoft Teams context. This 
 ```typescript
 useEffect(() => {
   if (context) {
-    setEntityId(context.entityId);
+    setEntityId(context.page.id);
     setMathTabState(state => ({ 
       ...state, 
-      mathOperator: context.entityId.replace("MathPage", "")
+      mathOperator: context.page.id.replace("MathPage", "")
     } as IConfigMathTabState));
   }
 }, [context]);
