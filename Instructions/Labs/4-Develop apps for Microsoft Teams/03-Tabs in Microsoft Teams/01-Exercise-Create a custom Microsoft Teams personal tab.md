@@ -1,7 +1,6 @@
 # Exercise 1: Create a custom Microsoft Teams personal tab
 
 
-
 In this exercise, you'll create a new Microsoft Teams personal tab by using the Microsoft Teams Yeoman generator, Visual Studio Code, and App Studio.
 
 ## Prerequisites
@@ -233,7 +232,6 @@ Finally, locate the string `TODO: add new list item form here` in the `render()`
 ```
 
 ## Task 4: Use App Studio to update the Microsoft Teams app manifest
-
 
 
 At this point, the app is complete. Recall from our initial test that when the app was added to Microsoft Teams, it had a few todo strings for the description of the app. While you could change these values in the project's **./src/manifest/manifest.json** file, you'll use App Studio to make these changes.

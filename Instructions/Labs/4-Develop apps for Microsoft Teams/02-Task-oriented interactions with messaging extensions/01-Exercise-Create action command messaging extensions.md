@@ -1,7 +1,5 @@
 # Exercise 1: Create action command messaging extensions
 
-
-
 In this exercise, you'll create an action command messaging extension for a custom Microsoft Teams app. Action commands allow you to present your users with a modal popup to collect or display information, then process their interaction and send information back to Teams.
 
 > [!NOTE]

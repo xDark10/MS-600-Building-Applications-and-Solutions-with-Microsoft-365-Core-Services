@@ -1,7 +1,5 @@
 # Exercise 1: Creating conversational bots
 
-
-
 In this exercise, you’ll learn how to create and add a new bot to a Microsoft Teams app and interact with it from the Microsoft Teams client.
 
 > [!NOTE]
