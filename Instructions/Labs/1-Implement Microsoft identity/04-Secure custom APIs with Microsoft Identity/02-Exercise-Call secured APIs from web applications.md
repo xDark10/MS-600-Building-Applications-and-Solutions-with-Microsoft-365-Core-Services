@@ -71,7 +71,7 @@ In order for the app to call the web API, it must acquire an access token with t
 ## Task 2: Create a single organization ASP.NET web application
 
 > [!NOTE]
-> The instructions below assume you are using .NET 5. They were last tested using v5.0.202 of the .NET 5 SDK.
+> The instructions below assume you are using .NET 6. They were last tested using v6.0.202 of the .NET 6 SDK.
 
 1. Open your command prompt, navigate to a directory where you want to save your work, create a new folder, and change directory into that folder.
 
