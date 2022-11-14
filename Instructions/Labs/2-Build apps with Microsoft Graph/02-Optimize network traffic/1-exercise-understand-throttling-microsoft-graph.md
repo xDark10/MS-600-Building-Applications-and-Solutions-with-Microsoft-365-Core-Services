@@ -20,38 +20,38 @@ You must have the minimum versions of these prerequisites installed on your work
 
 ## Task 1: Create an Azure AD application
 
-Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+1. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
   ![Screenshot of the App registrations](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-home.png)
 
-Select **Manage > App registrations** in the left-hand navigation.
+3. Select **Manage > App registrations** in the left-hand navigation.
 
-On the **App registrations** page, select **New registration**.
+4. On the **App registrations** page, select **New registration**.
 
   ![Screenshot of App Registrations page](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-00.png)
 
-On the **Register an application** page, set the values as follows:
+5. On the **Register an application** page, set the values as follows:
 
 - **Name**: Graph Console App
 - **Supported account types**: Accounts in this organizational directory only (Contoso only - Single tenant)
 
     ![Screenshot of the Register an application page](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-01.png)
 
-    Select **Register**.
+6. Select **Register**.
 
-On the **Graph Console App** page, copy the value of the **Application (client) ID** and **Directory (tenant) ID**; you'll need these in the application.
+7. On the **Graph Console App** page, copy the value of the **Application (client) ID** and **Directory (tenant) ID**; you'll need these in the application.
 
   ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-details.png)
 
-Select **Manage > Authentication**.
+8. Select **Manage > Authentication**.
 
-In the **Platform configurations** section, select the **Add a platform** button. Then in the **Configure platforms** panel, select the **Mobile and desktop applications** button:
+9. In the **Platform configurations** section, select the **Add a platform** button. Then in the **Configure platforms** panel, select the **Mobile and desktop applications** button:
 
 ![Screenshot of the Platform configurations section](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-02.png)
 
-In the **Redirect URIs** section of the **Configure Desktop + devices** panel, select the checkbox that ends with **nativeclient**, set **Custom redirect URIs** to **http://localhost**, and then select the **Configure** button:
+10. In the **Redirect URIs** section of the **Configure Desktop + devices** panel, select the checkbox that ends with **nativeclient**, set **Custom redirect URIs** to **http://localhost**, and then select the **Configure** button:
 
 ![Screenshot of the Configure Desktop + devices panel](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-03.png)
 
@@ -59,23 +59,23 @@ In the **Redirect URIs** section of the **Configure Desktop + devices** panel, s
 
 After creating the application, you need to grant it the necessary permissions to Microsoft Graph
 
-Select **API Permissions** in the left-hand navigation panel.
+11. Select **API Permissions** in the left-hand navigation panel.
 
 ![Screenshot of the API Permissions navigation item](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-permissions-01.png)
 
-Select the **Add a permission** button.
+12. Select the **Add a permission** button.
 
-In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
+13. In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
 
 ![Screenshot of Microsoft Graph in the Request API permissions panel](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-permissions-02.png)
 
-When prompted for the type of permission, select **Delegated permissions**.
+14. When prompted for the type of permission, select **Delegated permissions**.
 
 ![Screenshot of the Mail.Read permission in the Request API permissions panel](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-permissions-03.png)
 
-Enter **Mail.R** in the **Select permissions** search box and select the **Mail.Read** permission, followed by the **Add permission** button at the bottom of the panel.
+15. Enter **Mail.R** in the **Select permissions** search box and select the **Mail.Read** permission, followed by the **Add permission** button at the bottom of the panel.
 
-In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select **Yes** in the confirmation dialog.
+16. In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select **Yes** in the confirmation dialog.
 
 ![Screenshot of the Configured permissions panel](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-permissions-04.png)
 
@@ -84,16 +84,17 @@ In the **Configured Permissions** panel, select the button **Grant admin consent
 
 ## Task 2: Create .NET Core console application
 
-Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
+1. Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
 
 ```console
 dotnet new console -o graphconsoleapp
 ```
 
-After creating the application, run the following commands to ensure your new project runs correctly.
+2. After creating the application, run the following commands to ensure your new project runs correctly:
 
 ```console
 cd graphconsoleapp
+dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json
 dotnet add package Microsoft.Identity.Client
 dotnet add package Microsoft.Graph
 dotnet add package Microsoft.Extensions.Configuration
@@ -101,13 +102,16 @@ dotnet add package Microsoft.Extensions.Configuration.FileExtensions
 dotnet add package Microsoft.Extensions.Configuration.Json
 ```
 
-Open the application in Visual Studio Code using the following command:
+> [!NOTE]
+> Be sure to confirm that each package is successfully installed before proceeding.  
+
+3. Open the application in Visual Studio Code using the following command:
 
 ```console
 code .
 ```
 
-If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
+4. If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
 
 ### Update the console app to enable nullable reference types
 
@@ -125,7 +129,7 @@ Open the **graphconsoleapp.csproj** file and ensure the `<PropertyGroup>` elemen
 
 ### Update the console app to support Azure AD authentication
 
-Create a new file named **appsettings.json** in the root of the project and add the following code to it:
+5. Create a new file named **appsettings.json** in the root of the project and add the following code to it:
 
 ```json
 {
@@ -134,16 +138,16 @@ Create a new file named **appsettings.json** in the root of the project and add 
 }
 ```
 
-Update properties with the following values:
+6. Update properties with the following values:
 
 - `YOUR_TENANT_ID_HERE`: Azure AD directory ID
 - `YOUR_APP_ID_HERE`: Azure AD client ID
 
 #### Create helper classes
 
-Create a new folder **Helpers** in the project.
+7. Create a new folder **Helpers** in the project.
 
-Create a new file **AuthHandler.cs** in the **Helpers** folder and add the following code:
+8. Create a new file **AuthHandler.cs** in the **Helpers** folder and add the following code:
 
 ```csharp
 using Microsoft.Graph;
@@ -169,7 +173,7 @@ namespace Helpers
 }
 ```
 
-Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
+9. Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
 
 ```csharp
 using System.Net.Http.Headers;
@@ -236,7 +240,7 @@ namespace Helpers
 
 ### Incorporate Microsoft Graph into the console app
 
-Open the **Program.cs** file and replace the entire contents with the following code:
+10. Open the **Program.cs** file and replace the entire contents with the following code:
 
 ```csharp
 using System;
@@ -264,7 +268,7 @@ namespace graphconsoleapp
 }
 ```
 
-Add the following method `LoadAppSettings` to the `Program` class. The method retrieves the configuration details from the **appsettings.json** file previously created:
+11. Add the following method `LoadAppSettings` to the `Program` class. The method retrieves the configuration details from the **appsettings.json** file previously created:
 
 ```csharp
 private static IConfigurationRoot? LoadAppSettings()
@@ -291,7 +295,7 @@ private static IConfigurationRoot? LoadAppSettings()
 }
 ```
 
-Add the following method `CreateAuthorizationProvider` to the `Program` class. The method will create an instance of the clients used to call Microsoft Graph.
+12. Add the following method `CreateAuthorizationProvider` to the `Program` class. The method will create an instance of the clients used to call Microsoft Graph.
 
 ```csharp
 private static IAuthenticationProvider CreateAuthorizationProvider(IConfigurationRoot config)
@@ -310,7 +314,7 @@ private static IAuthenticationProvider CreateAuthorizationProvider(IConfiguratio
 }
 ```
 
-Add the following method `GetAuthenticatedHTTPClient` to the `Program` class. The method creates an instance of the `HttpClient` object.
+13. Add the following method `GetAuthenticatedHTTPClient` to the `Program` class. The method creates an instance of the `HttpClient` object.
 
 ```csharp
 private static HttpClient GetAuthenticatedHTTPClient(IConfigurationRoot config)
@@ -321,7 +325,7 @@ private static HttpClient GetAuthenticatedHTTPClient(IConfigurationRoot config)
 }
 ```
 
-Locate the `Main` method in the `Program` class. Replace the contents of the `Main` method with the following code that loads the configuration settings from the **appsettings.json** file:
+14. Locate the `Main` method in the `Program` class. Replace the contents of the `Main` method with the following code that loads the configuration settings from the **appsettings.json** file:
 
 ```csharp
 var config = LoadAppSettings();
@@ -332,13 +336,13 @@ if (config == null)
 }
 ```
 
-Add the following code to the end of the `Main` method, just after the code added in the last step. This code will obtain an authenticated instance of the `HttpClient`:
+15. Add the following code to the end of the `Main` method, just after the code added in the last step. This code will obtain an authenticated instance of the `HttpClient`:
 
 ```csharp
 var client = GetAuthenticatedHTTPClient(config);
 ```
 
-Add the following code to the end of the `Main` method, just after the code added in the last step. This code will submit a request for the current user's profile so it can display a welcome message to the user:
+16. Add the following code to the end of the `Main` method, just after the code added in the last step. This code will submit a request for the current user's profile so it can display a welcome message to the user:
 
 ```csharp
 var profileResponse = client.GetAsync("https://graph.microsoft.com/v1.0/me").Result;
@@ -348,9 +352,9 @@ var displayName = profileObject.RootElement.GetProperty("displayName").GetString
 Console.WriteLine("Hello " + displayName);
 ```
 
-Add the following code to issue many requests to Microsoft Graph. This code will create a collection of tasks to request a specific Microsoft Graph endpoint. When a task succeeds, it will write a dot to the console while failed request will write an `X` to the console. The most recent failed request's status code and headers are saved.
+17. Add the following code to issue many requests to Microsoft Graph. This code will create a collection of tasks to request a specific Microsoft Graph endpoint. When a task succeeds, it will write a dot to the console while failed request will write an `X` to the console. The most recent failed request's status code and headers are saved.
 
-All tasks are then executed in parallel. At the conclusion of all requests, the results are written to the console:
+18. All tasks are then executed in parallel. At the conclusion of all requests, the results are written to the console:
 
 ```csharp
 var totalRequests = 100;
@@ -395,27 +399,27 @@ if (successRequests != totalRequests)
 
 ### Build and test the application
 
-Run the following command to ensure the developer certificate has been trusted:
+19. Run the following command to ensure the developer certificate has been trusted:
 
 ```console
 dotnet dev-certs https --trust
 ```
 
-Run the following command in a command prompt to compile the console application:
+20. Run the following command in a command prompt to compile the console application:
 
 ```console
 dotnet build
 ```
 
-Run the following command to run the console application:
+21. Run the following command to run the console application:
 
 ```console
 dotnet run
 ```
 
-You now need to authenticate with Azure Active Directory. A new tab in your default browser should open to a page asking you to sign-in. After you've logged in successfully, you'll be redirected to a page displaying the message, **"Authentication complete. You can return to the application. Feel free to close this browser tab"**. You may now close the browser tab and switch back to the console application.
+22. You now need to authenticate with Azure Active Directory. A new tab in your default browser should open to a page asking you to sign-in. After you've logged in successfully, you'll be redirected to a page displaying the message, **"Authentication complete. You can return to the application. Feel free to close this browser tab"**. You may now close the browser tab and switch back to the console application.
 
-The console app may take a one or two minutes to complete the process issuing the requests to Microsoft Graph. When this process is complete, you'll see the results written to the console:
+23. The console app may take a one or two minutes to complete the process issuing the requests to Microsoft Graph. When this process is complete, you'll see the results written to the console:
 
 ![Screenshot of the console application with no query parameters](../../Linked_Image_Files/2-Graph/optimize-network-traffic/03-app-run-01.png)
 

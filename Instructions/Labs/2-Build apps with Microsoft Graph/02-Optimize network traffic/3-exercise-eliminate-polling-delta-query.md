@@ -9,35 +9,35 @@ In this exercise, you'll use the Azure AD application and .NET console applicati
 
 In this exercise, you'll update the application to get a list of all the users in the tenant. To do this task, the Azure AD application needs more permissions.
 
-Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account**.
+1. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account**.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
   ![Screenshot of Azure AD Portal](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-home.png)
 
-Select **Manage > App registrations** in the left-hand navigation.
+3. Select **Manage > App registrations** in the left-hand navigation.
 
-On the **App registrations** page, select the **Graph Console App**, or the name of the application you created in this module in a previous exercise.
+4. On the **App registrations** page, select the **Graph Console App**, or the name of the application you created in this module in a previous exercise.
 
-Select **API Permissions** in the left-hand navigation panel.
+5. Select **API Permissions** in the left-hand navigation panel.
 
 ![Screenshot of the API Permissions navigation item](../../Linked_Image_Files/2-Graph/optimize-network-traffic/07-azure-ad-portal-add-permission.png)
 
-Select the **Add a permission** button.
+6. Select the **Add a permission** button.
 
-In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
+7. In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
 
 ![Screenshot of Microsoft Graph in the Request API permissions panel](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-new-app-permissions-02.png)
 
-When prompted for the type of permission, select **Delegated permissions** and search for the permission **User.Read.All**, select it and then select the **Add permission** button at the bottom of the panel.
+8. When prompted for the type of permission, select **Delegated permissions** and search for the permission **User.Read.All**, select it and then select the **Add permission** button at the bottom of the panel.
 
-In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select the **Yes** button in the consent dialog to grant all users in your organization this permission.
+9. In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select the **Yes** button in the consent dialog to grant all users in your organization this permission.
 
 ## Task 2: Update the console application to use delta query
 
 Now you'll update the application to retrieve and then display all users in the tenant with Microsoft Graph. After displaying the list of users, the application will sleep for 10 seconds and repeat the same query, but instead only display the users who have been added or updated.
 
-First, add the following two members to the class, immediately before the `Main` method:
+1. First, add the following two members to the class, immediately before the `Main` method:
 
 ```csharp
 private static object? _deltaLink = null;
@@ -46,7 +46,7 @@ private static IUserDeltaCollectionPage? _previousPage = null;
 
 ### Add a Method to Display Users
 
-Within the **Program.cs** file, add the following method to write all users to the console:
+2. Within the **Program.cs** file, add the following method to write all users to the console:
 
 ```csharp
 private static void OutputUsers(IUserDeltaCollectionPage users)
@@ -66,7 +66,7 @@ If this is the first time the request is made, indicated by the `_previousPage =
 
 Otherwise, if there are more pages of users, it will start a request for the next page using the delta link string that you'll obtain later.
 
-Add the following method to the `Program` class:
+1. Add the following method to the `Program` class:
 
 ```csharp
 private static IUserDeltaCollectionPage GetUsers(GraphServiceClient graphClient, object? deltaLink)
@@ -101,7 +101,7 @@ private static IUserDeltaCollectionPage GetUsers(GraphServiceClient graphClient,
 
 The next method will be used to check for new and changed users. The first time it runs, it will get all users and display them page by page until it reaches the last page of the response from Microsoft Graph.
 
-Add the following method to the `Program` class:
+1. Add the following method to the `Program` class:
 
 ```csharp
 private static void CheckForUpdates(IConfigurationRoot config)
@@ -124,7 +124,7 @@ private static void CheckForUpdates(IConfigurationRoot config)
 
 The last thing this method needs to do is retrieve the delta link from the last page of results. This delta link, a string, will be used in future requests that will signal to Microsoft Graph to only return users who have been added or changed since the previous request.
 
-Add the following code to the end of the `CheckForUpdates` method:
+2. Add the following code to the end of the `CheckForUpdates` method:
 
 ```csharp
 object? deltaLink;
@@ -137,7 +137,7 @@ if (users.AdditionalData.TryGetValue("@odata.deltaLink", out deltaLink))
 
 ## Task 5: Update the application to use the new `CheckForUpdates` method
 
-Locate the following code in the `Main` method:
+1. Locate the following code in the `Main` method:
 
 ```csharp
 var config = LoadAppSettings();
@@ -148,9 +148,9 @@ if (config == null)
 }
 ```
 
-Remove all the existing code in this method after these lines.
+2. Remove all the existing code in this method after these lines.
 
-Next, add the following code to after the previous two lines above. This will use the `CheckForUpdates` method to get a list of all users. It will then go into an infinite loop, sleeping for 10 seconds, and issue the same request again:
+3. Next, add the following code to after the previous two lines above. This will use the `CheckForUpdates` method to get a list of all users. It will then go into an infinite loop, sleeping for 10 seconds, and issue the same request again:
 
 ```csharp
 Console.WriteLine("All users in tenant:");
@@ -169,13 +169,13 @@ The first request will result in the application obtaining the delta link that w
 
 ### Build and test the application
 
-Run the following command in a command prompt to compile the console application:
+4. Run the following command in a command prompt to compile the console application:
 
 ```console
 dotnet build
 ```
 
-Run the following command to run the console application:
+5. Run the following command to run the console application:
 
 ```console
 dotnet run
@@ -183,33 +183,33 @@ dotnet run
 
 You now need to authenticate with Azure Active Directory. A new tab in your default browser should open to a page asking you to sign-in. After you've logged in successfully, you'll be redirected to a page displaying the message, **"Authentication complete. You can return to the application. Feel free to close this browser tab"**. You may now close the browser tab and switch back to the console application.
 
-The application will write all the users in the tenant to the console:
+6. The application will write all the users in the tenant to the console:
 
 ![Screenshot of the console displaying all users](../../Linked_Image_Files/2-Graph/optimize-network-traffic/07-app-run-01.png)
 
-If you let the app run for a few moments without doing anything, notice it will keep requesting users, but not display anyone as no users have been created in your tenant:
+7. If you let the app run for a few moments without doing anything, notice it will keep requesting users, but not display anyone as no users have been created in your tenant:
 
 ![Screenshot of the console displaying no new users](../../Linked_Image_Files/2-Graph/optimize-network-traffic/07-app-run-02.png)
 
-Now, add a new user to your tenant.
+8. Now, add a new user to your tenant.
 
-Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account**.
+9. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account**.
 
-Select **Users** in the left-hand navigation.
+10. Select **Users** in the left-hand navigation.
 
 ![Screenshot of the Azure AD Users screen](../../Linked_Image_Files/2-Graph/optimize-network-traffic/azure-ad-portal-users.png)
 
-On the **Users - All Users** page, select **New User**.
+11. On the **Users - All Users** page, select **New User**.
 
-Create a new user by entering the values in the **Identity** section of the **New User** page and select **Create** at the bottom of the form.
+12. Create a new user by entering the values in the **Identity** section of the **New User** page and select **Create** at the bottom of the form.
 
 ![Screenshot creating a new user](../../Linked_Image_Files/2-Graph/optimize-network-traffic/07-app-run-03.png)
 
-Watch the running application in the console. The next time it runs, it will display the new user that you created:
+13. Watch the running application in the console. The next time it runs, it will display the new user that you created:
 
 ![Screenshot of the console app displaying the new user](../../Linked_Image_Files/2-Graph/optimize-network-traffic/07-app-run-04.png)
 
-Press <kbd>CTRL</kbd>+<kbd>C</kbd> to stop the application.
+14. Press <kbd>CTRL</kbd>+<kbd>C</kbd> to stop the application.
 
 ## Summary
 

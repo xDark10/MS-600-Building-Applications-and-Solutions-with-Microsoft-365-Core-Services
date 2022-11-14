@@ -9,10 +9,10 @@ You'll then implement track changes with the existing change notifications code 
 
 ## Task 1: Update the ASP.NET Core web API project
 
-Locate and open the following controller: **Controllers > NotificationsController.cs**.
+1. Locate and open the following controller: **Controllers > NotificationsController.cs**.
 Add the following code to the existing `NotificationsController` class.
 
-This code includes a new method, `CheckForUpdates()`, that will call the Microsoft Graph using the delta url and then pages through the results until it finds a new `deltalink` on the final page of results. It stores the url in memory until the code is notified again when another notification is triggered.
+2. This code includes a new method, `CheckForUpdates()`, that will call the Microsoft Graph using the delta url and then pages through the results until it finds a new `deltalink` on the final page of results. It stores the url in memory until the code is notified again when another notification is triggered.
 
 ```csharp
 private static object? DeltaLink = null;
@@ -73,7 +73,7 @@ private async Task<IUserDeltaCollectionPage> GetUsers(GraphServiceClient graphCl
 }
 ```
 
-Locate the existing `Post()` method and replace it with the following code:
+3. Locate the existing `Post()` method and replace it with the following code:
 
 ```csharp
 public async Task<ActionResult<string>> Post([FromQuery] string? validationToken = null)
@@ -110,33 +110,33 @@ public async Task<ActionResult<string>> Post([FromQuery] string? validationToken
 }
 ```
 
-The `Post` method will now call `CheckForUpdates` when a notification is received.
+4. The `Post` method will now call `CheckForUpdates` when a notification is received.
 
-**Save** all files.
+5. **Save** all files.
 
 ### Test your changes
 
-Within Visual Studio Code, select **Run > Start debugging** to run the application.
+6. Within Visual Studio Code, select **Run > Start debugging** to run the application.
 
-Navigate to the following url: **http://localhost:5000/api/notifications**. This will register a new subscription.
+7. Navigate to the following url: **http://localhost:5000/api/notifications**. This will register a new subscription.
 
-Open a browser and navigate to the [Microsoft 365 admin center (https://admin.microsoft.com/AdminPortal)](https://admin.microsoft.com/AdminPortal).
+8. Open a browser and navigate to the [Microsoft 365 admin center (https://admin.microsoft.com/AdminPortal)](https://admin.microsoft.com/AdminPortal).
 
-If you're prompted to sign-in, sign-in using an admin account.
+9. If you're prompted to sign-in, sign-in using an admin account.
 
-Select **Users > Active users**.
+10. Select **Users > Active users**.
 
-Select an active user and select **Edit** for their **Contact information**.
+11. Select an active user and select **Edit** for their **Contact information**.
 
-Update the **Mobile phone** value with a new number and Select **Save**.
+12. Update the **Mobile phone** value with a new number and Select **Save**.
 
-Wait for the notification to be received as indicated in the Visual Studio Code **Debug Console**:
+13. Wait for the notification to be received as indicated in the Visual Studio Code **Debug Console**:
 
 ```console
 Received notification: 'Users/7a7fded6-0269-42c2-a0be-512d58da4463', 7a7fded6-0269-42c2-a0be-512d58da4463
 ```
 
-The application will now start a delta query with Microsoft Graph to get all the users and log out some of their details to the console output.
+14. The application will now start a delta query with Microsoft Graph to get all the users and log out some of their details to the console output.
 
 ```console
 User: 19e429d2-541a-4e0b-9873-6dff9f48fabe, Allan Deyoung
@@ -170,15 +170,15 @@ User: bc5994d9-4404-4a14-8fb0-46b8dccca0ad,   Removed?:deleted
 User: d4e3a3e0-72e9-41a6-9538-c23e10a16122,   Removed?:deleted
 ```
 
-In the Microsoft 365 Admin Portal, repeat the process of editing a user and **Save** again.
+15. In the Microsoft 365 Admin Portal, repeat the process of editing a user and **Save** again.
 
-The application will receive another notification and will query Microsoft Graph again using the last delta link it received. However, this time you'll notice that only the modified user was returned in the results.
+16. The application will receive another notification and will query Microsoft Graph again using the last delta link it received. However, this time you'll notice that only the modified user was returned in the results.
 
 ```console
 User: 7a7fded6-0269-42c2-a0be-512d58da4463, Adele Vance
 ```
 
-Using this combination of notifications with delta query you can be assured you won't miss any updates to a resource. Notifications may be missed because of transient connection issues, however the next time your application gets a notification it will pick up all the changes since the last successful query.
+17. Using this combination of notifications with delta query you can be assured you won't miss any updates to a resource. Notifications may be missed because of transient connection issues, however the next time your application gets a notification it will pick up all the changes since the last successful query.
 
 ## Summary
 

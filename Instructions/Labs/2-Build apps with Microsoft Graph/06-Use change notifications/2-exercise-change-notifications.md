@@ -7,7 +7,7 @@ In this exercise, you'll extend the existing ASP.NET Core web API application to
 
 ## Task 1: Update the ASP.NET Core web API project
 
-Open the **Program.cs** file and replace the entire contents with the following code:
+1. Open the **Program.cs** file and replace the entire contents with the following code:
 
 ```csharp
 using System;
@@ -38,7 +38,7 @@ namespace msgraphapp
 }
 ```
 
-If the project doesn't contain a file named **Startup.cs**, then add it in the root of the project. Open the **Startup.cs** file and replace the entire contents with the following code:
+2. If the project doesn't contain a file named **Startup.cs**, then add it in the root of the project. Open the **Startup.cs** file and replace the entire contents with the following code:
 
 ```csharp
 using System;
@@ -104,9 +104,9 @@ namespace msgraphapp
 
 The application uses several new model classes for (de)serialization of messages to/from the Microsoft Graph.
 
-Create a new folder named **Models** in the root of the project.
+3. Create a new folder named **Models** in the root of the project.
 
-Create a new file named **MyConfig.cs** in the **Models** folder and add the following code:
+4. Create a new file named **MyConfig.cs** in the **Models** folder and add the following code:
 
 ```csharp
 namespace msgraphapp
@@ -121,7 +121,7 @@ namespace msgraphapp
 }
 ```
 
-Open the **Startup.cs** file. Locate the method `ConfigureServices()` method and add the following code at the end of the method:
+5. Open the **Startup.cs** file. Locate the method `ConfigureServices()` method and add the following code at the end of the method:
 
 ```csharp
 var config = new MyConfig();
@@ -129,7 +129,7 @@ Configuration.Bind("MyConfig", config);
 services.AddSingleton(config);
 ```
 
-Open the **appsettings.json** file and replace the content with the following JSON.
+6. Open the **appsettings.json** file and replace the content with the following JSON.
 
 ```json
 {
@@ -148,7 +148,7 @@ Open the **appsettings.json** file and replace the content with the following JS
 }
 ```
 
-Replace the following variables with the values you copied earlier:
+7. Replace the following variables with the values you copied earlier:
 
 - `<NGROK URL>`: set to the https ngrok url you copied earlier
 - `<TENANT ID>`: set to your Office 365 tenant ID you copied earlier
@@ -158,9 +158,9 @@ Replace the following variables with the values you copied earlier:
 
 The application requires a new controller to process the subscription and notification.
 
-Right-click the **Controllers** folder, select **New File**, and name the controller **NotificationsController.cs**.
+8. Right-click the **Controllers** folder, select **New File**, and name the controller **NotificationsController.cs**.
 
-Replace the contents of **NotificationsController.cs** with the following code:
+9. Replace the contents of **NotificationsController.cs** with the following code:
 
 ```csharp
 using System;
@@ -274,15 +274,15 @@ namespace msgraphapp.Controllers
 }
 ```
 
-**Save** all files.
+10. **Save** all files.
 
 ### Update the Visual Studio Code debugger launch configuration
 
 By default, the .NET Core launch configuration will open a browser and navigate to the default URL for the application when launching the debugger. For this application, we instead want to navigate to the ngrok URL. If you leave the launch configuration as is, each time you debug the application it will display a broken page. You can just change the URL, or change the launch configuration to not launch the browser.
 
-In Visual Studio Code, open the file **.vscode/launch.json**.
+11. In Visual Studio Code, open the file **.vscode/launch.json**.
 
-Delete the following section in the default configuration:
+12. Delete the following section in the default configuration:
 
 ```json
 // Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
@@ -292,68 +292,68 @@ Delete the following section in the default configuration:
 },
 ```
 
-Save your changes.
+13. Save your changes.
 
-Ensure the port being used to host the application matches the port that ngrok was configure to use.
+14. Ensure the port being used to host the application matches the port that ngrok was configure to use.
 
-Open the file **Properties/launchSettings.json**.
+15. Open the file **Properties/launchSettings.json**.
 
-Set the value for **profiles.msgraphapp.applicationUrl** to `https://localhost:5001;http://localhost:5000`.
+16. Set the value for **profiles.msgraphapp.applicationUrl** to `https://localhost:5001;http://localhost:5000`.
 
-Save your changes.
+17. Save your changes.
 
 ### Test the application
 
-In Visual Studio Code, select **Run > Start debugging** to run the application. Visual Studio Code will build and start the application.
+18. In Visual Studio Code, select **Run > Start debugging** to run the application. Visual Studio Code will build and start the application.
 
-Once you see the following in the **Debug Console** window...
+19. Once you see the following in the **Debug Console** window...
 
 ![Screenshot of the VS Code Debug Console](../../Linked_Image_Files/2-Graph/track-changes/05-vscode-debug-app-01.png)
 
-Open a browser and navigate to **http://localhost:5000/api/notifications** to subscribe to change notifications. If successful you'll see output that includes a subscription ID like the one below:
+20. Open a browser and navigate to **http://localhost:5000/api/notifications** to subscribe to change notifications. If successful you'll see output that includes a subscription ID like the one below:
 
 ![Screenshot of a successful subscription](../../Linked_Image_Files/2-Graph/track-changes/05-vscode-debug-app-02.png)
 
-Your application is now subscribed to receive notifications from the Microsoft Graph when an update is made on any user in the Office 365 tenant.
+21. Your application is now subscribed to receive notifications from the Microsoft Graph when an update is made on any user in the Office 365 tenant.
 
-Now, test the subscription by updating a user to trigger a notification from Microsoft Graph:
+22. Now, test the subscription by updating a user to trigger a notification from Microsoft Graph:
 
-Open a browser and navigate to the [Microsoft 365 admin center (https://admin.microsoft.com/AdminPortal)](https://admin.microsoft.com/AdminPortal).
+23. Open a browser and navigate to the [Microsoft 365 admin center (https://admin.microsoft.com/AdminPortal)](https://admin.microsoft.com/AdminPortal).
 
-If you're prompted to sign-in, sign-in using an admin account.
+24. If you're prompted to sign-in, sign-in using an admin account.
 
-Select **Users > Active users**.
+25. Select **Users > Active users**.
 
 ![Screenshot of the Microsoft 365 Admin Center](../../Linked_Image_Files/2-Graph/track-changes/05-vscode-debug-app-03.png)
 
-Select an active user and select **Edit** for their **Contact information**.
+26. Select an active user and select **Edit** for their **Contact information**.
 
 ![Screenshot of a user's details](../../Linked_Image_Files/2-Graph/track-changes/05-vscode-debug-app-04.png)
 
-Update the **Phone number** value with a new number and Select **Save**.
+27. Update the **Phone number** value with a new number and Select **Save**.
 
-In the Visual Studio Code **Debug Console**, you'll see a notification has been received. Sometimes this may take a few minutes to arrive. An example of the output is below:
+28. In the Visual Studio Code **Debug Console**, you'll see a notification has been received. Sometimes this may take a few minutes to arrive. An example of the output is below:
 
 ```console
 Received notification: 'Users/7a7fded6-0269-42c2-a0be-512d58da4463', 7a7fded6-0269-42c2-a0be-512d58da4463
 ```
 
-This indicates the application successfully received the notification from the Microsoft Graph for the user specified in the output. You can then use this information to query the Microsoft Graph for the users full details if you want to synchronize their details into your application.
+29. This indicates the application successfully received the notification from the Microsoft Graph for the user specified in the output. You can then use this information to query the Microsoft Graph for the users full details if you want to synchronize their details into your application.
 
 ### Renew subscriptions
 
 Subscriptions for notifications expire and need to be renewed periodically. The following steps will demonstrate how to renew notifications
 
-Open **Controllers/NotificationsController.cs** file
+30. Open **Controllers/NotificationsController.cs** file
 
-Add the following two member declarations to the `NotificationsController` class:
+31. Add the following two member declarations to the `NotificationsController` class:
 
 ```csharp
 private static Dictionary<string, Subscription> Subscriptions = new Dictionary<string, Subscription>();
 private static Timer? subscriptionTimer = null;
 ```
 
-Add the following new methods. These will implement a background timer that will run every 15 seconds to check if subscriptions have expired. If they have, they'll be renewed.
+32. Add the following new methods. These will implement a background timer that will run every 15 seconds to check if subscriptions have expired. If they have, they'll be renewed.
 
 ```csharp
 private void CheckSubscriptions(Object? stateInfo)
@@ -394,14 +394,14 @@ private async void RenewSubscription(Subscription subscription)
 }
 ```
 
-The `CheckSubscriptions()` method is called every 15 seconds by the timer.
+33. The `CheckSubscriptions()` method is called every 15 seconds by the timer.
 
 > [!TIP]
 > For production use this should be set to a more reasonable value to reduce the number of unnecessary calls to Microsoft Graph.
 
-The `RenewSubscription()` method renews a subscription and is only called if a subscription is going to expire in the next two minutes.
+34. The `RenewSubscription()` method renews a subscription and is only called if a subscription is going to expire in the next two minutes.
 
-Locate the method `Get()` and replace it with the following code:
+35. Locate the method `Get()` and replace it with the following code:
 
 ```csharp
 [HttpGet]
@@ -434,24 +434,24 @@ public async Task<ActionResult<string>> Get()
 
 ### Test the changes
 
-Within Visual Studio Code, select **Run > Start debugging** to run the application.
+36. Within Visual Studio Code, select **Run > Start debugging** to run the application.
 
-Navigate to the following url: **http://localhost:5000/api/notifications**. This will register a new subscription.
+37. Navigate to the following url: **http://localhost:5000/api/notifications**. This will register a new subscription.
 
-In the Visual Studio Code **Debug Console** window, approximately every 15 seconds, notice the timer checking the subscription for expiration:
+38. In the Visual Studio Code **Debug Console** window, approximately every 15 seconds, notice the timer checking the subscription for expiration:
 
 ```console
 Checking subscriptions 12:32:51.882
 Current subscription count 1
 ```
 
-Wait a few minutes and you'll see the following when the subscription needs renewing:
+39. Wait a few minutes and you'll see the following when the subscription needs renewing:
 
 ```console
 Renewed subscription: 07ca62cd-1a1b-453c-be7b-4d196b3c6b5b, New Expiration: 3/10/2019 7:43:22 PM +00:00
 ```
 
-This indicates that the subscription was renewed and shows the new expiry time.
+40. This indicates that the subscription was renewed and shows the new expiry time.
 
 ## Summary
 

@@ -20,38 +20,38 @@ You must have the minimum versions of these prerequisites installed on your work
 
 ## Task 1: Create an Azure AD application
 
-Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
+1. Open a browser and navigate to the [Azure Active Directory admin center (https://aad.portal.azure.com)](https://aad.portal.azure.com). Sign in using a **Work or School Account** that has global administrator rights to the tenancy.
 
-Select **Azure Active Directory** in the left-hand navigation.
+2. Select **Azure Active Directory** in the left-hand navigation.
 
-Select **Manage > App registrations** in the left-hand navigation.
+3. Select **Manage > App registrations** in the left-hand navigation.
 
   ![Screenshot of the App registrations](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/azure-ad-portal-home.png)
 
-On the **App registrations** page, select **New registration**.
+4. On the **App registrations** page, select **New registration**.
 
   ![Screenshot of App Registrations page](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/azure-ad-portal-new-app-00.png)
 
-On the **Register an application** page, set the values as follows:
+5. On the **Register an application** page, set the values as follows:
 
 - **Name**: Graph Console App
 - **Supported account types**: Accounts in this organizational directory only (Contoso only - Single tenant)
 
     ![Screenshot of the Register an application page](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/azure-ad-portal-new-app-01.png)
 
-    Select **Register**.
+6. Select **Register**.
 
-On the **Graph Console App** page, copy the value of the **Application (client) ID** and **Directory (tenant) ID**; you'll need these in the application.
+7. On the **Graph Console App** page, copy the value of the **Application (client) ID** and **Directory (tenant) ID**; you'll need these in the application.
 
   ![Screenshot of the application ID of the new app registration](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/azure-ad-portal-new-app-details.png)
 
-Select **Manage > Authentication**.
+8. Select **Manage > Authentication**.
 
-In the **Platform configurations** section, select the **Add a platform** button. Then in the **Configure platforms** panel, select the **Mobile and desktop applications** button:
+9. In the **Platform configurations** section, select the **Add a platform** button. Then in the **Configure platforms** panel, select the **Mobile and desktop applications** button:
 
 ![Screenshot of the Platform configurations section](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/azure-ad-portal-new-app-02.png)
 
-In the **Redirect URIs** section of the **Configure Desktop + devices** panel, select the checkbox that ends with **nativeclient**, set **Custom redirect URIs** to **http://localhost**, and then select the **Configure** button:
+10. In the **Redirect URIs** section of the **Configure Desktop + devices** panel, select the checkbox that ends with **nativeclient**, set **Custom redirect URIs** to **http://localhost**, and then select the **Configure** button:
 
 ![Screenshot of the Configure Desktop + devices panel](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/azure-ad-portal-new-app-03.png)
 
@@ -59,37 +59,38 @@ In the **Redirect URIs** section of the **Configure Desktop + devices** panel, s
 
 After creating the application, you need to grant it the necessary permissions to Microsoft Graph.
 
-Select **API Permissions** in the left-hand navigation panel.
+11. Select **API Permissions** in the left-hand navigation panel.
 
 ![Screenshot of the API Permissions navigation item](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/azure-ad-portal-new-app-permissions-01.png)
 
-Select the **Add a permission** button.
+12. Select the **Add a permission** button.
 
-In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
+13. In the **Request API permissions** panel that appears, select **Microsoft Graph** from the **Microsoft APIs** tab.
 
 ![Screenshot of Microsoft Graph in the Request API permissions panel](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/azure-ad-portal-new-app-permissions-03.png)
 
-When prompted for the type of permission, select **Delegated permissions**.
+14. When prompted for the type of permission, select **Delegated permissions**.
 
-Enter **User.R** in the **Select permissions** search box and select the **User.ReadBasic.All** permission. Repeat the process to add the permission **Group.Read.All**. Then select the **Add permission** button at the bottom of the panel to add the permissions to the app.
+15. Enter **User.R** in the **Select permissions** search box and select the **User.ReadBasic.All** permission. Repeat the process to add the permission **Group.Read.All**. Then select the **Add permission** button at the bottom of the panel to add the permissions to the app.
 
-In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select the **Yes** button in the consent dialog to grant all users in your organization this permission.
+16. In the **Configured Permissions** panel, select the button **Grant admin consent for [tenant]**, and then select the **Yes** button in the consent dialog to grant all users in your organization this permission.
 
 > [!NOTE]
 > The option to **Grant admin consent** in the Azure AD admin center simplifies the exercise by pre-consenting the permissions to the users in the tenant.
 
 ## Task 2: Create .NET Core console application
 
-Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
+1. Open your command prompt, navigate to a directory where you have rights to create your project, and run the following command to create a new .NET Core console application:
 
 ```console
 dotnet new console -o graphconsoleapp
 ```
 
-After creating the application, run the following commands to add the Microsoft Authentication Library (MSAL), Microsoft Graph .NET SDK, and a few configuration packages to the project:
+2. After creating the application, run the following commands to ensure your new project runs correctly:
 
 ```console
 cd graphconsoleapp
+dotnet nuget add source --name nuget.org https://api.nuget.org/v3/index.json
 dotnet add package Microsoft.Identity.Client
 dotnet add package Microsoft.Graph
 dotnet add package Microsoft.Extensions.Configuration
@@ -97,13 +98,16 @@ dotnet add package Microsoft.Extensions.Configuration.FileExtensions
 dotnet add package Microsoft.Extensions.Configuration.Json
 ```
 
-Open the application in Visual Studio Code using the following command:
+> [!NOTE]
+> Be sure to confirm that each package is successfully installed before proceeding.  
+
+3. Open the application in Visual Studio Code using the following command:
 
 ```console
 code .
 ```
 
-If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
+4. If Visual Studio code displays a dialog box asking if you want to add required assets to the project, select **Yes**.
 
 ### Update the console app to enable nullable reference types
 
@@ -121,7 +125,7 @@ Open the **graphconsoleapp.csproj** file and ensure the `<PropertyGroup>` elemen
 
 ### Update the console app to support Azure AD authentication
 
-Create a new file named **appsettings.json** in the root of the project and add the following code to it:
+5. Create a new file named **appsettings.json** in the root of the project and add the following code to it:
 
 ```json
 {
@@ -130,16 +134,16 @@ Create a new file named **appsettings.json** in the root of the project and add 
 }
 ```
 
-Update properties with the following values:
+6. Update properties with the following values:
 
 - `YOUR_TENANT_ID_HERE`: Azure AD directory ID
 - `YOUR_APP_ID_HERE`: Azure AD client ID
 
 #### Create helper class
 
-Create a new folder **Helpers** in the project.
+7. Create a new folder **Helpers** in the project.
 
-Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
+8. Create a new file **MsalAuthenticationProvider.cs** in the **Helpers** folder and add the following code:
 
 ```csharp
 using System.Net.Http.Headers;
@@ -206,7 +210,7 @@ namespace Helpers
 
 ### Incorporate Microsoft Graph into the console app
 
-Open the **Program.cs** file and replace the entire contents with the following code:
+9. Open the **Program.cs** file and replace the entire contents with the following code:
 
 ```csharp
 using System;
@@ -233,7 +237,7 @@ namespace graphconsoleapp
 }
 ```
 
-Add the following method `LoadAppSettings` to the `Program` class. The method retrieves the configuration details from the **appsettings.json** file previously created:
+10. Add the following method `LoadAppSettings` to the `Program` class. The method retrieves the configuration details from the **appsettings.json** file previously created:
 
 ```csharp
 private static IConfigurationRoot? LoadAppSettings()
@@ -260,7 +264,7 @@ private static IConfigurationRoot? LoadAppSettings()
 }
 ```
 
-Add the following method `CreateAuthorizationProvider` to the `Program` class. The method will create an instance of the clients used to call Microsoft Graph.
+11. Add the following method `CreateAuthorizationProvider` to the `Program` class. The method will create an instance of the clients used to call Microsoft Graph.
 
 ```csharp
 private static IAuthenticationProvider CreateAuthorizationProvider(IConfigurationRoot config)
@@ -279,7 +283,7 @@ private static IAuthenticationProvider CreateAuthorizationProvider(IConfiguratio
 }
 ```
 
-Add the following method `GetAuthenticatedGraphClient` to the `Program` class. The method creates an instance of the `GraphServiceClient` object.
+12. Add the following method `GetAuthenticatedGraphClient` to the `Program` class. The method creates an instance of the `GraphServiceClient` object.
 
 ```csharp
 private static GraphServiceClient GetAuthenticatedGraphClient(IConfigurationRoot config)
@@ -290,7 +294,7 @@ private static GraphServiceClient GetAuthenticatedGraphClient(IConfigurationRoot
 }
 ```
 
-Locate the `Main` method in the `Program` class. Replace the contents of the `Main` method with the following code that loads the configuration settings from the **appsettings.json** file:
+13. Locate the `Main` method in the `Program` class. Replace the contents of the `Main` method with the following code that loads the configuration settings from the **appsettings.json** file:
 
 ```csharp
 var config = LoadAppSettings();
@@ -301,20 +305,20 @@ if (config == null)
 }
 ```
 
-Add the following code to the end of the `Main` method, just after the code added in the last step. This code will obtain an authenticated instance of the `GraphServiceClient`:
+14. Add the following code to the end of the `Main` method, just after the code added in the last step. This code will obtain an authenticated instance of the `GraphServiceClient`:
 
 ```csharp
 var client = GetAuthenticatedGraphClient(config);
 ```
 
-Add the following code to the end of the `Main` method, just after the code added in the last step. This code will submit a request for the current user's profile so it can display a welcome message to the user:
+15. Add the following code to the end of the `Main` method, just after the code added in the last step. This code will submit a request for the current user's profile so it can display a welcome message to the user:
 
 ```csharp
 var profileResponse = client.Me.Request().GetAsync().Result;
 Console.WriteLine("Hello " + profileResponse.DisplayName);
 ```
 
-Next, add the following code to the end of the `Main` method. This code will request all the Office 365 groups in the current tenant and write them to the console:
+16. Next, add the following code to the end of the `Main` method. This code will request all the Office 365 groups in the current tenant and write them to the console:
 
 ```csharp
 // request 1 - all groups
@@ -332,19 +336,19 @@ Console.WriteLine(requestAllGroups.GetHttpRequestMessage().RequestUri);
 
 ### Build and test the application
 
-Run the following command in a command prompt to ensure the developer certificate has been trusted:
+17. Run the following command in a command prompt to ensure the developer certificate has been trusted:
 
 ```console
 dotnet dev-certs https --trust
 ```
 
-Run the following command in a command prompt to compile the console application:
+18. Run the following command in a command prompt to compile the console application:
 
 ```console
 dotnet build
 ```
 
-Run the following command to run the console application:
+19. Run the following command to run the console application:
 
 ```console
 dotnet run
@@ -352,7 +356,7 @@ dotnet run
 
 You now need to authenticate with Azure Active Directory. A new tab in your default browser should open to a page asking you to sign-in. After you've logged in successfully, you'll be redirected to a page displaying the message, **"Authentication complete. You can return to the application. Feel free to close this browser tab"**. You may now close the browser tab and switch back to the console application.
 
-The application will write the data returned from the request for all groups in the organization to the console.
+20. The application will write the data returned from the request for all groups in the organization to the console.
 
 ![Screenshot of the console application showing all groups in the organization](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/03-app-run-01.png)
 
@@ -360,15 +364,15 @@ The application will write the data returned from the request for all groups in 
 
 In this section, you'll get a specific group using Microsoft Graph.
 
-Locate the code you added above for `// request 1 - all groups` and comment it out so it doesn't continue to execute.
+1. Locate the code you added above for `// request 1 - all groups` and comment it out so it doesn't continue to execute.
 
-Using the results in the console from the previous step, copy the ID from one of the groups displayed. Add the following code to the end of the `Main` method, replacing `{{REPLACE_WITH_GROUP_ID}}` with the ID you copied from the console.
+2. Using the results in the console from the previous step, copy the ID from one of the groups displayed. Add the following code to the end of the `Main` method, replacing `{{REPLACE_WITH_GROUP_ID}}` with the ID you copied from the console.
 
 ```csharp
 var groupId = "{{REPLACE_WITH_GROUP_ID}}";
 ```
 
-Next, add the following code to the end of the `Main` method. This code will request a specific group and write its details to the console:
+3. Next, add the following code to the end of the `Main` method. This code will request a specific group and write its details to the console:
 
 ```csharp
 // request 2 - one group
@@ -383,14 +387,14 @@ Console.WriteLine(requestGroup.GetHttpRequestMessage().RequestUri);
 
 ### Build and test the application
 
-Run the following commands in a command prompt to compile and run the console application:
+4. Run the following commands in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After you've logged in, you'll see the results of a single group with the ID you specified written to the console.
+5. After you've logged in, you'll see the results of a single group with the ID you specified written to the console.
 
 ![Screenshot of the console application showing a single group in the organization](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/03-app-run-02.png)
 
@@ -398,9 +402,9 @@ After you've logged in, you'll see the results of a single group with the ID you
 
 In this section, you'll get the owner of the group you obtained in the last section.
 
-Locate the code you added above for `// request 2 - one group` and comment it out so it doesn't continue to execute. Don't comment out the declaration of the `groupId` variable.
+1. Locate the code you added above for `// request 2 - one group` and comment it out so it doesn't continue to execute. Don't comment out the declaration of the `groupId` variable.
 
-Add the following code to the end of the `Main` method. This will get the collection of owners of the specified group and write them to the console:
+2. Add the following code to the end of the `Main` method. This will get the collection of owners of the specified group and write them to the console:
 
 ```csharp
 // request 3 - group owners
@@ -425,14 +429,14 @@ Console.WriteLine(requestGroupOwners.GetHttpRequestMessage().RequestUri);
 
 ### Build and test the application
 
-Run the following commands in a command prompt to compile and run the console application:
+3. Run the following commands in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After you've logged in, you'll see the list of owners of a single group with the ID you specified written to the console.
+4. After you've logged in, you'll see the list of owners of a single group with the ID you specified written to the console.
 
 ![Screenshot of the console application showing a single group's owners in the organization](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/03-app-run-03.png)
 
@@ -441,9 +445,9 @@ After you've logged in, you'll see the list of owners of a single group with the
 
 In this section, you'll get all the members of the group you obtained in a previous section.
 
-Locate the code you added above for `// request 3 - group owners` and comment it out so it doesn't continue to execute.
+1. Locate the code you added above for `// request 3 - group owners` and comment it out so it doesn't continue to execute.
 
-Add the following code to the end of the `Main` method. This will get the collection of members of the specified group and write them to the console:
+2. Add the following code to the end of the `Main` method. This will get the collection of members of the specified group and write them to the console:
 
 ```csharp
 // request 4 - group members
@@ -465,14 +469,14 @@ Console.WriteLine(requestGroupMembers.GetHttpRequestMessage().RequestUri);
 
 ### Build and test the application
 
-Run the following commands in a command prompt to compile and run the console application:
+3. Run the following commands in a command prompt to compile and run the console application:
 
 ```console
 dotnet build
 dotnet run
 ```
 
-After you've logged in, you'll see the list of members of a single group with the ID you specified written to the console.
+4. After you've logged in, you'll see the list of members of a single group with the ID you specified written to the console.
 
 ![Screenshot of the console application showing a single group's members in the organization](../../Linked_Image_Files/2-Graph/manage-group-lifecycle/03-app-run-04.png)
 
