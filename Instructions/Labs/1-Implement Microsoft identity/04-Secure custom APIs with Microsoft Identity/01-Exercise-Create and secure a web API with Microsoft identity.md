@@ -82,7 +82,13 @@ cd ProductCatalog
 dotnet add package Microsoft.Identity.Web
 ```
 
-4. Open the scaffolded project folder, which is named **ProductCatalog** in **Visual Studio Code**. When a dialog box asks if you want to add required assets to the project, select **Yes**.
+4. Run the following command to open the scaffolded project folder, which is named **ProductCatalog** in **Visual Studio Code**. 
+
+```console
+code .
+```
+
+If a dialog box asks if you want to add required assets to the project, select **Yes**.  Otherwise, be sure to navigate to **Extensions** in the Visual Studio Code Activity Bar and install the **C#** extension (ID: ms-dotnettools.csharp).
 
 5. The scaffolded project contains a controller for weather forecasts that isn't needed. Delete the following files:
 
@@ -101,7 +107,7 @@ dotnet add package Microsoft.Identity.Web
     ```
     
   > [!NOTE]
-  > If you cannot find launch.json, create the file by going to Run & Debug >> Create a launch.json file.
+  > If you cannot find launch.json, create the file by navigating to **Run & Debug** in the Visual Studio Code Activity Bar, then select **Create a launch.json file**.
 
 7. The web API application doesn't contain any HTML pages, so there's no need to launch the browser. In the **launch.json** file, locate and remove the entire `serverReadyAction` node.
 
