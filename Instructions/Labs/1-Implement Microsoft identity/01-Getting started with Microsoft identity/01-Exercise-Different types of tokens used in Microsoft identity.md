@@ -2,6 +2,10 @@
 
 In this exercise, you'll create an Azure AD application and single page application for a user to sign in and display their information on the page.
 
+> [!**NOTE**]
+> To avoid issues related to token caching that will affect the outcome of this exercise, be sure to select "NO" if prompted to remain signed in to your tenant account via the "Stay signed in?" prompt.
+
+
 ## Task 1: Create a Node.js web application
 
 > [!NOTE]
