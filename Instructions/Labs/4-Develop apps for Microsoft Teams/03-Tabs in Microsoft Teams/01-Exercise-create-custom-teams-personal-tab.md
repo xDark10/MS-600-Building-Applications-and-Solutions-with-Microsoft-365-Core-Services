@@ -1,7 +1,7 @@
 
 # Exercise 1: Create a custom Microsoft Teams personal tab
 
-In this exercise, you'll create a new Microsoft Teams personal tab by using the Microsoft Teams Yeoman generator, Visual Studio Code, and App Studio.
+In this exercise, you'll create a new Microsoft Teams personal tab by using the Microsoft Teams Yeoman generator, Visual Studio Code, and the Developer Portal.
 
 ## Prerequisites
 
