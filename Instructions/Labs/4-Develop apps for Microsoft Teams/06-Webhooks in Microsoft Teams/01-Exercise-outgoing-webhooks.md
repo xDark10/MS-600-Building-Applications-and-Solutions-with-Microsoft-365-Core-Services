@@ -42,7 +42,7 @@ yo teams
 - **Where do you want to place the files?**: Use the current folder
 - **Title of your Microsoft Teams App project?**: Teams Webhooks
 - **Your (company) name? (max 32 characters)**: Contoso
-- **Which manifest version would you like to use?**: 1.13
+- **Which manifest version would you like to use?**: v1.13
 - **Quick scaffolding**: Yes
 - **What features do you want to add to your project?**: An Outgoing Webhook
 - **The URL where you will host this solution?**: (Accept the default option)
